@@ -1,11 +1,20 @@
 {
-  "name": "perfume",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "perfume-server",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "art-template": "^4.12.2",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "express-art-template": "^1.0.1",
+    "jade": "~1.11.0",
+    "mongoose": "^5.0.10",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
 }
