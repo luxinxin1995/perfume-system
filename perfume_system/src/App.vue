@@ -34,9 +34,12 @@ body {
   /*margin-top: 60px;*/
 }
 /*登录表单label*/
-.el-form-item__label{
+/*.el-form-item__label{
   color: white!important;
-}
+}*/
+  .el-upload{
+    border: 1px dashed #d9d9d9!important;      
+  }
 .el-radio{
   color: white;
 }

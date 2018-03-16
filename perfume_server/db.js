@@ -17,7 +17,7 @@ var userSchema = new db.Schema({
         type: String,
         default: ''
     },
-    password: {
+    pass: {
         type: String,
         default: ''
     },
@@ -32,6 +32,11 @@ var userSchema = new db.Schema({
     phone: {
         type: String,
         default: ''
+    },
+    avatar: {
+        type: String,
+        default: ''
     }
 })
-module.exports.UserInfo = db.model('userInfo', userSchema);
+var User = db.model('User',userSchema);
+module.exports = {User}

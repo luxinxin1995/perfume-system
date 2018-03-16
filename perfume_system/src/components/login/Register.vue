@@ -6,18 +6,18 @@
       </h2>
       <div class="form-container">
         <el-form id="user" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="用户名" prop="name">
-            <el-input placeholder="请输入用户名" name="username" prefix-icon="el-icon-edit" size="medium" v-model="ruleForm.name"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input placeholder="请输入用户名" name="username" prefix-icon="el-icon-edit" size="medium" v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="设置密码" prop="pass">
-            <el-input type="password" name="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
+            <el-input type="password" id="password" name="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="确认密码" prop="checkPass">
-            <el-input type="password" name="checkPass" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
+            <el-input type="password" id="rePassword" name="checkPass" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="gender">
-            <el-radio v-model="radio" value="true" name="gender" label="1">男</el-radio>
-            <el-radio v-model="radio" value="false" name="gender" label="2">女</el-radio>
+            <el-radio v-model="ruleForm.gender" value="true" name="gender" label="1">男</el-radio>
+            <el-radio v-model="ruleForm.gender" value="false" name="gender" label="2">女</el-radio>
           </el-form-item>
           <el-form-item label="邮箱账号" prop="email" :rules="[{ required: true, message: '请输入邮箱地址', trigger: 'blur' },{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }]">
             <el-input placeholder="请输入邮箱" name="email" v-model="ruleForm.email" prefix-icon="el-icon-message" size="medium" auto-complete="off"></el-input>
@@ -26,7 +26,7 @@
             <el-input placeholder="请输入手机号码" name="phone" v-model="ruleForm.phone" prefix-icon="el-icon-mobile-phone" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitRegister" style="width:100%;" size="medium">注册</el-button>
+            <el-button type="primary" @click="submitRegister('ruleForm')" style="width:100%;" size="medium">注册</el-button>
           </el-form-item>
           <el-button style="width:100%;background:none;border:none;text-align:right;padding-right:0;" size="small"><router-link :to="{name:'Index'}">已有账号,直接登录 ▶</router-link></el-button>
         </el-form>
@@ -35,6 +35,11 @@
   </div>
 </template>
 <script>
+// import { registerPost } from '@/api/register.js'
+// import Axios from '@/common/js/api.js'
+// 序列化数据
+var qs = require('qs')
+import axios from 'axios'
 import {isvalidPhone} from '../../utils/validate'
 var validPhone = (rule, value, callback) => {
   if (!value) {
@@ -67,16 +72,17 @@ export default {
       }
     }
     return {
-      radio: '1',
+      registerUrl: 'register',
       ruleForm: {
-        name: '',
+        username: '',
         pass: '',
         checkPass: '',
+        gender: '',
         email: '',
         phone: ''
       },
       rules: {
-        name: [
+        username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
         ],
@@ -93,8 +99,50 @@ export default {
     }
   },
   methods: {
-    submitRegister () {
-      console.log('1111')
+    submitRegister (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          // alert('submit!')
+          var self = this
+          var pass1 = $('#password').val()
+          var pass2 = $('#rePassword').val()
+          if (pass1 !== pass2) {
+            self.$message.error('两次输入密码不一致!')
+          } else {
+            console.log(this.ruleForm)
+            console.log(qs.stringify({data: this.ruleForm}))
+            axios.post(`${global.ApiUrl}/${this.registerUrl}`, qs.stringify({data: this.ruleForm}), {
+              headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            }).then(function (res) {
+              console.log(res.data.msg)
+              if (res.code === 'success') {
+                self.$alert('恭喜您注册成功,立即跳转登录界面?', '注册', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    self.$router.push({
+                      name: 'Login'
+                    })
+                  }
+                })
+                $('input').val('')
+              } else {
+                self.$alert(res.data.msg, '注册', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                  }
+                })
+              }
+            }).catch(function (err) {
+              console.log(err)
+            })
+          }
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }

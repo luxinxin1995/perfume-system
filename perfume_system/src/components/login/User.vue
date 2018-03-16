@@ -62,4 +62,7 @@ export default {
     text-decoration: none;
     color: red;
   }
+  /*label{
+  color: white!important;
+}*/
 </style>
