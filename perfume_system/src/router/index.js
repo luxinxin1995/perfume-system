@@ -8,6 +8,14 @@ import Register from '@/components/login/Register'
 import Home from '@/components/Home'
 import Settings from '@/components/settings/settings'
 import AddShop from '@/components/addData/AddShop'
+import AddGoods from '@/components/addData/AddGoods'
+import ShopList from '@/components/dataManager/ShopList'
+import GoodsList from '@/components/dataManager/GoodsList'
+import UserList from '@/components/dataManager/UserList'
+import Main from '@/components/Main'
+import Description from '@/components/description/Description'
+import EchartBrand from '@/components/EChart/tendency'
+
 Vue.use(Router)
 
 export default new Router({
@@ -46,7 +54,23 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
+      redirect: '/main',
       children: [
+        {
+          path: '/main',
+          name: 'Main',
+          component: Main
+        },
+        {
+          path: '/description',
+          name: 'Description',
+          component: Description
+        },
+        {
+          path: '/echartBrand',
+          name: 'EchartBrand',
+          component: EchartBrand
+        },
         {
           path: '/settings',
           name: 'Settings',
@@ -56,6 +80,26 @@ export default new Router({
           path: '/addShop',
           name: 'AddShop',
           component: AddShop
+        },
+        {
+          path: '/addGoods',
+          name: 'AddGoods',
+          component: AddGoods
+        },
+        {
+          path: '/ShopList',
+          name: 'ShopList',
+          component: ShopList
+        },
+        {
+          path: '/GoodsList',
+          name: 'GoodsList',
+          component: GoodsList
+        },
+        {
+          path: '/UserList',
+          name: 'UserList',
+          component: UserList
         }
       ]
     }

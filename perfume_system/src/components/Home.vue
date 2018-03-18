@@ -10,32 +10,16 @@
                     <span style="font-size:24px;">欢迎登录香水销售系统</span>
                     <el-dropdown trigger="click" @command="handleCommand" style="float:right;padding-right:40px;padding-top:25px;color:white;">
                         <span class="el-dropdown-link">
-                            <span>{{petname}}</span>
+                            <span>{{username}}</span>
                             <img src="../assets/logo.jpg" alt="">
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="changePassword">修改密码</el-dropdown-item>
+                            <el-dropdown-item command="settings">设置</el-dropdown-item>
                             <el-dropdown-item command="loginOut">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </el-col>
             </el-header>
-            <el-dialog title="修改密码" :visible.sync="dialogPasswordVisible" class="passwordBox">
-                <el-form :label-position="labelPosition" label-width="80px" ref="changePasswordForm" :rules="rules" :model="changePasswordForm" class="changePasswordForm">
-                    <el-form-item label="旧密码" prop="password">
-                        <el-input type="password" v-model="changePasswordForm.password" placeholder="请输入旧密码"></el-input>
-                    </el-form-item>
-                    <el-form-item label="新密码" prop="newPassword">
-                        <el-input type="password" v-model="changePasswordForm.newPassword" placeholder="请输入新密码"></el-input>
-                    </el-form-item>
-                    <el-form-item label="确认密码" prop="rePassword">
-                        <el-input type="password" v-model="changePasswordForm.rePassword" placeholder="请重新确认密码"></el-input>
-                    </el-form-item>
-                    <el-form-item size="large">
-                        <el-button type="primary" @click="onSubmit" style="width:100%;">确认修改</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-dialog>
             <el-container>
                 <el-menu default-active="1" background-color="#2f4050" text-color="#fff" active-text-color="#ffd04b" style="height:100%;text-align:left" :router="true" @open="handleOpen" @close="handleClose" :collapse="!isCollapse">
                     <el-menu-item index="/home">
@@ -45,9 +29,11 @@
                     <el-submenu index="2">
                         <template slot="title">
                             <i class="el-icon-tickets"></i>
-                            <span>数据管理</span>
+                            <span>系统管理员</span>
                         </template>
                         <el-menu-item-group>
+                            <el-menu-item index="/addAdmin">添加管理员</el-menu-item>
+                            <el-menu-item index="/editAdmin">编辑管理员</el-menu-item>
                             <el-menu-item index="/userList">用户列表</el-menu-item>
                             <el-menu-item index="/shopList">商家列表</el-menu-item>
                             <el-menu-item index="/goodsList">商品列表</el-menu-item>
@@ -56,104 +42,109 @@
                     <el-submenu index="3">
                         <template slot="title">
                             <i class="el-icon-edit"></i>
-                            <span>添加数据</span>
+                            <span>香水品牌管理</span>
                         </template>
                         <el-menu-item-group>
+                            <el-menu-item index="/addBrand">添加香水品牌</el-menu-item>
+                            <el-menu-item index="/editBrand">编辑香水品牌</el-menu-item>
                             <el-menu-item index="/addShop">添加商家</el-menu-item>
                             <el-menu-item index="/addGoods">添加商品</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
-                            <i class="el-icon-picture"></i>
-                            <span>图表说明</span>
+                            <i class="el-icon-edit"></i>
+                            <span>香水系列管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/echartBrand">香水品牌</el-menu-item>
+                            <el-menu-item index="/addSeries">添加香水系列</el-menu-item>
+                            <el-menu-item index="/editSeries">编辑香水系列</el-menu-item>
+                            <el-menu-item index="/addShop">添加商家</el-menu-item>
+                            <el-menu-item index="/addGoods">添加商品</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
-                            <i class="el-icon-setting"></i>
-                            <span>设置</span>
+                            <i class="el-icon-edit"></i>
+                            <span>香水原料管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/settings">管理员设置</el-menu-item>
+                            <el-menu-item index="/addElement">添加香水原料</el-menu-item>
+                            <el-menu-item index="/editElement">编辑香水原料</el-menu-item>
+                            <el-menu-item index="/addShop">添加商家</el-menu-item>
+                            <el-menu-item index="/addGoods">添加商品</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
-                            <i class="el-icon-info"></i>
-                            <span>说明</span>
+                            <i class="el-icon-edit"></i>
+                            <span>香水分类管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/description">系统说明</el-menu-item>
+                            <el-menu-item index="/addClassify">添加香水分类</el-menu-item>
+                            <el-menu-item index="/editClassify">编辑香水分类</el-menu-item>
+                            <el-menu-item index="/addShop">添加商家</el-menu-item>
+                            <el-menu-item index="/addGoods">添加商品</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="7">
+                        <template slot="title">
+                            <i class="el-icon-edit"></i>
+                            <span>香水书籍管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="/addBook">添加香水书籍</el-menu-item>
+                            <el-menu-item index="/editBook">编辑香水书籍</el-menu-item>
+                            <el-menu-item index="/addShop">添加商家</el-menu-item>
+                            <el-menu-item index="/addGoods">添加商品</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="8">
+                        <template slot="title">
+                            <i class="el-icon-edit"></i>
+                            <span>香水书籍管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="/addBook">添加香水书籍</el-menu-item>
+                            <el-menu-item index="/editBook">编辑香水书籍</el-menu-item>
+                            <el-menu-item index="/addShop">添加商家</el-menu-item>
+                            <el-menu-item index="/addGoods">添加商品</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="9">
+                        <template slot="title">
+                            <i class="el-icon-setting"></i>
+                            <span>系统管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="/topic">编辑热门话题</el-menu-item>
+                            <el-menu-item index="/knowledge">编辑入门知识</el-menu-item>
+                            <el-menu-item index="/today">编辑今日之香</el-menu-item>
+                            <el-menu-item index="/settings">管理员设置</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
                 <el-container>
                     <el-main>
-                        <el-breadcrumb separator-class="el-icon-arrow-right">
-                            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                        </el-breadcrumb>
-                        <!--<el-breadcrumb separator="/">
-                            <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
-                            <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
-                        </el-breadcrumb>-->
                         <router-view></router-view>
                     </el-main>
-                    <el-footer>Footer</el-footer>
                 </el-container>
             </el-container>
         </el-container>
     </div>
 </template>
 <script>
+import axios from '../Api/api'
 export default {
     data() {
         return {
             isCollapse: true,
-            isLogo: true,
-            dialogPasswordVisible: false,
-            changePasswordForm: {
-                password: "",
-                newPassword: "",
-                rePassword: ""
-            },
-            password: "",
-            labelPosition: "right",
-            petname: "",
-            rules: {
-                newPassword: [{
-                    required: true,
-                    message: "请输入新密码",
-                    trigger: "blur"
-                },
-                {
-                    min: 4,
-                    max: 16,
-                    message: "长度在4到16个字符之间",
-                    trigger: "blur"
-                }
-                ],
-                rePassword: [{
-                    required: true,
-                    message: "请输入新密码",
-                    trigger: "blur"
-                },
-                {
-                    min: 4,
-                    max: 16,
-                    message: "长度在4到16个字符之间",
-                    trigger: "blur"
-                }
-                ]
-            }
+            password: '',
+            username: '',
+            isLogo: true
         }
     },
+
     methods: {
         handleOpen(key, keyPath) {
             console.log(key, keyPath);
@@ -163,78 +154,36 @@ export default {
         },
         handleCommand(command) {
             if (command == 'loginOut') {
-                this.$confirm("您确定要退出登录?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
+                this.$confirm('您确定要退出登录?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
                 })
                     .then(() => {
                         this.$message({
-                            type: "success",
-                            message: "退出登录成功!"
+                            type: 'success',
+                            message: '退出登录成功!'
                         });
                         this.$router.push({
-                            name: "Login"
+                            name: 'User'
                         });
                     })
-                    .catch(() => {
-
-                    });
-            }
-
-            if (command == "changePassword") {
-                this.dialogPasswordVisible = true;
             }
         },
-        getPassword() {
-            var _this = this;
-            Ajax.getId(sessionStorage.getItem("petname"), res => {
+        getData() {
+            var self = this;
+            axios.getId(sessionStorage.getItem('username'), res => {
                 //获取表中id
                 console.log(res);
-                _this.id = res.id;
+                self.id = res.id;
                 sessionStorage.setItem('id', res.id);
-                Ajax.getInfo(res.id, data => {
+                axios.getInfo(res.id, data => {
                     //获取个人信息
                     var result = data.data;
                     sessionStorage.setItem("userInfo", JSON.stringify(result));
-                    _this.password = result.password;
+                    self.username = result.username;
                 });
             });
-        },
-        onSubmit() {
-            if (this.changePasswordForm.password != this.password) {
-                this.$message({
-                    type: "error",
-                    message: "旧密码输入错误"
-                });
-            } else {
-                if (
-                    this.changePasswordForm.newPassword !=
-                    this.changePasswordForm.rePassword
-                ) {
-                    this.$message({
-                        type: "error",
-                        message: "两次输入的密码不一致"
-                    });
-                } else {
-                    Ajax.postChangePassword(
-                        this.id, {
-                            password: this.changePasswordForm.newPassword
-                        },
-                        res => {
-                            if (res.code == "success") {
-                                this.$refs["changePasswordForm"].resetFields(); //重置表单
-                                this.dialogPasswordVisible = false;
-                                this.$message({
-                                    type: "success",
-                                    message: "修改密码成功"
-                                });
-                                this.getPassword();
-                            }
-                        }
-                    );
-                }
-            }
         }
     },
     watch: {
@@ -245,14 +194,10 @@ export default {
             } else {
                 this.isLogo = true;
             }
-        },
-        $route: function() {
-            this.getPassword();
         }
     },
     created() {
-        this.petname = decodeURI(sessionStorage.getItem('petname'));
-        this.getPassword();
+        this.username = decodeURI(sessionStorage.getItem('username'));
     }
 }
 
@@ -289,12 +234,13 @@ export default {
     text-align: center;
     padding: 0 !important;
 }
-.el-breadcrumb{
-    height: 30px;
-    line-height: 30px;
-    background-color: lightgray;
+
+.el-breadcrumb {
+    height: 50px;
+    line-height: 50px;
     padding-left: 20px;
 }
+
 .el-container {
     height: 100%;
     width: 100%;
@@ -366,8 +312,4 @@ export default {
     color: red !important;
 }
 
-footer {
-    border-top: 1px solid black;
-    line-height: 60px;
-}
 </style>

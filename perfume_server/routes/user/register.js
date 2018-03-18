@@ -1,13 +1,11 @@
 var exp = require('express');
 var router = exp.Router();
 var db = require('../../db');
-var qs=require('qs')
+var qs = require('qs')
 // 注册
-router.post('/',function (req,res){
-    let reqData =  qs.parse(req.body).data
-    console.log('req.body', reqData)
+router.post('/', function (req, res) {
+    let reqData = qs.parse(req.body).data
     var username = reqData.username;
-    console.log(username)
     var password = reqData.pass;
     var checkPass = reqData.checkPass;
     // var gender = req.body.gender
@@ -15,7 +13,7 @@ router.post('/',function (req,res){
     // 判断输入的两次密码是否一致
     if (password == checkPass) {
         // 在表User中按照username查找所有用户
-        db.User.find({'username': username}, function (err,data) {
+        db.User.find({ 'username': username }, function (err, data) {
             console.log(data)
             if (!err) {
                 if (data.length == 0) {
@@ -24,7 +22,7 @@ router.post('/',function (req,res){
                         // 注册成功
                         if (!error) {
                             res.status(200).json({
-                                code:'success',
+                                code: 'success',
                                 msg: '恭喜您,注册成功!'
                             })
                             // 注册失败
@@ -36,18 +34,18 @@ router.post('/',function (req,res){
                         }
                     })
                     // 用户名已存在
-                } else{
+                } else {
                     res.status(200).json({
-                        code:'error',
+                        code: 'error',
                         msg: '该用户名已经存在，请直接登录！'
                     })
                 }
             }
         })
         // 密码不一致
-    }else{
+    } else {
         res.send({
-            code:'error',
+            code: 'error',
             msg: '两次输入的密码不一致,请您重新输入!'
         })
     }

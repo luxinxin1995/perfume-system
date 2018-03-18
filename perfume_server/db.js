@@ -12,6 +12,7 @@ db.connection.on('open',function(){
 db.connection.on('error',function(err){
     console.log('连接数据库失败'+err)
 })
+// 用户表
 var userSchema = new db.Schema({
     username: {
         type: String,
@@ -38,5 +39,69 @@ var userSchema = new db.Schema({
         default: ''
     }
 })
+// 商店表
+var shopSchema = new db.Schema({
+    name:{
+        type:String,
+        default:''
+    },
+    address:{
+        type:String,
+        default:''
+    },
+    classify:{
+        type:String,
+        default:''
+    },
+    phone:{
+        type:String,
+        default:''
+    },
+    desc:{
+        type:String,
+        default:''
+    },
+    picture:{
+        type:String,
+        default:''
+    }
+})
+// 商品表
+var goodsSchema = new db.Schema({
+    name:{
+        type:String,
+        default:''
+    },
+    capacity:{
+        type:String,
+        default:''
+    },
+    price:{
+        type:String,
+        default:''
+    },
+    country:{
+        type:String,
+        default:''
+    },
+    description:{
+        type:String,
+        default:''
+    },
+    price:{
+        type:String,
+        default:''
+    },
+    expiration:{
+        type:String,
+        default:''
+    },
+    shopPhoto:{
+        type:Array,
+        default:''
+    }
+})
 var User = db.model('User',userSchema);
-module.exports = {User}
+var Shop = db.model('Shop',shopSchema);
+var Goods = db.model('Goods',goodsSchema);
+module.exports = {User,Shop,Goods}

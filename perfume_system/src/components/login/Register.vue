@@ -16,8 +16,8 @@
             <el-input type="password" id="rePassword" name="checkPass" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="gender">
-            <el-radio v-model="ruleForm.gender" value="true" name="gender" label="1">男</el-radio>
-            <el-radio v-model="ruleForm.gender" value="false" name="gender" label="2">女</el-radio>
+            <el-radio v-model="ruleForm.gender" value="true" name="gender" label="男">男</el-radio>
+            <el-radio v-model="ruleForm.gender" value="false" name="gender" label="女">女</el-radio>
           </el-form-item>
           <el-form-item label="邮箱账号" prop="email" :rules="[{ required: true, message: '请输入邮箱地址', trigger: 'blur' },{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }]">
             <el-input placeholder="请输入邮箱" name="email" v-model="ruleForm.email" prefix-icon="el-icon-message" size="medium" auto-complete="off"></el-input>
@@ -35,11 +35,9 @@
   </div>
 </template>
 <script>
-// import { registerPost } from '@/api/register.js'
-// import Axios from '@/common/js/api.js'
+import axios from '../../Api/api'
 // 序列化数据
 var qs = require('qs')
-import axios from 'axios'
 import {isvalidPhone} from '../../utils/validate'
 var validPhone = (rule, value, callback) => {
   if (!value) {
@@ -109,33 +107,26 @@ export default {
           if (pass1 !== pass2) {
             self.$message.error('两次输入密码不一致!')
           } else {
-            console.log(this.ruleForm)
             console.log(qs.stringify({data: this.ruleForm}))
-            axios.post(`${global.ApiUrl}/${this.registerUrl}`, qs.stringify({data: this.ruleForm}), {
-              headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-              }
-            }).then(function (res) {
-              console.log(res.data.msg)
+            axios.postRegister(qs.stringify({data: this.ruleForm}), res => {
+              console.log(res)
               if (res.code === 'success') {
                 self.$alert('恭喜您注册成功,立即跳转登录界面?', '注册', {
                   confirmButtonText: '确定',
                   callback: action => {
                     self.$router.push({
-                      name: 'Login'
+                      path: '/user'
                     })
                   }
                 })
                 $('input').val('')
               } else {
-                self.$alert(res.data.msg, '注册', {
+                self.$alert(res.msg, '注册', {
                   confirmButtonText: '确定',
                   callback: action => {
                   }
                 })
               }
-            }).catch(function (err) {
-              console.log(err)
             })
           }
         } else {

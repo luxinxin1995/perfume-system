@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var register = require('./routes/user/register');
-var users = require('./routes/users');
+var login = require('./routes/user/login');//登录
+var register = require('./routes/user/register');//注册
+var users = require('./routes/user/users');//用户信息
+var photo = require('./routes/user/photo');//上传头像
+var shop = require('./routes/shop/shop');//商店
 
 var app = express();
 
@@ -31,13 +34,12 @@ app.all('*', (req, res, next) => {
     res.header("Content-Type", "application/json;charset=utf-8");
     next()
 })
-console.log('1111')
 app.use('/', index);
-app.use('/users', users);
-console.log('2222')
-app.use('/register', register)
-console.log('3333')
-
+app.use('/users', users);//用户
+app.use('/login',login);//登录
+app.use('/register', register);//注册
+app.use('/photo',photo)//头像
+app.use('/shop',shop)//商店
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

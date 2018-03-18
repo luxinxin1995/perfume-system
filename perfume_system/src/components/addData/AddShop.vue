@@ -2,6 +2,7 @@
     <div>
         <el-row style="margin-top: 20px;">
             <el-col :span="12" :offset="4">
+                <header class="form_header">添加商店</header>
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item label="商店名称" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
@@ -9,7 +10,7 @@
                     <el-form-item label="商店地址" prop="address">
                         <el-input v-model="ruleForm.address"></el-input>
                     </el-form-item>
-                    <el-form-item label="主营范围" prop="type" style="width:62%;">
+                    <el-form-item label="主营范围" prop="type">
                         <el-checkbox-group v-model="ruleForm.type">
                             <el-checkbox label="护肤品" name="type"></el-checkbox>
                             <el-checkbox label="化妆品" name="type"></el-checkbox>
@@ -24,7 +25,7 @@
                         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
                     </el-form-item>
                     <el-form-item label="商店图片" prop="shopPhoto">
-                        <el-upload action="https://jsonplaceholder.typicode.com/posts/" limit="2" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
                             <i class="el-icon-plus"></i>
                         </el-upload>
                         <el-dialog :visible.sync="dialogVisible">
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import axios from '../../Api/api'
 import { isvalidPhone } from '../../utils/validate'
 var validPhone = (rule, value, callback) => {
     if (!value) {
@@ -88,7 +90,9 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    axios.postshopAdd(this.ruleForm, res => {
+                        console.log(res)
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -133,5 +137,11 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
+}
+
+.form_header {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
 }
 </style>

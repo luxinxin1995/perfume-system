@@ -4,123 +4,147 @@
         <div class="admin_set">
             <ul>
                 <li>
-                    <span>姓名：</span><span></span>
+                    <span>用户名：</span>
+                    <span>{{userinfo.username}}</span>
                 </li>
                 <li>
-                    <span>注册时间：</span><span></span>
+                    <span>邮箱：</span>
+                    <span>{{userinfo.email}}</span>
                 </li>
                 <li>
-                    <span>管理员权限：</span><span></span>
-                </li>
-                <li>
-                    <span>管理员 ID：</span><span></span>
+                    <span>手机号码：</span>
+                    <span>{{userinfo.phone}}</span>
                 </li>
                 <li>
                     <span>更换头像：</span>
-                    <!--<el-upload
-                      class="avatar-uploader"
-                      :action="baseUrl + '/admin/update/avatar/' + adminInfo.id"
-                      :show-file-list="false"
-                      :on-success="uploadImg"
-                      :before-upload="beforeImgUpload">
-                      <img v-if="adminInfo.avatar" :src="baseImgPath + adminInfo.avatar" class="avatar">
-                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>-->
-                </li>    
+                    <el-upload class="avatar-uploader" action="http://localhost:3000/photo" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <img v-if="userinfo.avatar" :src="userinfo.avatar" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </li>
             </ul>
         </div>
     </div>
 </template>
 
 <script>
-	// import headTop from '../components/headTop'
-    // import {mapState} from 'vuex'
-    // import {baseUrl, baseImgPath} from '@/config/env'
-
-    // export default {
-    //     data(){
-    //         return {
-    //             baseUrl,
-    //             baseImgPath,
-    //         }
-    //     },
-    // 	components: {
-    // 		headTop,
-    // 	},
-    //     computed: {
-    //         ...mapState(['adminInfo']),
-    //     },
-    //     methods: {
-    //         uploadImg(res, file) {
-    //             if (res.status == 1) {
-    //                 this.adminInfo.avatar = res.image_path;
-    //             }else{
-    //                 this.$message.error('上传图片失败！');
-    //             }
-    //         },
-    //         beforeImgUpload(file) {
-    //             const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-    //             const isLt2M = file.size / 1024 / 1024 < 2;
-
-    //             if (!isRightType) {
-    //                 this.$message.error('上传头像图片只能是 JPG 格式!');
-    //             }
-    //             if (!isLt2M) {
-    //                 this.$message.error('上传头像图片大小不能超过 2MB!');
-    //             }
-    //             return isRightType && isLt2M;
-    //         },
-    //     },
-    // }
+import axios from '../../Api/api'
+export default {
+    data() {
+        return {
+            userinfo: {
+                username: '',
+                email: '',
+                phone: '',
+                avatar: ''
+            }
+        }
+    },
+    created() {
+        this.getData()
+    },
+    methods: {
+        handleAvatarSuccess(res, file) {
+            this.userinfo.avatar = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        },
+        getData() {
+            var self = this;
+            axios.getId(sessionStorage.getItem('username'), res => {
+                //获取表中id
+                self.id = res.id;
+                sessionStorage.setItem('id', res.id);
+                axios.getInfo(res.id, data => {
+                    //获取个人信息
+                    console.log('data', data)
+                    var result = data.data;
+                    sessionStorage.setItem('userInfo', JSON.stringify(result));
+                    self.userinfo = result
+                });
+            });
+        }
+    },
+    watch: {
+        $route: function() {
+            this.getData();
+        }
+    }
+}
 </script>
 
 <style scoped>
-	.explain_text{
-		margin-top: 20px;
-		text-align: center;
-		font-size: 20px;
-		color: #333;
-	}
-    .admin_set{
-        width: 60%;
-        background-color: #F9FAFC;
-        min-height: 400px;
-        margin: 20px auto 0;
-        border-radius: 10px;
-    }
-        ul > li{
-            padding: 20px;}
-        ul > li span{
-                color: #666;
-            }
-    .admin_title{
-        margin-top: 20px;
-        font-size: 24px;
-        color: #666;
-        text-align: center;
-    }
-    .avatar-uploader .el-upload {
-        border: 1px dashed #d9d9d9;
-        margin-top: 10px;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    .avatar-uploader .el-upload:hover {
-        border-color: #20a0ff;
-    }
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 120px;
-        height: 120px;
-        line-height: 120px;
-        text-align: center;
-    }
-    .avatar {
-        width: 120px;
-        height: 120px;
-        display: block;
-    }
+.explain_text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+}
+
+.admin_set {
+    width: 60%;
+    background-color: #F9FAFC;
+    min-height: 400px;
+    margin: 20px auto 0;
+    border-radius: 10px;
+}
+
+ul>li {
+    padding: 40px;
+    text-align: left
+}
+
+ul>li span:nth-child(1) {
+    font-weight: 700
+}
+
+ul>li span {
+    color: #666;
+}
+
+.admin_title {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #666;
+    text-align: center;
+}
+.avatar-uploader{
+    margin: -15px 0 0 100px;
+}
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    display: block;
+}
+
 </style>
