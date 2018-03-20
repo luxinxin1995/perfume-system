@@ -1,6 +1,6 @@
 <template>
   <div class="bg-container">
-    <h1>香水销售管理系统</h1>
+    <h1>香水管理系统</h1>
     <router-view></router-view>
   </div>
 </template>

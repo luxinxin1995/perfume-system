@@ -115,7 +115,7 @@ export default {
                   confirmButtonText: '确定',
                   callback: action => {
                     self.$router.push({
-                      path: '/user'
+                      path: '/login'
                     })
                   }
                 })

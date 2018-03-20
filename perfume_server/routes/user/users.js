@@ -21,13 +21,10 @@ router.get('/findId/:username', function (req, res) {
     })
 });
 // 获取所有用户
-router.get('/findAll/:id/:pageIndex/:pageSize', function (req, res) {
-    console.log(req.params)
-    var id = req.params.id;
+router.get('/findAll/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
     db.User.find(function (err, data) {
-        console.log('data',data)
         if (!err) {
             var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
             var pageCount = Math.ceil(data.length / pageSize);
@@ -39,6 +36,8 @@ router.get('/findAll/:id/:pageIndex/:pageSize', function (req, res) {
                 pageCount: pageCount,
                 length: data.length
             })
+        }else{
+            console.log(err)
         }
     })
 });
@@ -85,5 +84,16 @@ router.post('/changePassword/:id', function (req, res) {
         }
     })
 });
-
+// 删除用户
+router.post('/delete/:id', function (req, res) {
+  var _id = req.params.id;
+  db.User.findByIdAndRemove(_id, function (err) {
+    if (!err) {
+      res.send({
+        code: 'success',
+        msg: '删除成功'
+      });
+    }
+  })
+});
 module.exports = router;
