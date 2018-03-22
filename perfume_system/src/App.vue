@@ -132,5 +132,7 @@ body {
 .el-form-item__content {
   text-align: left;
 }
-
+.el-aside, .el-main{
+  overflow: visible;
+}
 </style>

@@ -1,56 +1,55 @@
 <template>
     <div>
-        <el-row style="margin-top: 20px;">
-            <el-col :span="12" :offset="4">
-                <header class="form_header">添加品牌</header>
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                    <el-form-item label="品牌名称" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="品牌发源地" prop="address">
-                        <el-select v-model="ruleForm.address" placeholder="请选择">
-                            <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
-                                <span style="color: #8492a6; font-size: 13px">{{ item.value }}</span>
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="品牌成立时间" prop="time">
-                        <el-date-picker v-model="ruleForm.time" type="date" placeholder="选择日期">
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="品牌介绍" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-                    </el-form-item>
-                    <!--<el-form-item label="品牌logo" prop="shopPhoto">
-                                                <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-                                                    <i class="el-icon-plus"></i>
-                                                </el-upload>
-                                                <el-dialog :visible.sync="dialogVisible">
-                                                    <img width="100%" :src="dialogImageUrl" alt="">
-                                                </el-dialog>
-                                            </el-form-item>-->
-                    <el-form-item style="display:flex;">
-                        <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
+        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+            <el-form-item label="品牌名称" prop="name">
+                <el-input v-model="formObj.name"></el-input>
+            </el-form-item>
+            <el-form-item label="品牌发源地" prop="address">
+                <el-select v-model="formObj.address" placeholder="请选择">
+                    <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
+                        <span style="color: #8492a6; font-size: 13px">{{ item.value }}</span>
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="品牌成立时间" prop="time">
+                <el-date-picker v-model="formObj.time" type="date" placeholder="选择日期">
+                </el-date-picker>
+            </el-form-item>
+            <el-form-item label="品牌介绍" prop="desc">
+                <el-input type="textarea" v-model="formObj.desc"></el-input>
+            </el-form-item>
+            <!--<el-form-item label="品牌logo" prop="shopPhoto">
+                                                                <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                                                                    <i class="el-icon-plus"></i>
+                                                                </el-upload>
+                                                                <el-dialog :visible.sync="dialogVisible">
+                                                                    <img width="100%" :src="dialogImageUrl" alt="">
+                                                                </el-dialog>
+                                                            </el-form-item>-->
+            <el-form-item style="display:flex;">
+                <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
+                <el-button @click="resetForm('formObj')">重置</el-button>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
 <script>
 import axios from '../../../../Api/api'
 export default {
+    props: {
+        form: {
+            type: Object,
+            default: () => {
+                return {}
+            }
+        }
+    },
     data() {
         return {
-            dialogVisible: false,
-            ruleForm: {
-                name: '',
-                address: '',
-                desc: '',
-                time: ''
-            },
+            formObj: this.form,
+            // 1表示新增,2表示修改
+            addOrEditFlag: null,
             cities: [{
                 value: '北京'
             }, {
@@ -72,17 +71,18 @@ export default {
             }
         };
     },
+    mounted() {
+        if (this.formObj.hasOwnProperty('name')) {
+            this.addOrEditFlag = '修改'
+        } else {
+            this.addOrEditFlag = '新增'
+        }
+    },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    axios.postbrandAdd(this.ruleForm, res => {
-                        if (res.code == 'success') {
-                            this.$message.success('添加品牌成功')
-                            this.form = []
-                            this.$router.push({name: 'BrandList'})
-                        }
-                    })
+                    this.$emit('submitHandle', this.formObj, this.addOrEditFlag)
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -127,11 +127,5 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
-}
-
-.form_header {
-    margin-bottom: 20px;
-    font-size: 20px;
-    font-weight: 700;
 }
 </style>

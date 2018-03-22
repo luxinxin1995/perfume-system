@@ -7,7 +7,7 @@ import Home from '@/components/Home'
 // 用户
 import AdminList from '@/components/backgroundAdmin/system-management/adminList'
 // 品牌
-import AddBrand from '@/components/backgroundAdmin/about-perfume/brand/addBrand'
+// import AddBrand from '@/components/backgroundAdmin/about-perfume/brand/addBrand'
 import BrandList from '@/components/backgroundAdmin/about-perfume/brand/brandList'
 // 系列
 import AddSeries from '@/components/backgroundAdmin/about-perfume/series/addSeries'
@@ -67,11 +67,11 @@ export default new Router({
       name: 'Home',
       component: Home,
       children: [
-        {
-          path: '/addBrand',
-          name: 'AddBrand',
-          component: AddBrand
-        },
+        // {
+        //   path: '/addBrand',
+        //   name: 'AddBrand',
+        //   component: AddBrand
+        // },
         {
           path: '/editBrand',
           name: 'BrandList',
