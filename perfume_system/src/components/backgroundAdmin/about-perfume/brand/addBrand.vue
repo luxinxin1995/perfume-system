@@ -18,14 +18,14 @@
             <el-form-item label="品牌介绍" prop="desc">
                 <el-input type="textarea" v-model="formObj.desc"></el-input>
             </el-form-item>
-            <!--<el-form-item label="品牌logo" prop="shopPhoto">
-                                                                <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-                                                                    <i class="el-icon-plus"></i>
-                                                                </el-upload>
-                                                                <el-dialog :visible.sync="dialogVisible">
-                                                                    <img width="100%" :src="dialogImageUrl" alt="">
-                                                                </el-dialog>
-                                                            </el-form-item>-->
+            <el-form-item label="品牌logo" prop="photo">
+                <el-upload action="http://localhost:3000/photo/multiplefile" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
                 <el-button @click="resetForm('formObj')">重置</el-button>
@@ -50,6 +50,8 @@ export default {
             formObj: this.form,
             // 1表示新增,2表示修改
             addOrEditFlag: null,
+            dialogImageUrl: '',
+            dialogVisible: false,
             cities: [{
                 value: '北京'
             }, {

@@ -1,51 +1,52 @@
 <template>
     <div>
-        <el-row style="margin-top: 20px;">
-            <el-col :span="12" :offset="4">
-                <header class="form_header">添加香水系列</header>
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                    <el-form-item label="系列名称" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="所属品牌" prop="brand">
-                        <el-select v-model="ruleForm.brand" placeholder="请选择">
-                            <el-option v-for="item in brand" :key="item.value" :label="item.label" :value="item.name">
-                                <span style="color: #8492a6; font-size: 13px">{{item.name}}</span>
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="系列介绍" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-                    </el-form-item>
-                    <!--<el-form-item label="品牌logo" prop="shopPhoto">
-                                                        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-                                                            <i class="el-icon-plus"></i>
-                                                        </el-upload>
-                                                        <el-dialog :visible.sync="dialogVisible">
-                                                            <img width="100%" :src="dialogImageUrl" alt="">
-                                                        </el-dialog>
-                                                    </el-form-item>-->
-                    <el-form-item style="display:flex;">
-                        <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
+        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+            <el-form-item label="系列名称" prop="name">
+                <el-input v-model="formObj.name"></el-input>
+            </el-form-item>
+            <el-form-item label="所属品牌" prop="brand">
+                <el-select v-model="formObj.brand" placeholder="请选择">
+                    <el-option v-for="item in brand" :key="item.value" :label="item.label" :value="item.name">
+                        <span style="color: #8492a6; font-size: 13px">{{item.name}}</span>
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="系列介绍" prop="desc">
+                <el-input type="textarea" v-model="formObj.desc"></el-input>
+            </el-form-item>
+            <!--<el-form-item label="品牌logo" prop="shopPhoto">
+                                                                <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                                                                    <i class="el-icon-plus"></i>
+                                                                </el-upload>
+                                                                <el-dialog :visible.sync="dialogVisible">
+                                                                    <img width="100%" :src="dialogImageUrl" alt="">
+                                                                </el-dialog>
+                                                            </el-form-item>-->
+            <el-form-item style="display:flex;">
+                <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
+                <el-button @click="resetForm('formObj')">重置</el-button>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
 <script>
 import axios from '../../../../Api/api'
 export default {
+    props: {
+        form: {
+            type: Object,
+            default: () => {
+                return {}
+            }
+        }
+    },
     data() {
         return {
             dialogVisible: false,
-            ruleForm: {
-                name: '',
-                desc: '',
-                brand: ''
-            },
+            formObj: this.form,
+            // 1表示新增,2表示修改
+            addOrEditFlag: null,
             brand: [],
             rules: {
                 name: [
@@ -55,18 +56,18 @@ export default {
             }
         };
     },
+    mounted() {
+        if (this.formObj.hasOwnProperty('name')) {
+            this.addOrEditFlag = '修改'
+        } else {
+            this.addOrEditFlag = '新增'
+        }
+    },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    axios.postseriesAdd(this.ruleForm, res => {
-                        console.log(res)
-                        if (res.code == 'success') {
-                            this.$message.success('添加品牌系列成功')
-                            this.form = []
-                            this.$router.push({ name: 'SeriesList' })
-                        }
-                    })
+                    this.$emit('submitHandle', this.formObj, this.addOrEditFlag)
                 } else {
                     console.log('error submit!!');
                     return false;

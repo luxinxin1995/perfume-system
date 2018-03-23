@@ -9,6 +9,7 @@
                 <span>{{username}}</span>
               </span>
               <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="back" v-show="admin">返回系统</el-dropdown-item>
                 <el-dropdown-item command="out">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -56,6 +57,7 @@ export default {
       isCollapse: true,
       isLogin: false,
       username: '',
+      admin: false,
       loginOut: true,
       imgURL: [
         { src: require('../../assets/c1.jpg') },
@@ -96,6 +98,9 @@ export default {
           });
         })
       }
+      if (command == 'back') {
+        this.$router.push({name: 'Home'})
+      }
     },
     getData() {
       var self = this;
@@ -112,6 +117,11 @@ export default {
             self.username = result.username;
             self.loginOut = false;
             self.isLogin = true;
+            if (self.username == 'admin') {
+              this.admin = true
+            }else {
+              this.admin = false
+            }
           });
         }
       });

@@ -17,8 +17,8 @@
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
-                        <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
+                        <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -37,7 +37,7 @@
 
 <script>
 import axios from '../../../../Api/api'
-import projcetAddOrEdit from './addBrand.vue'
+import projcetAddOrEdit from './addBrand'
 export default {
     components: {
         projcetAddOrEdit
@@ -127,6 +127,9 @@ export default {
                         this.getData();
                     }
                 })
+                // axios.postPhoto(obj, res => {
+                //     console.log(res)
+                // })
             }
         },
         // 分页

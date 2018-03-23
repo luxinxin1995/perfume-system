@@ -1,35 +1,36 @@
 <template>
     <div>
-        <el-row style="margin-top: 20px;">
-            <el-col :span="12" :offset="4">
-                <header class="form_header">添加今日之香</header>
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                    <el-form-item label="标题" prop="title">
-                        <el-input v-model="ruleForm.title"></el-input>
-                    </el-form-item>
-                    <el-form-item label="详情" prop="detail">
-                        <el-input type="textarea" v-model="ruleForm.detail"></el-input>
-                    </el-form-item>
-                    <el-form-item style="display:flex;">
-                        <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
+        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+            <el-form-item label="标题" prop="title">
+                <el-input v-model="formObj.title"></el-input>
+            </el-form-item>
+            <el-form-item label="详情" prop="detail">
+                <el-input type="textarea" v-model="formObj.detail"></el-input>
+            </el-form-item>
+            <el-form-item style="display:flex;">
+                <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
+                <el-button @click="resetForm('formObj')">重置</el-button>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
 <script>
 import axios from '../../../../Api/api'
 export default {
+    props: {
+        form: {
+            type: Object,
+            default: () => {
+                return {}
+            }
+        }
+    },
     data() {
         return {
-            dialogVisible: false,
-            ruleForm: {
-                title: '',
-                detail: ''
-            },
+            formObj: this.form,
+            // 1表示新增,2表示修改
+            addOrEditFlag: null,
             rules: {
                 title: [
                     { required: true, message: '请输入标题', trigger: 'blur' }
@@ -37,18 +38,18 @@ export default {
             }
         };
     },
+    mounted() {
+        if (this.formObj.hasOwnProperty('title')) {
+            this.addOrEditFlag = '修改'
+        } else {
+            this.addOrEditFlag = '新增'
+        }
+    },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    axios.posttodayAdd(this.ruleForm, res => {
-                        console.log(res)
-                        if (res.code == 'success') {
-                            this.$message.success('添加品牌系列成功')
-                            this.form = []
-                            this.$router.push({ name: 'TodayList' })
-                        }
-                    })
+                    this.$emit('submitHandle', this.formObj, this.addOrEditFlag)
                 } else {
                     console.log('error submit!!');
                     return false;

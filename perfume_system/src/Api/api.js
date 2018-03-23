@@ -24,9 +24,9 @@ export default {
       console.log(err)
     })
   },
-  // 上传头像
+  // 上传多张图片
   postPhoto (data, callback) {
-    axios.post(`${global.ApiUrl}/photo`, data).then((res) => {
+    axios.post(`${global.ApiUrl}/photo//multiplefile`, data).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)

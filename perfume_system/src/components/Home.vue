@@ -22,12 +22,12 @@
             <el-container>
                 <el-menu default-active="1" background-color="#2f4050" text-color="#fff" active-text-color="#ffd04b" style="height:100%;text-align:left" :router="true" @open="handleOpen" @close="handleClose" :collapse="!isCollapse">
                     <el-menu-item index="/">
-                        <i class="el-icon-location"></i>
+                        <i class="fa fa-home ft-size"></i>
                         <span slot="title">首页</span>
                     </el-menu-item>
                     <el-submenu index="2">
                         <template slot="title">
-                            <i class="el-icon-service"></i>
+                            <i class="fa fa-user-circle ft-size"></i>
                             <span>系统管理员</span>
                         </template>
                         <el-menu-item-group>
@@ -37,87 +37,78 @@
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title">
-                            <i class="el-icon-menu"></i>
+                            <i class="fa fa-yelp ft-size"></i>
                             <span>香水品牌管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addBrand">添加香水品牌</el-menu-item>
                             <el-menu-item index="/editBrand">香水品牌列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
-                            <i class="el-icon-goods"></i>
+                            <i class="fa fa-tachometer ft-size"></i>
                             <span>香水系列管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addSeries">添加香水系列</el-menu-item>
                             <el-menu-item index="/editSeries">香水系列列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
-                            <i class="el-icon-star-on"></i>
+                            <i class="fa fa-pagelines ft-size"></i>
                             <span>香水原料管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addMaterial">添加香水原料</el-menu-item>
                             <el-menu-item index="/editMaterial">香水原料列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
-                            <i class="el-icon-edit-outline"></i>
+                            <i class="fa fa-pie-chart ft-size"></i>
                             <span>香水分类管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addClassify">添加香水分类</el-menu-item>
                             <el-menu-item index="/editClassify">香水分类列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="7">
                         <template slot="title">
-                            <i class="el-icon-tickets"></i>
+                            <i class="fa fa-book ft-size"></i>
                             <span>香水书籍管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addBook">添加香水书籍</el-menu-item>
                             <el-menu-item index="/editBook">香水书籍列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="8">
                         <template slot="title">
-                            <i class="el-icon-picture"></i>
+                            <i class="fa fa-youtube-play ft-size"></i>
                             <span>香水电影管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/addMovie">添加香水电影</el-menu-item>
                             <el-menu-item index="/editMovie">香水电影列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="9">
                         <template slot="title">
-                            <i class="el-icon-setting"></i>
+                            <i class="fa fa-ge ft-size"></i>
                             <span>系统管理</span>
                         </template>
                         <el-menu-item-group>
                             <el-submenu index="9-1">
                                 <template slot="title">热门话题管理</template>
-                                <el-menu-item index="/addTopic">添加热门话题</el-menu-item>
                                 <el-menu-item index="/editTopic">热门话题列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
                             <el-submenu index="9-2">
                                 <template slot="title">精彩文章管理</template>
-                                <el-menu-item index="/addArticle">添加精彩文章</el-menu-item>
                                 <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
                             <el-submenu index="9-3">
                                 <template slot="title">今日之香管理</template>
-                                <el-menu-item index="/addToday">添加今日之香</el-menu-item>
                                 <el-menu-item index="/editToday">今日之香列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>

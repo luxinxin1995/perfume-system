@@ -1,44 +1,42 @@
 <template>
     <div>
-        <el-row style="margin-top: 20px;">
-            <el-col :span="12" :offset="4">
-                <header class="form_header">添加香水系列</header>
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                    <el-form-item label="动物原料" prop="animal">
-                        <el-input v-model="ruleForm.animal"></el-input>
-                    </el-form-item>
-                    <el-form-item label="动物原料介绍" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm.animaldesc"></el-input>
-                    </el-form-item>
-                    <el-form-item label="植物原料" prop="plant">
-                        <el-input v-model="ruleForm.plant"></el-input>
-                    </el-form-item>
-                    <el-form-item label="植物原料介绍" prop="desc">
-                        <el-input type="textarea" v-model="ruleForm.plantdesc"></el-input>
-                    </el-form-item>
-                    <el-form-item style="display:flex;">
-                        <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
+        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+            <el-form-item label="动物原料" prop="animal">
+                <el-input v-model="formObj.animal"></el-input>
+            </el-form-item>
+            <el-form-item label="动物原料介绍" prop="animaldesc">
+                <el-input type="textarea" v-model="formObj.animaldesc"></el-input>
+            </el-form-item>
+            <el-form-item label="植物原料" prop="plant">
+                <el-input v-model="formObj.plant"></el-input>
+            </el-form-item>
+            <el-form-item label="植物原料介绍" prop="plantdesc">
+                <el-input type="textarea" v-model="formObj.plantdesc"></el-input>
+            </el-form-item>
+            <el-form-item style="display:flex;">
+                <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
+                <el-button @click="resetForm('formObj')">重置</el-button>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
 <script>
 import axios from '../../../../Api/api'
 export default {
+    props: {
+        form: {
+            type: Object,
+            default: () => {
+                return {}
+            }
+        }
+    },
     data() {
         return {
-            dialogVisible: false,
-            ruleForm: {
-                animal: '',
-                plant: '',
-                animaldesc: '',
-                plantdesc: ''
-            },
-            brand: [],
+            formObj: this.form,
+            // 1表示新增,2表示修改
+            addOrEditFlag: null,
             rules: {
                 animal: [
                     { required: true, message: '请输入动物原料', trigger: 'blur' },
@@ -51,18 +49,18 @@ export default {
             }
         };
     },
+    mounted() {
+        if (this.formObj.hasOwnProperty('animal')) {
+            this.addOrEditFlag = '修改'
+        } else {
+            this.addOrEditFlag = '新增'
+        }
+    },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    axios.postmaterialAdd(this.ruleForm, res => {
-                        console.log(res)
-                        if (res.code == 'success') {
-                            this.$message.success('添加香水原料成功')
-                            this.form = []
-                            this.$router.push({ name: 'MaterialList' })
-                        }
-                    })
+                    this.$emit('submitHandle', this.formObj, this.addOrEditFlag)
                 } else {
                     console.log('error submit!!');
                     return false;

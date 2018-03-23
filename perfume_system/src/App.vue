@@ -135,4 +135,12 @@ body {
 .el-aside, .el-main{
   overflow: visible;
 }
+.ft-size{
+  font-size: 20px;
+  margin-right: 10px;
+  color: white!important;
+}
+.ft-btn{
+  font-size: 12px;
+}
 </style>

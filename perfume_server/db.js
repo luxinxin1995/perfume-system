@@ -64,6 +64,10 @@ var brandSchema = new db.Schema({
     time: {
         type: String,
         default: ''
+    },
+    photos: {
+        type: Array,
+        default: []
     }
 })
 // 香水系列表

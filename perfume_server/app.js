@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var db = require('./db')
 
 var index = require('./routes/index');
 var login = require('./routes/user/login');//登录
 var register = require('./routes/user/register');//注册
 var users = require('./routes/user/users');//用户信息
-var photo = require('./routes/user/photo');//上传头像
 var brand = require('./routes/brand');//品牌
 var series = require('./routes/series');//系列
 var material = require('./routes/material');//原料
@@ -20,6 +20,7 @@ var movie = require('./routes/movie');//电影
 var topic = require('./routes/topic');//热门话题
 var article = require('./routes/article');//精彩文章
 var today = require('./routes/today');//今日之香
+var photo = require('./routes/photo');//上传图片
 
 var app = express();
 
@@ -32,8 +33,10 @@ app.set('view engine', 'html');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.text()); //把请求发送的数据解析成文本
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // 解决跨域
 app.all('*', (req, res, next) => {
@@ -49,7 +52,6 @@ app.use('/', index);
 app.use('/users', users);//用户
 app.use('/login', login);//登录
 app.use('/register', register);//注册
-app.use('/photo', photo)//头像
 app.use('/brand', brand)//品牌
 app.use('/series', series)//系列
 app.use('/material', material)//原料
@@ -59,6 +61,7 @@ app.use('/movie', movie)//电影
 app.use('/topic', topic)//热门话题
 app.use('/article', article)//精彩文章
 app.use('/today', today)//今日之香
+app.use('/photo', photo)//上传图片
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
