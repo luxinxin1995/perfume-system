@@ -14,13 +14,14 @@ var users = require('./routes/user/users');//用户信息
 var brand = require('./routes/brand');//品牌
 var series = require('./routes/series');//系列
 var material = require('./routes/material');//原料
+var material2 = require('./routes/material2');//原料
 var classify = require('./routes/classify');//分类
 var book = require('./routes/book');//书籍
 var movie = require('./routes/movie');//电影
 var topic = require('./routes/topic');//热门话题
 var article = require('./routes/article');//精彩文章
 var today = require('./routes/today');//今日之香
-var photo = require('./routes/photo');//上传图片
+// var photo = require('./routes/photo');//上传图片
 
 var app = express();
 
@@ -55,13 +56,14 @@ app.use('/register', register);//注册
 app.use('/brand', brand)//品牌
 app.use('/series', series)//系列
 app.use('/material', material)//原料
+app.use('/material2', material2)//原料
 app.use('/classify', classify)//分类
 app.use('/book', book)//书籍
 app.use('/movie', movie)//电影
 app.use('/topic', topic)//热门话题
 app.use('/article', article)//精彩文章
 app.use('/today', today)//今日之香
-app.use('/photo', photo)//上传图片
+// app.use('/photo', photo)//上传图片
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

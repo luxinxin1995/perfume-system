@@ -9,8 +9,6 @@
                 </el-table-column>
                 <el-table-column prop="title" label="文章标题" width="180">
                 </el-table-column>
-                <el-table-column prop="link" label="文章链接" width="180">
-                </el-table-column>
                 <el-table-column prop="detail" label="文章内容" width="180">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">

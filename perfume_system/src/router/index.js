@@ -13,6 +13,7 @@ import BrandList from '@/components/backgroundAdmin/about-perfume/brand/brandLis
 import SeriesList from '@/components/backgroundAdmin/about-perfume/series/seriesList'
 // 原料
 import MaterialList from '@/components/backgroundAdmin/about-perfume/material/materialList'
+import MaterialList2 from '@/components/backgroundAdmin/about-perfume/material/materialList2'
 // 分类
 import ClassifyList from '@/components/backgroundAdmin/about-perfume/classify/classifyList'
 // 书籍
@@ -73,6 +74,11 @@ export default new Router({
           path: '/editMaterial',
           name: 'MaterialList',
           component: MaterialList
+        },
+        {
+          path: '/editMaterial2',
+          name: 'MaterialList2',
+          component: MaterialList2
         },
         {
           path: '/editClassify',

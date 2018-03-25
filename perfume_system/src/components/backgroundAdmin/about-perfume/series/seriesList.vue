@@ -9,7 +9,7 @@
                 </el-table-column>
                 <el-table-column prop="name" label="系列名称" width="180">
                 </el-table-column>
-                <el-table-column prop="brand" label="所属系列" width="180">
+                <el-table-column prop="brand" label="所属品牌" width="180">
                 </el-table-column>
                 <el-table-column prop="desc" label="系列介绍" width="180">
                 </el-table-column>

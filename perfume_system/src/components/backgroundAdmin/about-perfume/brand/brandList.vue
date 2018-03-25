@@ -5,15 +5,13 @@
                 <el-button size="mini" type="primary" @click="addBrand()" icon="el-icon-plus">新增</el-button>
             </div>
             <el-table :data="tableData" style="width: 100%;">
-                <el-table-column type="index" width="50">
+                <el-table-column type="index">
                 </el-table-column>
-                <el-table-column prop="name" label="品牌名称" width="180">
+                <el-table-column prop="ChineseName" label="品牌中文名称">
                 </el-table-column>
-                <el-table-column prop="address" label="品牌发源地" width="220">
+                <el-table-column prop="EnglishName" label="品牌英文名称">
                 </el-table-column>
-                <el-table-column prop="desc" label="品牌介绍" width="180">
-                </el-table-column>
-                <el-table-column prop="time" label="品牌成立时间" width="220">
+                <el-table-column prop="desc" label="品牌介绍">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
@@ -58,6 +56,11 @@ export default {
     created() {
         this.getData()
     },
+    // filters: {
+    //     dateFrm (el) {
+    //         return moment(el).format('YYYY-MM-DD HH:mm:ss')
+    //     }
+    // },
     methods: {
         // 获取所有品牌
         getData() {
@@ -66,6 +69,10 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var element = this.tableData[i].time;
+                        this.tableData[i].time = element.substring(0,10)
+                    }
                 }
             })
         },
@@ -127,9 +134,6 @@ export default {
                         this.getData();
                     }
                 })
-                // axios.postPhoto(obj, res => {
-                //     console.log(res)
-                // })
             }
         },
         // 分页

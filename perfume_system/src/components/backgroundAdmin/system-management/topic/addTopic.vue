@@ -34,8 +34,7 @@ export default {
             addOrEditFlag: null,
             rules: {
                 title: [
-                    { required: true, message: '请输入标题', trigger: 'blur' },
-                    { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入标题', trigger: 'blur' }
                 ]
             }
         };

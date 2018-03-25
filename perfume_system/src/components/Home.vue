@@ -32,7 +32,6 @@
                         </template>
                         <el-menu-item-group>
                             <el-menu-item index="/AdminList">用户列表</el-menu-item>
-                            <el-menu-item index="/changePassword">修改密码</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="3">
@@ -59,7 +58,8 @@
                             <span>香水原料管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/editMaterial">香水原料列表</el-menu-item>
+                            <el-menu-item index="/editMaterial">动物原料列表</el-menu-item>
+                            <el-menu-item index="/editMaterial2">植物原料列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="6">

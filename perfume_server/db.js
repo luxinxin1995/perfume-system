@@ -49,7 +49,11 @@ var userSchema = new db.Schema({
 })
 // 品牌表
 var brandSchema = new db.Schema({
-    name: {
+    ChineseName: {
+        type: String,
+        default: ''
+    },
+    EnglishName: {
         type: String,
         default: ''
     },
@@ -65,9 +69,9 @@ var brandSchema = new db.Schema({
         type: String,
         default: ''
     },
-    photos: {
-        type: Array,
-        default: []
+    logo: {
+        type: String,
+        default: ''
     }
 })
 // 香水系列表
@@ -91,11 +95,14 @@ var materialSchema = new db.Schema({
         type: String,
         default: ''
     },
-    plant: {
+    animaldesc: {
         type: String,
         default: ''
-    },
-    animaldesc: {
+    }
+})
+// 香水原料列表2
+var material2Schema = new db.Schema({
+    plant: {
         type: String,
         default: ''
     },
@@ -197,10 +204,6 @@ var articleSchema = new db.Schema({
         type: String,
         default: ''
     },
-    link: {
-        type: String,
-        default: ''
-    },
     detail: {
         type: String,
         default: ''
@@ -221,6 +224,7 @@ var User = db.model('User', userSchema);
 var Brand = db.model('Brand', brandSchema);
 var Series = db.model('Series', seriesSchema)
 var Material = db.model('Material', materialSchema)
+var Material2 = db.model('Material2', material2Schema)
 var Classify = db.model('Classify', classifySchema)
 var Book = db.model('Book', bookSchema)
 var Movie = db.model('Movie', movieSchema)
@@ -228,4 +232,4 @@ var Topic = db.model('Topic', topicSchema)
 var Article = db.model('Article', articleSchema)
 var Today = db.model('Today', todaySchema)
 
-module.exports = { User, Brand, Series, Material, Classify, Book, Movie, Topic, Article, Today}
+module.exports = { User, Brand, Series, Material, Material2, Classify, Book, Movie, Topic, Article, Today}

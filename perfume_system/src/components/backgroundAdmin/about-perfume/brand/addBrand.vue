@@ -1,30 +1,15 @@
 <template>
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
-            <el-form-item label="品牌名称" prop="name">
-                <el-input v-model="formObj.name"></el-input>
+            <el-form-item label="品牌中文名称" prop="ChineseName">
+                <el-input v-model="formObj.ChineseName"></el-input>
             </el-form-item>
-            <el-form-item label="品牌发源地" prop="address">
-                <el-select v-model="formObj.address" placeholder="请选择">
-                    <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
-                        <span style="color: #8492a6; font-size: 13px">{{ item.value }}</span>
-                    </el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="品牌成立时间" prop="time">
-                <el-date-picker v-model="formObj.time" type="date" placeholder="选择日期">
-                </el-date-picker>
+            <el-form-item label="品牌英文名称" prop="EnglishName">
+                <el-input v-model="formObj.EnglishName"></el-input>
             </el-form-item>
             <el-form-item label="品牌介绍" prop="desc">
                 <el-input type="textarea" v-model="formObj.desc"></el-input>
             </el-form-item>
-            <el-form-item label="品牌logo" prop="photo">
-                <el-upload action="http://localhost:3000/photo/multiplefile" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-                    <i class="el-icon-plus"></i>
-                </el-upload>
-                <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt="">
-                </el-dialog>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
@@ -50,25 +35,9 @@ export default {
             formObj: this.form,
             // 1表示新增,2表示修改
             addOrEditFlag: null,
-            dialogImageUrl: '',
-            dialogVisible: false,
-            cities: [{
-                value: '北京'
-            }, {
-                value: '上海'
-            }, {
-                value: '南京'
-            }, {
-                value: '成都'
-            }, {
-                value: '深圳'
-            }, {
-                value: '广州'
-            }],
             rules: {
-                name: [
-                    { required: true, message: '请输入品牌名称', trigger: 'blur' },
-                    { min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
+                ChineseName: [
+                    { required: true, message: '请输入品牌中文名称', trigger: 'blur' }
                 ]
             }
         };

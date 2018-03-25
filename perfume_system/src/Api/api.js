@@ -207,6 +207,46 @@ export default {
       console.log(err)
     })
   },
+  // 添加原料
+  postmaterial2Add (data, callback) {
+    axios.post(`${global.ApiUrl}/material2/add`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取所有原料
+  getmaterial2All (pageIndex, pageSize, callback) {
+    axios.get(`${global.ApiUrl}/material2/allMaterial2/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取id对应原料
+  getmaterial2ById (id, callback) {
+    axios.get(`${global.ApiUrl}/material2/Material2One/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 修改id对应原料
+  postmaterial2Editor (id, data, callback) {
+    axios.post(`${global.ApiUrl}/material2/editor/${id}`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 删除id对应原料
+  postmaterial2Delete (id, callback) {
+    axios.post(`${global.ApiUrl}/material2/delete/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
   // 添加分类
   postclassifyAdd (data, callback) {
     axios.post(`${global.ApiUrl}/classify/add`, data).then((res) => {

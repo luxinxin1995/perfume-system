@@ -4,9 +4,6 @@
             <el-form-item label="文章标题" prop="title">
                 <el-input v-model="formObj.title"></el-input>
             </el-form-item>
-            <el-form-item label="文章链接" prop="link">
-                <el-input v-model="formObj.link"></el-input>
-            </el-form-item>
             <el-form-item label="文章内容" prop="detail">
                 <el-input type="textarea" v-model="formObj.detail"></el-input>
             </el-form-item>

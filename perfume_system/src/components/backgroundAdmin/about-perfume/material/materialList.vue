@@ -9,13 +9,9 @@
                 </el-table-column>
                 <el-table-column prop="animal" label="动物原料" width="180">
                 </el-table-column>
-                <el-table-column prop="animaldesc" label="动物原料介绍" width="220">
+                <el-table-column prop="animaldesc" label="动物原料介绍">
                 </el-table-column>
-                <el-table-column prop="plant" label="植物原料" width="180">
-                </el-table-column>
-                <el-table-column prop="plantdesc" label="植物原料介绍" width="220">
-                </el-table-column>
-                <el-table-column label="操作" header-align="center">
+                <el-table-column label="操作" header-align="center" width="320">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
                         <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>

@@ -7,12 +7,6 @@
             <el-form-item label="动物原料介绍" prop="animaldesc">
                 <el-input type="textarea" v-model="formObj.animaldesc"></el-input>
             </el-form-item>
-            <el-form-item label="植物原料" prop="plant">
-                <el-input v-model="formObj.plant"></el-input>
-            </el-form-item>
-            <el-form-item label="植物原料介绍" prop="plantdesc">
-                <el-input type="textarea" v-model="formObj.plantdesc"></el-input>
-            </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
                 <el-button @click="resetForm('formObj')">重置</el-button>
@@ -39,12 +33,7 @@ export default {
             addOrEditFlag: null,
             rules: {
                 animal: [
-                    { required: true, message: '请输入动物原料', trigger: 'blur' },
-                    { min: 2, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
-                ],
-                plant: [
-                    { required: true, message: '请输入植物原料', trigger: 'blur' },
-                    { min: 2, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入动物原料', trigger: 'blur' }
                 ]
             }
         };
