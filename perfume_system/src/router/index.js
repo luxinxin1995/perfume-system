@@ -59,6 +59,7 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
+      redirect: '/AdminList',
       children: [
         {
           path: '/editBrand',
