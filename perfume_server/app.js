@@ -12,7 +12,6 @@ var login = require('./routes/user/login');//登录
 var register = require('./routes/user/register');//注册
 var users = require('./routes/user/users');//用户信息
 var brand = require('./routes/brand');//品牌
-var series = require('./routes/series');//系列
 var material = require('./routes/material');//原料
 var material2 = require('./routes/material2');//原料
 var classify = require('./routes/classify');//分类
@@ -54,7 +53,6 @@ app.use('/users', users);//用户
 app.use('/login', login);//登录
 app.use('/register', register);//注册
 app.use('/brand', brand)//品牌
-app.use('/series', series)//系列
 app.use('/material', material)//原料
 app.use('/material2', material2)//原料
 app.use('/classify', classify)//分类

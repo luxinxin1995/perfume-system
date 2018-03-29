@@ -7,17 +7,11 @@
             <el-form-item label="国家" prop="country">
                 <el-input v-model="formObj.country"></el-input>
             </el-form-item>
-            <el-form-item label="上映时间" prop="showtime">
-                <el-input v-model="formObj.showtime"></el-input>
-            </el-form-item>
             <el-form-item label="分类" prop="classify">
                 <el-input v-model="formObj.classify"></el-input>
             </el-form-item>
-            <el-form-item label="主演" prop="protagonist">
-                <el-input v-model="formObj.protagonist"></el-input>
-            </el-form-item>
-            <el-form-item label="导演" prop="director">
-                <el-input v-model="formObj.director"></el-input>
+            <el-form-item label="图片" prop="logo">
+                <el-input v-model="formObj.logo"></el-input>
             </el-form-item>
             <el-form-item label="剧情简介" prop="desc">
                 <el-input type="textarea" autosize v-model="formObj.desc"></el-input>

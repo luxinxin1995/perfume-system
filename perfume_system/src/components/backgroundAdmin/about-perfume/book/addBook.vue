@@ -7,6 +7,9 @@
             <el-form-item label="作者" prop="author">
                 <el-input v-model="formObj.author"></el-input>
             </el-form-item>
+            <el-form-item label="图片" prop="logo">
+                <el-input v-model="formObj.logo"></el-input>
+            </el-form-item>
             <el-form-item label="内容简介" prop="desc">
                 <el-input type="textarea" v-model="formObj.desc"></el-input>
             </el-form-item>

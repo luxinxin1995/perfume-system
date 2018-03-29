@@ -71,14 +71,6 @@ export default {
       console.log(err)
     })
   },
-  // 修改密码
-  postChangePassword (_id, data, callback) {
-    axios.post(`${global.ApiUrl}/users/changePassword/${_id}`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
   // 添加品牌
   postbrandAdd (data, callback) {
     axios.post(`${global.ApiUrl}/brand/add`, data).then((res) => {
@@ -122,46 +114,6 @@ export default {
   // 删除id对应品牌
   postbrandDelete (id, callback) {
     axios.post(`${global.ApiUrl}/brand/delete/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 添加系列
-  postseriesAdd (data, callback) {
-    axios.post(`${global.ApiUrl}/series/add`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取所有系列
-  getseriesAll (pageIndex, pageSize, callback) {
-    axios.get(`${global.ApiUrl}/series/allSeries/${pageIndex}/${pageSize}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取id对应系列
-  getseriesById (id, callback) {
-    axios.get(`${global.ApiUrl}/series/SeriesOne/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 修改id对应系列
-  postseriesEditor (id, data, callback) {
-    axios.post(`${global.ApiUrl}/series/editor/${id}`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 删除id对应系列
-  postseriesDelete (id, callback) {
-    axios.post(`${global.ApiUrl}/series/delete/${id}`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)

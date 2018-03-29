@@ -39,7 +39,7 @@ export default {
         };
     },
     mounted() {
-        if (this.formObj.hasOwnProperty('animal')) {
+        if (this.formObj.hasOwnProperty('plant')) {
             this.addOrEditFlag = '修改'
         } else {
             this.addOrEditFlag = '新增'

@@ -11,13 +11,12 @@
                 </el-table-column>
                 <el-table-column prop="country" label="国家" width="80">
                 </el-table-column>
-                <el-table-column prop="showtime" label="上映时间" width="120">
-                </el-table-column>
                 <el-table-column prop="classify" label="分类" width="100">
                 </el-table-column>
-                <el-table-column prop="protagonist" label="主演" width="100">
-                </el-table-column>
-                <el-table-column prop="director" label="导演" width="100">
+                <el-table-column prop="logo" label="图片">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.logo" width="300" />
+                    </template>
                 </el-table-column>
                 <el-table-column prop="desc" label="剧情简介" width="300">
                 </el-table-column>
@@ -95,7 +94,7 @@ export default {
             this.projcetAddOrEditShow = true
             this.titleText = '编辑关于香水的电影'
         },
-        handleDelete(index,row) {
+        handleDelete(index, row) {
             console.log(row)
             var id = row._id
             axios.postmovieDelete(id, res => {
@@ -106,7 +105,7 @@ export default {
                         name: 'MovieList'
                     })
                     this.getData();
-                }else{
+                } else {
                     this.$message.error('删除失败')
                 }
             })
@@ -149,6 +148,7 @@ export default {
 .table_container {
     padding: 20px;
 }
+
 .add {
     float: left;
 }

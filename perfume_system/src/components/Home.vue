@@ -43,15 +43,6 @@
                             <el-menu-item index="/editBrand">香水品牌列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="4">
-                        <template slot="title">
-                            <i class="fa fa-tachometer ft-size"></i>
-                            <span>香水系列管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/editSeries">香水系列列表</el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
                             <i class="fa fa-pagelines ft-size"></i>
@@ -137,10 +128,8 @@ export default {
 
     methods: {
         handleOpen(key, keyPath) {
-            console.log(key, keyPath);
         },
         handleClose(key, keyPath) {
-            console.log(key, keyPath);
         },
         handleCommand(command) {
             if (command == 'loginOut') {
@@ -178,7 +167,6 @@ export default {
     },
     watch: {
         isCollapse: function(p) {
-            console.log(p)
             if (!p) {
                 this.isLogo = false;
             } else {

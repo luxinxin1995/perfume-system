@@ -58,7 +58,6 @@ export default {
         // 获取所有文章
         getData() {
             axios.getarticleAll(this.pageIndex, this.pageSize, res => {
-                console.log(res)
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
@@ -89,7 +88,6 @@ export default {
             console.log(row)
             var id = row._id
             axios.postarticleDelete(id, res => {
-                console.log(res)
                 if (res.code == 'success') {
                     this.$message.success('删除成功')
                     this.$router.push({
@@ -110,6 +108,7 @@ export default {
             this.projcetAddOrEditShow = false
             if (flag === '修改') {
                 axios.postarticleEditor(obj._id, obj, res => {
+                    console.log(res)
                     if (res.code == 'success') {
                         this.formObj = obj
                         this.getData();

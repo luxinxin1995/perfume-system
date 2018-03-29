@@ -3,7 +3,6 @@ var router = exp.Router();
 var db = require('../db');
 // 添加品牌
 router.post('/add', function (req, res) {
-    console.log(req.body)
     new db.Brand(req.body).save().then(function () {
         res.send({
             code: 'success',
@@ -67,7 +66,6 @@ router.get('/brandOne/:id', function (req, res) {
     var id = req.params.id;
     db.Brand.findById(id, function (err, data) {
         if (!err) {
-            console.log(data)
             res.send({
                 code: 'success',
                 data: data

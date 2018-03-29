@@ -7,6 +7,9 @@
             <el-form-item label="品牌英文名称" prop="EnglishName">
                 <el-input v-model="formObj.EnglishName"></el-input>
             </el-form-item>
+            <el-form-item label="品牌logo" prop="logo">
+                <el-input v-model="formObj.logo"></el-input>
+            </el-form-item>
             <el-form-item label="品牌介绍" prop="desc">
                 <el-input type="textarea" v-model="formObj.desc"></el-input>
             </el-form-item>
@@ -43,7 +46,7 @@ export default {
         };
     },
     mounted() {
-        if (this.formObj.hasOwnProperty('name')) {
+        if (this.formObj.hasOwnProperty('ChineseName')) {
             this.addOrEditFlag = '修改'
         } else {
             this.addOrEditFlag = '新增'

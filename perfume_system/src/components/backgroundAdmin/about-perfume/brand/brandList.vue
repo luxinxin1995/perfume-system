@@ -11,6 +11,11 @@
                 </el-table-column>
                 <el-table-column prop="EnglishName" label="品牌英文名称">
                 </el-table-column>
+                <el-table-column prop="logo" label="品牌logo">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.logo" width="80" />
+                    </template>
+                </el-table-column>
                 <el-table-column prop="desc" label="品牌介绍">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
@@ -50,17 +55,12 @@ export default {
             titleText: '',
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
-            formObj: null
+            formObj: null,
         }
     },
     created() {
         this.getData()
     },
-    // filters: {
-    //     dateFrm (el) {
-    //         return moment(el).format('YYYY-MM-DD HH:mm:ss')
-    //     }
-    // },
     methods: {
         // 获取所有品牌
         getData() {
@@ -69,10 +69,6 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     this.tableData = res.data
-                    for (var i = 0; i < this.tableData.length; i++) {
-                        var element = this.tableData[i].time;
-                        this.tableData[i].time = element.substring(0,10)
-                    }
                 }
             })
         },
@@ -140,6 +136,11 @@ export default {
         pageChange(page) {
             this.pageIndex = page;
             this.getData();
+        }
+    },
+    watch: {
+        $route: function() {
+            this.getData()
         }
     }
 }

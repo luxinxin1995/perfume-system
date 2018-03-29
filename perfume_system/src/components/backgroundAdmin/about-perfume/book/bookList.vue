@@ -11,7 +11,12 @@
                 </el-table-column>
                 <el-table-column prop="author" label="作者" width="220">
                 </el-table-column>
-                <el-table-column prop="desc" label="内容简介" width="180">
+                <el-table-column prop="logo" label="图片">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.logo" width="150" />
+                    </template>
+                </el-table-column>
+                <el-table-column prop="desc" label="内容简介" width="250">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
@@ -140,6 +145,7 @@ export default {
 .table_container {
     padding: 20px;
 }
+
 .add {
     float: left;
 }

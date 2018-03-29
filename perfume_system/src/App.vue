@@ -102,6 +102,7 @@ body {
   text-align: center;
   color: black;
   height: 100%;
+  overflow-x: hidden;
   /*margin-top: 60px;*/
 }
 
