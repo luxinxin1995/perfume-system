@@ -4,6 +4,9 @@
             <el-form-item label="标题" prop="title">
                 <el-input v-model="formObj.title"></el-input>
             </el-form-item>
+            <el-form-item label="图片" prop="logo">
+                <el-input v-model="formObj.logo"></el-input>
+            </el-form-item>
             <el-form-item label="详情" prop="detail">
                 <el-input type="textarea" v-model="formObj.detail"></el-input>
             </el-form-item>

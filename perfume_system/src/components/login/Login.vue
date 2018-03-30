@@ -101,7 +101,7 @@ export default {
 .admin-form {
   width: 300px;
   margin: 10px auto 0 auto;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 5px;
 }

@@ -28,26 +28,59 @@
         <el-container>
           <div class="left">
             <div class="carousel">
-              <el-carousel :interval="4000" arrow="always" height="350px">
+              <el-carousel :interval="4000" arrow="always" height="450px">
                 <el-carousel-item v-for="(item,index) in imgURL" :key="index">
                   <img :src="item.src" alt="">
                 </el-carousel-item>
               </el-carousel>
             </div>
-            
-            <!--香水原料-->
+            <!--香水品牌-->
             <div class="topic">
-              <p class="title">香水原料</p>
-              <div class="detail" v-for="(item, index) in material" :key="item.animal">
-                <p class="animal">{{item.animal}}
-                  <span>：{{item.animaldesc}}</span>
-                </p>
+              <p class="title">香水品牌</p>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
+                <div class="detail" v-for="(item, index) in brand" :key="item.animal" style="width:150px;">
+                  <p class="animal" style="display:flex;flex-direction:column;align-items:center;">
+                    <img :src="item.logo" alt="" width="100px;">
+                    <span>{{item.ChineseName}}</span>
+                    <span style="float:right;">{{item.EnglishName}}</span>
+                  </p>
+                </div>
               </div>
-              <div class="detail" v-for="(item, index) in material2" :key="item.plant">
-                <p class="plant">{{item.plant}}
-                  <span>：{{item.plantdesc}}</span>
-                </p>
+            </div>
+            <!--关于香水的电影-->
+            <div class="topic">
+              <p class="title">关于香水的电影</p>
+              <div class="detail" v-for="(item,index) in movie" :key="index"style="display:flex;justify-content:space-between;">
+                <img :src="item.logo" alt="" width="300px" height="400px;" style="margin-right:30px;">
+                <div>
+                  <p style="font-size:22px;color:black;">{{item.name}}
+                    <span style="font-size:16px;color:black;">&#X3000;{{item.classify}}</span>
+                  </p>
+                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">国家/地区：<span style="color:gray;">{{item.country}}</span></p>
+                  <p style="font-size:16px;color:black;text-align:justify">剧情简介：<span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span></p>
+                </div>
               </div>
+            </div>
+            <!--关于香水的书籍-->
+            <div class="topic">
+              <p class="title">关于香水的书籍</p>
+              <div class="detail" v-for="(item,index) in book" :key="index"style="display:flex;justify-content:space-between;">
+                <img :src="item.logo" alt="" width="200px;" style="margin-right:30px;">
+                <div>
+                  <p style="font-size:22px;color:black;">{{item.name}}</p>
+                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">作者：<span style="color:gray;">{{item.author}}</span></p>
+                  <p style="font-size:16px;color:black;">剧情简介：<span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <!--今日之香-->
+            <div class="today">
+              <p class="title">今日之香</p>
+              <img :src="logo" alt="">
+              <p class="smallTitle">{{title}}</p>
+              <p class="detail">{{detail}}</p>
             </div>
             <!--香水分类-->
             <div class="topic">
@@ -63,25 +96,21 @@
                 </el-table-column>
               </el-table>
             </div>
-          </div>
-          <div class="right">
-            <!--今日之香-->
-            <div class="today">
-              <p class="title">今日之香</p>
-              <img src="../../assets/today.jpg" alt="">
-              <p class="smallTitle">{{title}}</p>
-              <p class="detail">{{detail}}</p>
-            </div>
-            <!--香水品牌-->
+            <!--香水原料-->
             <div class="topic">
-              <p class="title">香水品牌</p>
-              <div class="detail" v-for="(item, index) in brand" :key="item.animal">
-                <p class="animal">
-                  <span>{{item.ChineseName}}</span>
-                  <span style="float:right;">{{item.EnglishName}}</span>
+              <p class="title">香水原料</p>
+              <div class="detail" v-for="(item, index) in material" :key="item.animal">
+                <p class="animal">{{item.animal}}
+                  <span>：{{item.animaldesc}}</span>
+                </p>
+              </div>
+              <div class="detail" v-for="(item, index) in material2" :key="item.plant">
+                <p class="plant">{{item.plant}}
+                  <span>：{{item.plantdesc}}</span>
                 </p>
               </div>
             </div>
+
             <!--热门话题-->
             <div class="topic">
               <p class="title">热门话题</p>
@@ -122,7 +151,7 @@
             <i class="fa fa-weibo ft-weibo"></i>&#x3000;
             <i class="fa fa-weixin ft-weixin"></i>
           </p>
-          <p>©2018 ▪ 最美系统 ▪ ALL RIGHTS RESERVED ▪ 福建省宁德师范学院 ▪ 14级 ▪ 计算机科学与技术师范班 ▪ 陆欣欣</p>
+          <p>©2018 ▪ 最美香水 ▪ ALL RIGHTS RESERVED ▪ 福建省宁德师范学院 ▪ 14级 ▪ 计算机科学与技术师范班 ▪ 陆欣欣</p>
         </div>
       </el-footer>
     </el-container>
@@ -141,6 +170,7 @@ export default {
       loginOut: true,
       pageIndex: 1,
       pageSize: 40,
+      logo: '',
       title: '',
       detail: '',
       article: [],
@@ -149,6 +179,8 @@ export default {
       material: [],
       material2: [],
       tableData: [],
+      movie: [],
+      book: [],
       imgURL: [
         { src: require('../../assets/c1.jpg') },
         { src: require('../../assets/c2.jpg') },
@@ -215,19 +247,19 @@ export default {
           });
         }
       });
-      // 获取香水原料
+      // 获取香水品牌
       axios.getbrandAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
           this.brand = res.data
         }
       });
-      // 获取香水原料
+      // 获取香水动物原料
       axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
           this.material = res.data
         }
       });
-      // 获取香水原料
+      // 获取香水植物原料
       axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
           this.material2 = res.data
@@ -244,6 +276,21 @@ export default {
         if (res.code == 'success') {
           this.title = res.data[0].title
           this.detail = res.data[0].detail
+          this.logo = res.data[0].logo
+        }
+      });
+      // 获取关于香水的电影
+      axios.getmovieAll(this.pageIndex, this.pageSize, res => {
+        if (res.code == 'success') {
+          console.log(res.data)
+          this.movie = res.data
+        }
+      });
+      // 获取关于香水的书籍
+      axios.getbookAll(this.pageIndex, this.pageSize, res => {
+        if (res.code == 'success') {
+          console.log(res.data)
+          this.book = res.data
         }
       });
       // 获取热门话题
@@ -306,13 +353,14 @@ export default {
   /*background-color: #E9EEF3;*/
   color: #333;
   text-align: center;
-  width: 65%;
+  width: 84%;
   margin: 10px auto;
   padding: 0;
 }
 
 .el-main .el-container {
   position: relative;
+  width: 100%;
 }
 
 .left {
@@ -331,6 +379,7 @@ export default {
 }
 
 .right {
+  width: calc(100% - 70% - 60px);
   float: right;
 }
 
@@ -453,6 +502,5 @@ export default {
   color: gray;
   font-size: 12px;
 }
-
 </style>
 

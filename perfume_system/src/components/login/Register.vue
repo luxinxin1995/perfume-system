@@ -28,7 +28,9 @@
           <el-form-item>
             <el-button type="primary" @click="submitRegister('ruleForm')" style="width:100%;" size="medium">注册</el-button>
           </el-form-item>
-          <el-button style="width:100%;background:none;border:none;text-align:right;padding-right:0;" size="small"><router-link :to="{name:'Index'}">已有账号,直接登录 ▶</router-link></el-button>
+          <el-button style="width:100%;background:none;border:none;text-align:right;padding-right:0;" size="small">
+            <router-link :to="{name:'Index'}">已有账号,直接登录 ▶</router-link>
+          </el-button>
         </el-form>
       </div>
     </div>
@@ -38,7 +40,7 @@
 import axios from '../../Api/api'
 // 序列化数据
 var qs = require('qs')
-import {isvalidPhone} from '../../utils/validate'
+import { isvalidPhone } from '../../utils/validate'
 var validPhone = (rule, value, callback) => {
   if (!value) {
     callback(new Error('请输入电话号码'))
@@ -49,7 +51,7 @@ var validPhone = (rule, value, callback) => {
   }
 }
 export default {
-  data () {
+  data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
@@ -97,7 +99,7 @@ export default {
     }
   },
   methods: {
-    submitRegister (formName) {
+    submitRegister(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!')
@@ -107,8 +109,8 @@ export default {
           if (pass1 !== pass2) {
             self.$message.error('两次输入密码不一致!')
           } else {
-            console.log(qs.stringify({data: this.ruleForm}))
-            axios.postRegister(qs.stringify({data: this.ruleForm}), res => {
+            console.log(qs.stringify({ data: this.ruleForm }))
+            axios.postRegister(qs.stringify({ data: this.ruleForm }), res => {
               console.log(res)
               if (res.code === 'success') {
                 self.$alert('恭喜您注册成功,立即跳转登录界面?', '注册', {
@@ -139,35 +141,39 @@ export default {
 }
 </script>
 <style scoped>
-  .title{
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    display: flex;
-    color: white;
-    justify-content: space-around;
-    letter-spacing: 8px;
-  }
-  .title p{
-    display: inline-block;
-    height: 30px;
-    width: 100%;
-    text-decoration: none;
-    color: white;
-    border-bottom: 3px solid lightskyblue;
-  }
-  .admin-form{
-    width: 300px;
-    margin: 10px auto 0 auto;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 5px;
-  }
-  .demo-ruleForm{
-    margin-top: 20px;
-  }
-  a{
-    text-decoration: none;
-    color: red;
-  }
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  letter-spacing: 8px;
+}
+
+.title p {
+  display: inline-block;
+  height: 30px;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  border-bottom: 3px solid lightskyblue;
+}
+
+.admin-form {
+  width: 300px;
+  margin: 10px auto 0 auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.demo-ruleForm {
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: red;
+}
 </style>

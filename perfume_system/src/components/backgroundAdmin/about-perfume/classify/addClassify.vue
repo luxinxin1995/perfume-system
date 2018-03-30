@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+        <el-form :model="formObj" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="香型" prop="odortype">
                 <el-input v-model="formObj.odortype"></el-input>
             </el-form-item>
@@ -36,21 +36,8 @@ export default {
         return {
             formObj: this.form,
             // 1表示新增,2表示修改
-            addOrEditFlag: null,
-            rules: {
-                odortype: [
-                    { required: true, message: '请输入香水香型', trigger: 'blur' }
-                ],
-                flavour: [
-                    { required: true, message: '请输入香水味道', trigger: 'blur' }
-                ],
-                concentration: [
-                    { required: true, message: '请输入香水浓度', trigger: 'blur' }
-                ],
-                rank: [
-                    { required: true, message: '请输入香水等级', trigger: 'blur' }
-                ]
-            }
+            addOrEditFlag: null
+            
         };
     },
     mounted() {
