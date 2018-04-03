@@ -5,7 +5,7 @@
 2. npm run dev 启动
 ```
 
-## 后台
+## 后台服务器
 ```
 1. npm install 安装模块
 2. npm start 启动服务器
