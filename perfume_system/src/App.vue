@@ -144,4 +144,7 @@ body {
 .ft-btn{
   font-size: 12px;
 }
+.el-breadcrumb{
+  margin-bottom: 20px;
+}
 </style>
