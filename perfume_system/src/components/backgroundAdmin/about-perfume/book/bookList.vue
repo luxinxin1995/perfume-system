@@ -65,7 +65,6 @@ export default {
         // 获取所有书籍
         getData() {
             axios.getbookAll(this.pageIndex, this.pageSize, res => {
-                console.log(res)
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
@@ -117,6 +116,7 @@ export default {
             if (flag === '修改') {
                 axios.postbookEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改书籍成功')
                         this.formObj = obj
                         this.getData();
                     }

@@ -22,6 +22,10 @@ var userSchema = new db.Schema({
         type: String,
         default: ''
     },
+    checkPass: {
+        type: String,
+        default: ''
+    },
     gender: {
         type: String,
         default: ''

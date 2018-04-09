@@ -120,6 +120,7 @@ export default {
             if (flag === '修改') {
                 axios.postmovieEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改电影成功')
                         this.formObj = obj
                         this.getData();
                     }

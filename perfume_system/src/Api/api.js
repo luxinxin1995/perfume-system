@@ -24,14 +24,6 @@ export default {
       console.log(err)
     })
   },
-  // 上传多张图片
-  postPhoto (data, callback) {
-    axios.post(`${global.ApiUrl}/photo//multiplefile`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
   getId (username, callback) {
     axios.get(`${global.ApiUrl}/users/findId/${username}`).then((res) => {
       callback(res.data)
@@ -50,6 +42,13 @@ export default {
   // 删除用户
   postUserDelete (_id, callback) {
     axios.post(`${global.ApiUrl}/users/delete/${_id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  postChangePassword (_id, data, callback) {
+    axios.post(`${global.ApiUrl}/users/changePassword/${_id}`, data).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)

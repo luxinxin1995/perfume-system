@@ -116,6 +116,7 @@ export default {
             if (flag === '修改') {
                 axios.postbrandEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改品牌成功')
                         this.formObj = obj
                         this.getData();
                     }

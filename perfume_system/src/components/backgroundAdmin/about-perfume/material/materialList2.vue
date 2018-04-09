@@ -85,7 +85,7 @@ export default {
             this.projcetAddOrEditShow = true
             this.titleText = '编辑香水原料'
         },
-        handleDelete(index,row) {
+        handleDelete(index, row) {
             console.log(row)
             var id = row._id
             axios.postmaterial2Delete(id, res => {
@@ -96,7 +96,7 @@ export default {
                         name: 'MaterialList'
                     })
                     this.getData();
-                }else{
+                } else {
                     this.$message.error('删除失败')
                 }
             })
@@ -111,6 +111,7 @@ export default {
             if (flag === '修改') {
                 axios.postmaterial2Editor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改原料成功')
                         this.formObj = obj
                         this.getData();
                     }
@@ -139,6 +140,7 @@ export default {
 .table_container {
     padding: 20px;
 }
+
 .add {
     float: left;
 }

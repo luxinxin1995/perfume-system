@@ -11,7 +11,7 @@
                 <el-input v-model="formObj.classify"></el-input>
             </el-form-item>
             <el-form-item label="图片" prop="logo">
-                <el-input v-model="formObj.logo"></el-input>
+                <el-input v-model="formObj.logo" placeholder="请输入图片URL地址，如:https://imgsrc.baidu.com/baike/pic/item/e7cd7b899e510fb3899c1684d533c895d1430c1f.jpg"></el-input>
             </el-form-item>
             <el-form-item label="剧情简介" prop="desc">
                 <el-input type="textarea" autosize v-model="formObj.desc"></el-input>

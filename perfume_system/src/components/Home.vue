@@ -20,7 +20,7 @@
                 </el-col>
             </el-header>
             <el-container>
-                <el-menu default-active="1" background-color="#2f4050" text-color="#fff" active-text-color="#ffd04b" style="height:100%;text-align:left" :router="true" @open="handleOpen" @close="handleClose" :collapse="!isCollapse">
+                <el-menu default-active="1" background-color="#2f4050" text-color="#fff" active-text-color="#ffd04b" style="height:100%;text-align:left" :router="true" :collapse="!isCollapse">
                     <el-menu-item index="/">
                         <i class="fa fa-home ft-size"></i>
                         <span slot="title">首页</span>
@@ -127,10 +127,6 @@ export default {
     },
 
     methods: {
-        handleOpen(key, keyPath) {
-        },
-        handleClose(key, keyPath) {
-        },
         handleCommand(command) {
             if (command == 'loginOut') {
                 this.$confirm('您确定要退出登录?', '提示', {
@@ -145,7 +141,7 @@ export default {
                     sessionStorage.removeItem('username');
                     sessionStorage.removeItem('userInfo');
                     this.$router.push({
-                        name: 'foreIndex'
+                        name: 'Login'
                     });
                 })
             }

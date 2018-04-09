@@ -71,8 +71,6 @@ router.get('/getInfo/:id', function (req, res) {
 });
 router.post('/changePassword/:id', function (req, res) {
     var _id = req.params.id;
-    console.log(_id)
-    console.log(req.body)
     db.User.findByIdAndUpdate({
         _id: _id
     }, req.body, function (err) {

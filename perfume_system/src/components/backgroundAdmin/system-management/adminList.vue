@@ -63,7 +63,7 @@ export default {
                     for (let i = 0; i < res.data.length; i++) {
                         let element = res.data[i];
                         if (element.username == 'admin') {
-                            element.jurisdiction = '超级管理员'
+                            element.jurisdiction = '系统管理员'
                         } else {
                             element.jurisdiction = '普通用户'
                         }
@@ -78,8 +78,8 @@ export default {
             })
         },
         handleDelete(index, row) {
-            if (row.jurisdiction == "超级管理员") {
-                this.$message.error("超级管理员无法删除!")
+            if (row.jurisdiction == "系统管理员") {
+                this.$message.error("系统管理员无法删除!")
             } else {
                 axios.postUserDelete(row._id, res => {
                     if (res.code == "success") {

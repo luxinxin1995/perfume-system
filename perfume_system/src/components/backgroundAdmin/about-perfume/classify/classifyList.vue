@@ -89,7 +89,7 @@ export default {
             this.projcetAddOrEditShow = true
             this.titleText = '编辑分类'
         },
-        handleDelete(index,row) {
+        handleDelete(index, row) {
             console.log(row)
             var id = row._id
             axios.postclassifyDelete(id, res => {
@@ -100,7 +100,7 @@ export default {
                         name: 'ClassifyList'
                     })
                     this.getData();
-                }else{
+                } else {
                     this.$message.error('删除失败')
                 }
             })
@@ -115,6 +115,7 @@ export default {
             if (flag === '修改') {
                 axios.postclassifyEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改分类成功')
                         this.formObj = obj
                         this.getData();
                     }
@@ -143,6 +144,7 @@ export default {
 .table_container {
     padding: 20px;
 }
+
 .add {
     float: left;
 }

@@ -10,8 +10,12 @@
                 <img src="../../assets/bg.jpg" alt="" style="width:50px;height:50px;border-radius:50%">
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="back" v-show="admin">返回系统</el-dropdown-item>
-                <el-dropdown-item command="out">退出登录</el-dropdown-item>
+                <template slot-scope="scope">
+                  <el-dropdown-item command="back" v-show="admin">返回系统</el-dropdown-item>
+                  <el-dropdown-item command="info">个人资料</el-dropdown-item>
+                  <el-dropdown-item command="password">修改密码</el-dropdown-item>
+                  <el-dropdown-item command="out">退出登录</el-dropdown-item>
+                </template>
               </el-dropdown-menu>
             </el-dropdown>
             <router-link to="/login" v-show="loginOut">登录</router-link>
@@ -50,26 +54,34 @@
             <!--关于香水的电影-->
             <div class="topic">
               <p class="title">关于香水的电影</p>
-              <div class="detail" v-for="(item,index) in movie" :key="index"style="display:flex;justify-content:space-between;">
+              <div class="detail" v-for="(item,index) in movie" :key="index" style="display:flex;justify-content:space-between;">
                 <img :src="item.logo" alt="" width="300px" height="400px;" style="margin-right:30px;">
                 <div>
                   <p style="font-size:22px;color:black;">{{item.name}}
                     <span style="font-size:16px;color:black;">&#X3000;{{item.classify}}</span>
                   </p>
-                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">国家/地区：<span style="color:gray;">{{item.country}}</span></p>
-                  <p style="font-size:16px;color:black;text-align:justify">剧情简介：<span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span></p>
+                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">国家/地区：
+                    <span style="color:gray;">{{item.country}}</span>
+                  </p>
+                  <p style="font-size:16px;color:black;text-align:justify">剧情简介：
+                    <span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span>
+                  </p>
                 </div>
               </div>
             </div>
             <!--关于香水的书籍-->
             <div class="topic">
               <p class="title">关于香水的书籍</p>
-              <div class="detail" v-for="(item,index) in book" :key="index"style="display:flex;justify-content:space-between;">
+              <div class="detail" v-for="(item,index) in book" :key="index" style="display:flex;justify-content:space-between;">
                 <img :src="item.logo" alt="" width="200px;" style="margin-right:30px;">
                 <div>
                   <p style="font-size:22px;color:black;">{{item.name}}</p>
-                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">作者：<span style="color:gray;">{{item.author}}</span></p>
-                  <p style="font-size:16px;color:black;">剧情简介：<span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span></p>
+                  <p style="font-size:16px;display:block;margin:10px 0;color:black;">作者：
+                    <span style="color:gray;">{{item.author}}</span>
+                  </p>
+                  <p style="font-size:16px;color:black;">剧情简介：
+                    <span style="font-size:14px;line-height:26px;color:gray;">{{item.desc}}</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -154,16 +166,37 @@
           <p>©2018 ▪ 最美香水 ▪ ALL RIGHTS RESERVED ▪ 福建省宁德师范学院 ▪ 14级 ▪ 计算机科学与技术师范班 ▪ 陆欣欣</p>
         </div>
       </el-footer>
+      <!--修改个人信息-->
+      <el-dialog title="修改个人信息" modal center :visible.sync="infoShow">
+        <info v-if="infoShow" :form='formObj' @submitHandle='submitHandle'>
+        </info>
+      </el-dialog>
+      <!--修改密码-->
+      <el-dialog title="修改密码" modal center :visible.sync="passShow">
+        <pass v-if="passShow" :form='formObj' @submitpassHandle='submitpassHandle'>
+        </pass>
+      </el-dialog>
     </el-container>
   </div>
 </template>
 
 <script>
 import axios from '../../Api/api'
+import info from './info'
+import pass from './changePassword'
+
 export default {
+  components: {
+    info,
+    pass
+  },
   data() {
     return {
       isCollapse: true,
+      infoShow: false,
+      passShow: false,
+      dialogTableVisible: false,
+      formObj: null,
       isLogin: false,
       username: '',
       admin: false,
@@ -196,7 +229,7 @@ export default {
   },
   watch: {
     $route: function() {
-      this.getData();
+      this.submitHandle()
     }
   },
   methods: {
@@ -216,13 +249,54 @@ export default {
           this.loginOut = true;
           this.isLogin = false;
           this.$router.push({
-            name: 'foreIndex'
+            name: 'Login'
           });
         })
       }
       if (command == 'back') {
         this.$router.push({ name: 'Home' })
       }
+      if (command == 'info') {
+        this.infoShow = true
+      }
+      if (command == 'password') {
+        this.passShow = true
+      }
+    },
+    // 提交(修改)
+    submitHandle(obj, flag) {
+      console.log(obj)
+      this.infoShow = false
+      if (flag === '修改') {
+        axios.postEditorInfo(obj._id, obj, res => {
+          if (res.code == 'success') {
+            this.$message({
+              type: 'success',
+              message: '修改个人信息成功!'
+            });
+            this.formObj = obj
+            this.username = this.formObj.username
+          }
+        })
+      }
+    },
+    submitpassHandle(obj) {
+      console.log(obj)
+      this.passShow = false
+      axios.postChangePassword(obj._id, obj, res => {
+        console.log(obj)
+        if (res.code == 'success') {
+          this.formObj = obj
+          this.$alert('修改密码成功，请重新登录！', '登录', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$router.push({
+                path: '/login'
+              })
+            }
+          })
+        }
+      })
     },
     getData() {
       var self = this;
@@ -235,6 +309,7 @@ export default {
           axios.getInfo(res.id, data => {
             //获取个人信息
             var result = data.data;
+            self.formObj = result
             sessionStorage.setItem("userInfo", JSON.stringify(result));
             self.username = result.username;
             self.loginOut = false;
@@ -282,14 +357,12 @@ export default {
       // 获取关于香水的电影
       axios.getmovieAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
-          console.log(res.data)
           this.movie = res.data
         }
       });
       // 获取关于香水的书籍
       axios.getbookAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
-          console.log(res.data)
           this.book = res.data
         }
       });
