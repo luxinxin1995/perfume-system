@@ -1,6 +1,11 @@
 <template>
     <div class="fillcontain">
         <div class="table_container">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>香水品牌管理</el-breadcrumb-item>
+                <el-breadcrumb-item>香水品牌列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <div class="add">
                 <el-button size="mini" type="primary" @click="addBrand()" icon="el-icon-plus">新增</el-button>
             </div>

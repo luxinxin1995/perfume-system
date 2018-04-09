@@ -8,7 +8,7 @@
             <el-input placeholder="请输入用户名" prefix-icon="el-icon-edit" size="medium" v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="用户密码" prop="pass">
-            <el-input type="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
+            <el-input type="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-goods" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;" size="medium">登录</el-button>

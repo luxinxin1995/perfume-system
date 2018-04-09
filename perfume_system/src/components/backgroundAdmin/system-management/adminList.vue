@@ -1,6 +1,11 @@
 <template>
     <div class="fillcontain">
         <div class="table_container">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>系统管理员</el-breadcrumb-item>
+                <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column type="index" width="50">
                 </el-table-column>
@@ -38,82 +43,82 @@
 </template>
 
 <script>
-import axios from '../../../Api/api'
+import axios from "../../../Api/api";
 export default {
-    data() {
-        return {
-            tableData: [],
-            pageCount: '',
-            pageIndex: 1,
-            pageSize: 5,
-            total: 0,
-            deleteBtn: true
-        }
-    },
-    created() {
-        this.getData()
-    },
-    methods: {
-        getData() {
-            // 获取所有用户信息
-            axios.getAll(this.pageIndex, this.pageSize, res => {
-                this.pageCount = res.pageCount //总页数
-                this.total = res.length //总数
-                if (res.code == 'success') {
-                    for (let i = 0; i < res.data.length; i++) {
-                        let element = res.data[i];
-                        if (element.username == 'admin') {
-                            element.jurisdiction = '系统管理员'
-                        } else {
-                            element.jurisdiction = '普通用户'
-                        }
-                        // 转化时间
-                    }
-                    this.tableData = res.data
-                    for (var i = 0; i < this.tableData.length; i++) {
-                        var element = this.tableData[i].registDate;
-                        this.tableData[i].registDate = element.substring(0, 10)
-                    }
-                }
-            })
-        },
-        handleDelete(index, row) {
-            if (row.jurisdiction == "系统管理员") {
-                this.$message.error("系统管理员无法删除!")
+  data() {
+    return {
+      tableData: [],
+      pageCount: "",
+      pageIndex: 1,
+      pageSize: 5,
+      total: 0,
+      deleteBtn: true
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      // 获取所有用户信息
+      axios.getAll(this.pageIndex, this.pageSize, res => {
+        this.pageCount = res.pageCount; //总页数
+        this.total = res.length; //总数
+        if (res.code == "success") {
+          for (let i = 0; i < res.data.length; i++) {
+            let element = res.data[i];
+            if (element.username == "admin") {
+              element.jurisdiction = "系统管理员";
             } else {
-                axios.postUserDelete(row._id, res => {
-                    if (res.code == "success") {
-                        this.$message.success('删除用户成功!')
-                        this.getData();
-                        this.$router.push({
-                            name: 'AdminList',
-                            query: {
-                                random: Math.random()
-                            }
-                        })
-                    } else {
-                        this.dialogVisible = false;
-                        this.$message.error('删除用户失败!')
-                    }
-                })
+              element.jurisdiction = "普通用户";
             }
-        },
-        pageChange(page) {
-            this.pageIndex = page;
-            this.getData();
+            // 转化时间
+          }
+          this.tableData = res.data;
+          for (var i = 0; i < this.tableData.length; i++) {
+            var element = this.tableData[i].registDate;
+            this.tableData[i].registDate = element.substring(0, 10);
+          }
         }
+      });
     },
-    watch: {
-        $route: function() {
+    handleDelete(index, row) {
+      if (row.jurisdiction == "系统管理员") {
+        this.$message.error("系统管理员无法删除!");
+      } else {
+        axios.postUserDelete(row._id, res => {
+          if (res.code == "success") {
+            this.$message.success("删除用户成功!");
             this.getData();
-        }
+            this.$router.push({
+              name: "AdminList",
+              query: {
+                random: Math.random()
+              }
+            });
+          } else {
+            this.dialogVisible = false;
+            this.$message.error("删除用户失败!");
+          }
+        });
+      }
+    },
+    pageChange(page) {
+      this.pageIndex = page;
+      this.getData();
     }
-}
+  },
+  watch: {
+    $route: function() {
+      this.getData();
+    }
+  }
+};
 </script>
 
 <style scoped>
 .table_container {
-    padding: 20px;
+  padding: 20px;
 }
 </style>
 

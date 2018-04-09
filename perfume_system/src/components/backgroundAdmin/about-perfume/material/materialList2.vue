@@ -1,6 +1,11 @@
 <template>
     <div class="fillcontain">
         <div class="table_container">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
+                <el-breadcrumb-item>植物原料列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <div class="add">
                 <el-button size="mini" type="primary" @click="addMaterial()" icon="el-icon-plus">新增</el-button>
             </div>
@@ -32,116 +37,116 @@
 </template>
 
 <script>
-import axios from '../../../../Api/api'
-import projcetAddOrEdit from './addMaterial2'
+import axios from "../../../../Api/api";
+import projcetAddOrEdit from "./addMaterial2";
 export default {
-    components: {
-        projcetAddOrEdit
-    },
-    data() {
-        return {
-            tableData: [],
-            pageCount: '',
-            pageIndex: 1,
-            pageSize: 5,
-            total: 0,
-            titleText: '',
-            dialogTableVisible: false,
-            projcetAddOrEditShow: false,
-            formObj: null
+  components: {
+    projcetAddOrEdit
+  },
+  data() {
+    return {
+      tableData: [],
+      pageCount: "",
+      pageIndex: 1,
+      pageSize: 5,
+      total: 0,
+      titleText: "",
+      dialogTableVisible: false,
+      projcetAddOrEditShow: false,
+      formObj: null
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    // 获取所有原料
+    getData() {
+      axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
+        console.log(res);
+        this.pageCount = res.pageCount; //总页数
+        this.total = res.length; //总数
+        if (res.code == "success") {
+          this.tableData = res.data;
         }
+      });
     },
-    created() {
-        this.getData()
+    // 新增品牌
+    addMaterial() {
+      var obj = {};
+      this.formObj = obj;
+      this.projcetAddOrEditShow = true;
+      this.titleText = "新增香水原料";
     },
-    methods: {
-        // 获取所有原料
-        getData() {
-            axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
-                console.log(res)
-                this.pageCount = res.pageCount //总页数
-                this.total = res.length //总数
-                if (res.code == 'success') {
-                    this.tableData = res.data
-                }
-            })
-        },
-        // 新增品牌
-        addMaterial() {
-            var obj = {}
-            this.formObj = obj
-            this.projcetAddOrEditShow = true
-            this.titleText = '新增香水原料'
-        },
-        // 编辑原料
-        handleEdit(index, row) {
-            var obj = {}
-            for (var key in row) {
-                if (row.hasOwnProperty(key)) {
-                    obj[key] = row[key];
-                }
-            }
-            this.formObj = obj
-            this.projcetAddOrEditShow = true
-            this.titleText = '编辑香水原料'
-        },
-        handleDelete(index, row) {
-            console.log(row)
-            var id = row._id
-            axios.postmaterial2Delete(id, res => {
-                console.log(res)
-                if (res.code == 'success') {
-                    this.$message.success('删除成功')
-                    this.$router.push({
-                        name: 'MaterialList'
-                    })
-                    this.getData();
-                } else {
-                    this.$message.error('删除失败')
-                }
-            })
-        },
-        // 修改,新增的取消
-        cancleHandle() {
-            this.projcetAddOrEditShow = false
-        },
-        // 提交(新增/修改)
-        submitHandle(obj, flag) {
-            this.projcetAddOrEditShow = false
-            if (flag === '修改') {
-                axios.postmaterial2Editor(obj._id, obj, res => {
-                    if (res.code == 'success') {
-                        this.$message.success('修改原料成功')
-                        this.formObj = obj
-                        this.getData();
-                    }
-                })
-            } else {
-                axios.postmaterial2Add(obj, res => {
-                    if (res.code == 'success') {
-                        this.$message.success('添加原料成功')
-                        this.$router.push({
-                            name: 'MaterialList2'
-                        })
-                        this.getData();
-                    }
-                })
-            }
-        },
-        pageChange(page) {
-            this.pageIndex = page;
+    // 编辑原料
+    handleEdit(index, row) {
+      var obj = {};
+      for (var key in row) {
+        if (row.hasOwnProperty(key)) {
+          obj[key] = row[key];
+        }
+      }
+      this.formObj = obj;
+      this.projcetAddOrEditShow = true;
+      this.titleText = "编辑香水原料";
+    },
+    handleDelete(index, row) {
+      console.log(row);
+      var id = row._id;
+      axios.postmaterial2Delete(id, res => {
+        console.log(res);
+        if (res.code == "success") {
+          this.$message.success("删除成功");
+          this.$router.push({
+            name: "MaterialList"
+          });
+          this.getData();
+        } else {
+          this.$message.error("删除失败");
+        }
+      });
+    },
+    // 修改,新增的取消
+    cancleHandle() {
+      this.projcetAddOrEditShow = false;
+    },
+    // 提交(新增/修改)
+    submitHandle(obj, flag) {
+      this.projcetAddOrEditShow = false;
+      if (flag === "修改") {
+        axios.postmaterial2Editor(obj._id, obj, res => {
+          if (res.code == "success") {
+            this.$message.success("修改原料成功");
+            this.formObj = obj;
             this.getData();
-        }
+          }
+        });
+      } else {
+        axios.postmaterial2Add(obj, res => {
+          if (res.code == "success") {
+            this.$message.success("添加原料成功");
+            this.$router.push({
+              name: "MaterialList2"
+            });
+            this.getData();
+          }
+        });
+      }
+    },
+    pageChange(page) {
+      this.pageIndex = page;
+      this.getData();
     }
-}
+  }
+};
 </script>
 
 <style scoped>
 .table_container {
-    padding: 20px;
+  padding: 20px;
 }
 
 .add {
-    float: left;
+  float: left;
 }
 </style>

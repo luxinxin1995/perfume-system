@@ -10,10 +10,10 @@
             <el-input placeholder="请输入用户名" name="username" prefix-icon="el-icon-edit" size="medium" v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="设置密码" prop="pass">
-            <el-input type="password" id="password" name="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
+            <el-input type="password" id="password" name="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-goods" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="确认密码" prop="checkPass">
-            <el-input type="password" id="rePassword" name="checkPass" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-edit-outline" size="medium" auto-complete="off"></el-input>
+            <el-input type="password" id="rePassword" name="checkPass" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-goods" size="medium" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="gender">
             <el-radio v-model="ruleForm.gender" value="true" name="gender" label="男">男</el-radio>

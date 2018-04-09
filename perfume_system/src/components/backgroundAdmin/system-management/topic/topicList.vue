@@ -1,6 +1,12 @@
 <template>
     <div class="fillcontain">
         <div class="table_container">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
+                <el-breadcrumb-item>热门话题管理</el-breadcrumb-item>
+                <el-breadcrumb-item>热门话题列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <div class="add">
                 <el-button size="mini" type="primary" @click="addClassify()" icon="el-icon-plus">新增</el-button>
             </div>
@@ -111,6 +117,7 @@ export default {
             if (flag === '修改') {
                 axios.posttopicEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
+                        this.$message.success('修改热门话题成功')
                         this.formObj = obj
                         this.getData();
                     }

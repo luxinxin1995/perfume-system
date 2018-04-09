@@ -7,7 +7,7 @@
             <el-dropdown trigger="click" @command="handleCommand" v-show="isLogin" style="color:white;">
               <span class="el-dropdown-link" style="display:flex;align-items:center;justify-content:space-between;width:100px;">
                 <span>{{username}}</span>
-                <img src="../../assets/bg.jpg" alt="" style="width:50px;height:50px;border-radius:50%">
+                <img :src="avatar" alt="" style="width:50px;height:50px;border-radius:50%">
               </span>
               <el-dropdown-menu slot="dropdown">
                 <template slot-scope="scope">
@@ -42,7 +42,7 @@
             <div class="topic">
               <p class="title">香水品牌</p>
               <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
-                <div class="detail" v-for="(item, index) in brand" :key="item.animal" style="width:150px;">
+                <div class="detail" v-for="item in brand" :key="item.animal" style="width:150px;">
                   <p class="animal" style="display:flex;flex-direction:column;align-items:center;">
                     <img :src="item.logo" alt="" width="100px;">
                     <span>{{item.ChineseName}}</span>
@@ -111,12 +111,12 @@
             <!--香水原料-->
             <div class="topic">
               <p class="title">香水原料</p>
-              <div class="detail" v-for="(item, index) in material" :key="item.animal">
+              <div class="detail" v-for="item in material" :key="item.animal">
                 <p class="animal">{{item.animal}}
                   <span>：{{item.animaldesc}}</span>
                 </p>
               </div>
-              <div class="detail" v-for="(item, index) in material2" :key="item.plant">
+              <div class="detail" v-for="item in material2" :key="item.plant">
                 <p class="plant">{{item.plant}}
                   <span>：{{item.plantdesc}}</span>
                 </p>
@@ -168,7 +168,7 @@
       </el-footer>
       <!--修改个人信息-->
       <el-dialog title="修改个人信息" modal center :visible.sync="infoShow">
-        <info v-if="infoShow" :form='formObj' @submitHandle='submitHandle'>
+        <info v-if="infoShow" :form='formObj' @submitHandle='submitHandle' :disabledInput='show'>
         </info>
       </el-dialog>
       <!--修改密码-->
@@ -194,15 +194,17 @@ export default {
     return {
       isCollapse: true,
       infoShow: false,
+      show: false,
       passShow: false,
       dialogTableVisible: false,
       formObj: null,
       isLogin: false,
       username: '',
+      avatar: '',
       admin: false,
       loginOut: true,
       pageIndex: 1,
-      pageSize: 40,
+      pageSize: 50,
       logo: '',
       title: '',
       detail: '',
@@ -264,10 +266,8 @@ export default {
       }
     },
     // 提交(修改)
-    submitHandle(obj, flag) {
-      console.log(obj)
+    submitHandle(obj) {
       this.infoShow = false
-      if (flag === '修改') {
         axios.postEditorInfo(obj._id, obj, res => {
           if (res.code == 'success') {
             this.$message({
@@ -276,15 +276,13 @@ export default {
             });
             this.formObj = obj
             this.username = this.formObj.username
+            this.avatar = this.formObj.avatar
           }
         })
-      }
     },
     submitpassHandle(obj) {
-      console.log(obj)
       this.passShow = false
       axios.postChangePassword(obj._id, obj, res => {
-        console.log(obj)
         if (res.code == 'success') {
           this.formObj = obj
           this.$alert('修改密码成功，请重新登录！', '登录', {
@@ -310,8 +308,12 @@ export default {
             //获取个人信息
             var result = data.data;
             self.formObj = result
+            if (self.formObj.username == 'admin') {
+              this.show = true
+            }
             sessionStorage.setItem("userInfo", JSON.stringify(result));
             self.username = result.username;
+            self.avatar = result.avatar;
             self.loginOut = false;
             self.isLogin = true;
             if (self.username == 'admin') {
