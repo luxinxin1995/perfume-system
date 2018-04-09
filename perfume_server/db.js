@@ -140,19 +140,7 @@ var movieSchema = new db.Schema({
         type: String,
         default: ''
     },
-    showtime: {
-        type: String,
-        default: ''
-    },
     classify: {
-        type: String,
-        default: ''
-    },
-    protagonist: {
-        type: String,
-        default: ''
-    },
-    director: {
         type: String,
         default: ''
     },
