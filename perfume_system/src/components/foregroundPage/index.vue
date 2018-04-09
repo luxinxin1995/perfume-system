@@ -148,6 +148,21 @@
                 <p><img src="../../assets/code.png" alt=""></p>
               </div>
             </div>
+            <!-- 分享 -->
+            <div class="topic">
+              <p class="title">分享</p>
+              <div class="detail">
+                <div class="jiathis_style_24x24">
+                  <a class="jiathis_button_qzone"></a>
+                  <a class="jiathis_button_tsina"></a>
+                  <a class="jiathis_button_tqq"></a>
+                  <a class="jiathis_button_weixin"></a>
+                  <a class="jiathis_button_renren"></a>
+                  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+              </div>
+            </div>
           </div>
         </el-container>
       </el-main>
@@ -181,9 +196,9 @@
 </template>
 
 <script>
-import axios from '../../Api/api'
-import info from './info'
-import pass from './changePassword'
+import axios from "../../Api/api";
+import info from "./info";
+import pass from "./changePassword";
 
 export default {
   components: {
@@ -199,15 +214,15 @@ export default {
       dialogTableVisible: false,
       formObj: null,
       isLogin: false,
-      username: '',
-      avatar: '',
+      username: "",
+      avatar: "",
       admin: false,
       loginOut: true,
       pageIndex: 1,
       pageSize: 50,
-      logo: '',
-      title: '',
-      detail: '',
+      logo: "",
+      title: "",
+      detail: "",
       article: [],
       topicTitle: [],
       brand: [],
@@ -217,177 +232,186 @@ export default {
       movie: [],
       book: [],
       imgURL: [
-        { src: require('../../assets/c1.jpg') },
-        { src: require('../../assets/c2.jpg') },
-        { src: require('../../assets/c3.jpg') },
-        { src: require('../../assets/c4.png') },
-        { src: require('../../assets/c5.jpg') },
-        { src: require('../../assets/c6.jpg') },
+        { src: require("../../assets/c1.jpg") },
+        { src: require("../../assets/c2.jpg") },
+        { src: require("../../assets/c3.jpg") },
+        { src: require("../../assets/c4.png") },
+        { src: require("../../assets/c5.jpg") },
+        { src: require("../../assets/c6.jpg") }
       ]
-    }
+    };
+  },
+  mounted() {
+    this.init();
   },
   created() {
-    this.getData()
+    this.getData();
   },
   watch: {
     $route: function() {
-      this.submitHandle()
+      this.submitHandle();
     }
   },
   methods: {
+    init: function() {
+      let url = "http://v3.jiathis.com/code/jia.js";
+      let script = document.createElement("script");
+      script.setAttribute("src", url);
+      document.getElementsByTagName("head")[0].appendChild(script);
+    },
     handleCommand(command) {
-      if (command == 'out') {
-        this.$confirm('您确定要退出登录?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
+      if (command == "out") {
+        this.$confirm("您确定要退出登录?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
         }).then(() => {
           this.$message({
-            type: 'success',
-            message: '退出登录成功!'
+            type: "success",
+            message: "退出登录成功!"
           });
-          sessionStorage.removeItem('username');
-          sessionStorage.removeItem('userInfo');
+          sessionStorage.removeItem("username");
+          sessionStorage.removeItem("userInfo");
           this.loginOut = true;
           this.isLogin = false;
           this.$router.push({
-            name: 'Login'
+            name: "Login"
           });
-        })
+        });
       }
-      if (command == 'back') {
-        this.$router.push({ name: 'Home' })
+      if (command == "back") {
+        this.$router.push({ name: "Home" });
       }
-      if (command == 'info') {
-        this.infoShow = true
+      if (command == "info") {
+        this.infoShow = true;
       }
-      if (command == 'password') {
-        this.passShow = true
+      if (command == "password") {
+        this.passShow = true;
       }
     },
     // 提交(修改)
     submitHandle(obj) {
-      this.infoShow = false
-        axios.postEditorInfo(obj._id, obj, res => {
-          if (res.code == 'success') {
-            this.$message({
-              type: 'success',
-              message: '修改个人信息成功!'
-            });
-            this.formObj = obj
-            this.username = this.formObj.username
-            this.avatar = this.formObj.avatar
-          }
-        })
+      this.infoShow = false;
+      axios.postEditorInfo(obj._id, obj, res => {
+        if (res.code == "success") {
+          this.$message({
+            type: "success",
+            message: "修改个人信息成功!"
+          });
+          this.formObj = obj;
+          this.username = this.formObj.username;
+          this.avatar = this.formObj.avatar;
+        }
+      });
     },
     submitpassHandle(obj) {
-      this.passShow = false
+      this.passShow = false;
       axios.postChangePassword(obj._id, obj, res => {
-        if (res.code == 'success') {
-          this.formObj = obj
-          this.$alert('修改密码成功，请重新登录！', '登录', {
-            confirmButtonText: '确定',
+        if (res.code == "success") {
+          this.formObj = obj;
+          this.$alert("修改密码成功，请重新登录！", "登录", {
+            confirmButtonText: "确定",
             callback: action => {
               this.$router.push({
-                path: '/login'
-              })
+                path: "/login"
+              });
             }
-          })
+          });
         }
-      })
+      });
     },
     getData() {
       var self = this;
       // 获取个人用户信息
-      axios.getId(sessionStorage.getItem('username'), res => {
-        if (res.code == 'success') {
+      axios.getId(sessionStorage.getItem("username"), res => {
+        if (res.code == "success") {
           //获取表中id
           self.id = res.id;
-          sessionStorage.setItem('id', res.id);
+          sessionStorage.setItem("id", res.id);
           axios.getInfo(res.id, data => {
             //获取个人信息
             var result = data.data;
-            self.formObj = result
-            if (self.formObj.username == 'admin') {
-              this.show = true
+            self.formObj = result;
+            if (self.formObj.username == "admin") {
+              this.show = true;
             }
             sessionStorage.setItem("userInfo", JSON.stringify(result));
             self.username = result.username;
             self.avatar = result.avatar;
             self.loginOut = false;
             self.isLogin = true;
-            if (self.username == 'admin') {
-              this.admin = true
+            if (self.username == "admin") {
+              this.admin = true;
             } else {
-              this.admin = false
+              this.admin = false;
             }
           });
         }
       });
       // 获取香水品牌
       axios.getbrandAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.brand = res.data
+        if (res.code == "success") {
+          this.brand = res.data;
         }
       });
       // 获取香水动物原料
       axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.material = res.data
+        if (res.code == "success") {
+          this.material = res.data;
         }
       });
       // 获取香水植物原料
       axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.material2 = res.data
+        if (res.code == "success") {
+          this.material2 = res.data;
         }
       });
       // 获取香水分类
       axios.getclassifyAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.tableData = res.data
+        if (res.code == "success") {
+          this.tableData = res.data;
         }
       });
       // 获取今日之香
       axios.gettodayAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.title = res.data[0].title
-          this.detail = res.data[0].detail
-          this.logo = res.data[0].logo
+        if (res.code == "success") {
+          this.title = res.data[0].title;
+          this.detail = res.data[0].detail;
+          this.logo = res.data[0].logo;
         }
       });
       // 获取关于香水的电影
       axios.getmovieAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.movie = res.data
+        if (res.code == "success") {
+          this.movie = res.data;
         }
       });
       // 获取关于香水的书籍
       axios.getbookAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.book = res.data
+        if (res.code == "success") {
+          this.book = res.data;
         }
       });
       // 获取热门话题
       axios.gettopicAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.topicTitle = res.data
+        if (res.code == "success") {
+          this.topicTitle = res.data;
         }
       });
       // 获取精彩文章
       axios.getarticleAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          this.article = res.data
+        if (res.code == "success") {
+          this.article = res.data;
         }
       });
     }
   }
-}
+};
 </script>
 <style scoped>
 .el-header {
-  height: 360px!important;
-  background-image: url('../../assets/head.jpg');
+  height: 360px !important;
+  background-image: url("../../assets/head.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 20px 150px 0 150px;
@@ -402,14 +426,14 @@ export default {
 }
 
 .el-header .head .user {
-  float: right
+  float: right;
 }
 
 .el-header .text {
   display: block;
   margin-top: 150px;
-  color: rgba(255, 255, 255, .3);
-  font-family: '楷体';
+  color: rgba(255, 255, 255, 0.3);
+  font-family: "楷体";
   font-size: 30px;
 }
 
@@ -445,7 +469,7 @@ export default {
 }
 
 .carousel {
-  width: 100%；
+  width: 100%；;
 }
 
 .carousel img {
@@ -518,7 +542,7 @@ export default {
 
 .focus p {
   display: block;
-  border-bottom: none!important;
+  border-bottom: none !important;
 }
 
 .focus p:nth-child(2) {
@@ -531,7 +555,7 @@ export default {
 }
 
 .el-footer {
-  height: 300px!important;
+  height: 300px !important;
   background: -webkit-linear-gradient(white, lightblue);
   background: -o-linear-gradient(white, lightblue);
   background: -moz-linear-gradient(white, lightblue);
@@ -542,7 +566,7 @@ export default {
 .el-footer div {
   margin-top: 150px;
   font-size: 16px;
-  color: gray!important;
+  color: gray !important;
 }
 
 .el-footer div .title {
@@ -554,7 +578,7 @@ export default {
 }
 
 .el-footer div i {
-  color: black!important;
+  color: black !important;
   font-size: 24px;
 }
 
