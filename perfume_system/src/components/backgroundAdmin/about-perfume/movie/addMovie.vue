@@ -2,19 +2,19 @@
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="电影名称" prop="name">
-                <el-input v-model="formObj.name"></el-input>
+                <el-input v-model="formObj.name" placeholder="请输入电影名称"></el-input>
             </el-form-item>
             <el-form-item label="国家" prop="country">
-                <el-input v-model="formObj.country"></el-input>
+                <el-input v-model="formObj.country" placeholder="请输入国家"></el-input>
             </el-form-item>
             <el-form-item label="分类" prop="classify">
-                <el-input v-model="formObj.classify"></el-input>
+                <el-input v-model="formObj.classify" placeholder="请输入电影分类"></el-input>
             </el-form-item>
             <el-form-item label="图片" prop="logo">
                 <el-input v-model="formObj.logo" placeholder="请输入图片URL地址，如:https://imgsrc.baidu.com/baike/pic/item/e7cd7b899e510fb3899c1684d533c895d1430c1f.jpg"></el-input>
             </el-form-item>
             <el-form-item label="剧情简介" prop="desc">
-                <el-input type="textarea" autosize v-model="formObj.desc"></el-input>
+                <el-input type="textarea" autosize v-model="formObj.desc" placeholder="请输入剧情简介"></el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>

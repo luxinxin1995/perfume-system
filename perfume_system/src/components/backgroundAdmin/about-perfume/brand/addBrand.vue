@@ -2,17 +2,16 @@
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="品牌中文名称" prop="ChineseName">
-                <el-input v-model="formObj.ChineseName"></el-input>
+                <el-input v-model="formObj.ChineseName" placeholder="请输入品牌中文名称"></el-input>
             </el-form-item>
             <el-form-item label="品牌英文名称" prop="EnglishName">
-                <el-input v-model="formObj.EnglishName"></el-input>
+                <el-input v-model="formObj.EnglishName" placeholder="请输入品牌英文名称"></el-input>
             </el-form-item>
             <el-form-item label="品牌logo" prop="logo">
-                <el-input v-model="formObj.logo"></el-input>
+                <el-input v-model="formObj.logo" placeholder="请输入品牌logo URL地址"></el-input>
             </el-form-item>
             <el-form-item label="品牌介绍" prop="desc">
-                <el-input type="textarea" v-model="formObj.desc"></el-input>
-            </el-form-item>
+                <el-input type="textarea" v-model="formObj.desc" placeholder="请输入品牌介绍"></el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>

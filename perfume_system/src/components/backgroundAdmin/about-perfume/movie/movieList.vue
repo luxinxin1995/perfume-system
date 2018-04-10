@@ -85,7 +85,7 @@ export default {
             var obj = {}
             this.formObj = obj
             this.projcetAddOrEditShow = true
-            this.titleText = '新增品牌'
+            this.titleText = '新增关于香水的电影'
         },
         // 编辑电影
         handleEdit(index, row) {

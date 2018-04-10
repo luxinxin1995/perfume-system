@@ -2,10 +2,10 @@
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="文章标题" prop="title">
-                <el-input v-model="formObj.title"></el-input>
+                <el-input v-model="formObj.title" placeholder="请输入文章标题"></el-input>
             </el-form-item>
             <el-form-item label="文章内容" prop="detail">
-                <el-input type="textarea" v-model="formObj.detail"></el-input>
+                <el-input type="textarea" v-model="formObj.detail" placeholder="请输入文章内容"></el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
