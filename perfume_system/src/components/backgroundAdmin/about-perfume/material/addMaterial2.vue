@@ -2,10 +2,10 @@
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="植物原料" prop="plant">
-                <el-input v-model="formObj.plant"></el-input>
+                <el-input v-model="formObj.plant" placeholder="请输入植物原料名称"></el-input>
             </el-form-item>
             <el-form-item label="植物原料介绍" prop="plantdesc">
-                <el-input type="textarea" v-model="formObj.plantdesc"></el-input>
+                <el-input type="textarea" v-model="formObj.plantdesc" placeholder="请输入植物园原料介绍"></el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>

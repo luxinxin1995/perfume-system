@@ -2,16 +2,16 @@
     <div>
         <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="书名" prop="name">
-                <el-input v-model="formObj.name"></el-input>
+                <el-input v-model="formObj.name" placeholder="请输入书籍名称"></el-input>
             </el-form-item>
             <el-form-item label="作者" prop="author">
-                <el-input v-model="formObj.author"></el-input>
+                <el-input v-model="formObj.author" placeholder="请输入作者"></el-input>
             </el-form-item>
             <el-form-item label="图片" prop="logo">
-                <el-input v-model="formObj.logo"></el-input>
+                <el-input v-model="formObj.logo" placeholder="请输入书籍图片URL地址"></el-input>
             </el-form-item>
             <el-form-item label="内容简介" prop="desc">
-                <el-input type="textarea" v-model="formObj.desc"></el-input>
+                <el-input type="textarea" v-model="formObj.desc" placeholder="请输入内容简介"></el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>

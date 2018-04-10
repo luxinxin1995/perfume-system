@@ -7,7 +7,7 @@
                     </el-switch>
                 </el-col>
                 <el-col :span="22" style="text-align:left;">
-                    <span style="font-size:24px;">欢迎登录香水管理系统</span>
+                    <span style="font-size:24px;">欢迎登录香水知识管理系统</span>
                     <el-dropdown trigger="click" @command="handleCommand" style="float:right;padding-right:40px;padding-top:25px;color:white;">
                         <span class="el-dropdown-link">
                             <span>{{username}}</span>
