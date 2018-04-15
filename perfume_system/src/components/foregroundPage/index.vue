@@ -3,6 +3,14 @@
     <el-container>
       <el-header>
         <div class="head">
+          <span class="logo"><span style="font-size:60px;">P</span>ERFUME</span>
+          <span class="nav">
+            <router-link to="/" active-class="active-nav">首页</router-link>
+            <router-link to="/centre" active-class="active-nav">品牌中心</router-link>
+            <router-link to="/story" active-class="active-nav">品牌故事</router-link>
+            <router-link to="/news" active-class="active-nav">新闻资讯</router-link>
+            <router-link to="/advisory" active-class="active-nav">时尚资讯</router-link>
+          </span>
           <span class="user">
             <el-dropdown trigger="click" @command="handleCommand" v-show="isLogin" style="color:white;">
               <span class="el-dropdown-link" style="display:flex;align-items:center;justify-content:space-between;width:100px;">
@@ -27,6 +35,11 @@
           <p>NOSETIME</p>
         </div>
       </el-header>
+      <el-carousel :interval="4000" arrow="always" height="635px">
+        <el-carousel-item v-for="(item,index) in imgURL" :key="index">
+          <img :src="item.src" alt="">
+        </el-carousel-item>
+      </el-carousel>
       <el-main>
         <!--幻灯片-->
         <el-container>
@@ -237,7 +250,7 @@ export default {
         { src: require("../../assets/c3.jpg") },
         { src: require("../../assets/c4.png") },
         { src: require("../../assets/c5.jpg") },
-        { src: require("../../assets/c6.jpg") }
+        { src: require("../../assets/c4.jpg") }
       ]
     };
   },
@@ -410,23 +423,33 @@ export default {
 </script>
 <style scoped>
 .el-header {
-  height: 360px !important;
-  background-image: url("../../assets/head.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding: 20px 150px 0 150px;
+  height: 100px !important;
+  line-height: 100px;
+  /* padding: 0 150px 0 150px; */
 }
 
-.el-header .head {
-  word-spacing: 20px;
+.el-header .head .nav {
+  display: inline-block;
+  word-spacing: 40px;
 }
-
-.el-header .head .brand {
+.el-header .head .nav a{
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  min-width: 80px;
+}
+.el-header .head .nav a:hover{
+  border-bottom: 2px solid black;
+  color: red;
+}
+.el-header .head .logo{
   float: left;
+  color: pink;
+  font-size: 36px;
 }
-
 .el-header .head .user {
   float: right;
+  word-spacing: 20px;
 }
 
 .el-header .text {
@@ -439,7 +462,7 @@ export default {
 
 .el-header a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .el-header,
@@ -468,8 +491,13 @@ export default {
   margin-right: 60px;
 }
 
+.el-carousel__item img{
+  width: 100%;
+  height: 100%;
+}
+
 .carousel {
-  width: 100%；;
+  width: 100%;
 }
 
 .carousel img {
@@ -600,6 +628,9 @@ export default {
 .plant span {
   color: gray;
   font-size: 12px;
+}
+.active-nav {
+  border-bottom: 2px solid black;
 }
 </style>
 
