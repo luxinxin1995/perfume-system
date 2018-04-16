@@ -26,6 +26,10 @@ import ArticleList from '@/components/backgroundAdmin/system-management/article/
 import TodayList from '@/components/backgroundAdmin/system-management/today/todayList'
 // 前台
 import foreIndex from '@/components/foregroundPage/index'
+import Main from '@/components/foregroundPage/main'
+import Centre from '@/components/foregroundPage/centre'
+import Top from '@/components/foregroundPage/top'
+
 Vue.use(Router)
 
 export default new Router({
@@ -33,7 +37,25 @@ export default new Router({
     {
       path: '/',
       name: 'foreIndex',
-      component: foreIndex
+      component: foreIndex,
+      redirect: '/index',
+      children: [
+        {
+          path: '/index',
+          name: 'Main',
+          component: Main
+        },
+        {
+          path: '/centre',
+          name: 'Centre',
+          component: Centre
+        },
+        {
+          path: '/top',
+          name: 'Top',
+          component: Top
+        }
+      ]
     },
     {
       path: '/background',
