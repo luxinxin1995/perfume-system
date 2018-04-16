@@ -108,6 +108,7 @@ body {
 
 
 
+
 /*登录表单label*/
 
 
@@ -118,10 +119,12 @@ body {
 .el-table .cell {
   text-align: center!important;
 }
-.el-table thead{
+
+.el-table thead {
   color: black;
   font-weight: 700
 }
+
 .el-upload {
   border: 1px dashed #d9d9d9!important;
 }
@@ -133,18 +136,23 @@ body {
 .el-form-item__content {
   text-align: left;
 }
-.el-aside, .el-main{
+
+.el-aside,
+.el-main {
   overflow: visible;
 }
-.ft-size{
+
+.ft-size {
   font-size: 20px;
   margin-right: 10px;
   color: white!important;
 }
-.ft-btn{
+
+.ft-btn {
   font-size: 12px;
 }
-.el-breadcrumb{
+
+.el-breadcrumb {
   margin-bottom: 20px;
 }
 </style>

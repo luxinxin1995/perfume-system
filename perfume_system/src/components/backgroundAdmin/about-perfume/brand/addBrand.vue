@@ -7,11 +7,18 @@
             <el-form-item label="品牌英文名称" prop="EnglishName">
                 <el-input v-model="formObj.EnglishName" placeholder="请输入品牌英文名称"></el-input>
             </el-form-item>
-            <el-form-item label="品牌logo" prop="logo">
-                <el-input v-model="formObj.logo" placeholder="请输入品牌logo URL地址"></el-input>
+            <el-form-item label="品牌图片" prop="logo">
+                <el-upload class="avatar-uploader" v-model="formObj.logo" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <img v-if="formObj.logo" :src="formObj.logo" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-form-item>
+            <el-form-item label="品牌官网链接" prop="link">
+                <el-input v-model="formObj.link" placeholder="请输入品牌官网链接"></el-input>
             </el-form-item>
             <el-form-item label="品牌介绍" prop="desc">
-                <el-input type="textarea" v-model="formObj.desc" placeholder="请输入品牌介绍"></el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入品牌介绍" v-model="formObj.desc">
+                </el-input>
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
@@ -30,7 +37,8 @@ export default {
             default: () => {
                 return {}
             }
-        }
+        },
+        url: ''
     },
     data() {
         return {
@@ -52,6 +60,21 @@ export default {
         }
     },
     methods: {
+        handleAvatarSuccess(res, file) {
+            this.formObj.logo = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {

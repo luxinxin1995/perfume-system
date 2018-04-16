@@ -29,6 +29,9 @@ import foreIndex from '@/components/foregroundPage/index'
 import Main from '@/components/foregroundPage/main'
 import Centre from '@/components/foregroundPage/centre'
 import Top from '@/components/foregroundPage/top'
+import Knowledge from '@/components/foregroundPage/knowledge'
+import Advisory from '@/components/foregroundPage/advisory'
+import MessageBoard from '@/components/foregroundPage/MessageBoard'
 
 Vue.use(Router)
 
@@ -48,12 +51,159 @@ export default new Router({
         {
           path: '/centre',
           name: 'Centre',
-          component: Centre
+          component: Centre,
+          children: [
+            {
+              path: '/A',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/B',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/C',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/D',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/E',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/F',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/G',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/H',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/I',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/J',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/K',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/L',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/M',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/N',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/O',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/P',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Q',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/R',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/S',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/T',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/U',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/V',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/W',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/X',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Y',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Z',
+              name: 'Centre',
+              component: Centre
+            }
+          ]
         },
         {
           path: '/top',
           name: 'Top',
           component: Top
+        },
+        {
+          path: '/knowledge',
+          name: 'Knowledge',
+          component: Knowledge
+        },
+        {
+          path: '/advisory',
+          name: 'Advisory',
+          component: Advisory
+        },
+        {
+          path: '/message',
+          name: 'MessageBoard',
+          component: MessageBoard
         }
       ]
     },

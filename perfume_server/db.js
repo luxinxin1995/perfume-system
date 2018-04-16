@@ -42,6 +42,14 @@ var userSchema = new db.Schema({
         type: String,
         default: ''
     },
+    message: {
+        type: String,
+        default: ''
+    },
+    MessageDate: {
+        type: Date,
+        default: Date.now()
+    },
     jurisdiction: {
         type: Number,
         default: 0
@@ -65,7 +73,15 @@ var brandSchema = new db.Schema({
         type: String,
         default: ''
     },
+    link: {
+        type: String,
+        default: ''
+    },
     logo: {
+        type: String,
+        default: ''
+    },
+    classify: {
         type: String,
         default: ''
     }

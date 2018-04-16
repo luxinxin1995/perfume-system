@@ -47,6 +47,7 @@ export default {
       console.log(err)
     })
   },
+  // 修改密码
   postChangePassword (_id, data, callback) {
     axios.post(`${global.ApiUrl}/users/changePassword/${_id}`, data).then((res) => {
       callback(res.data)
