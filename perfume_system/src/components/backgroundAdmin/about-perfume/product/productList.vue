@@ -23,7 +23,7 @@
                         <img :src="scope.row.photo" class="img"  width="120"/>
                     </template>
                 </el-table-column>
-                <el-table-column prop="desc" label="品牌介绍">
+                <el-table-column prop="flavorist" label="调香师">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center" width="200">
                     <template slot-scope="scope">
@@ -135,7 +135,7 @@ export default {
                     if (res.code == 'success') {
                         this.$message.success('添加产品成功')
                         this.$router.push({
-                            name: 'productList'
+                            name: 'ProductList'
                         })
                         this.getData();
                     }

@@ -67,6 +67,13 @@ export default {
             }
         };
     },
+    mounted() {
+        if (this.formObj.hasOwnProperty('productName')) {
+            this.addOrEditFlag = '修改'
+        } else {
+            this.addOrEditFlag = '新增'
+        }
+    },
     methods: {
         handleAvatarSuccess(res, file) {
             this.formObj.photo = URL.createObjectURL(file.raw);

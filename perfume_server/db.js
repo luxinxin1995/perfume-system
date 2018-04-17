@@ -208,89 +208,6 @@ var knowledgeSchema = new db.Schema({
         default: ''
     }
 })
-// 香水原料列表
-var materialSchema = new db.Schema({
-    animal: {
-        type: String,
-        default: ''
-    },
-    animaldesc: {
-        type: String,
-        default: ''
-    }
-})
-// 香水原料列表2
-var material2Schema = new db.Schema({
-    plant: {
-        type: String,
-        default: ''
-    },
-    plantdesc: {
-        type: String,
-        default: ''
-    }
-})
-// 香水分类列表
-var classifySchema = new db.Schema({
-    odortype: {
-        type: String,
-        default: ''
-    },
-    flavour: {
-        type: String,
-        default: ''
-    },
-    concentration: {
-        type: String,
-        default: ''
-    },
-    rank: {
-        type: String,
-        default: ''
-    }
-})
-// 香水书籍列表
-var bookSchema = new db.Schema({
-    name: {
-        type: String,
-        default: ''
-    },
-    author: {
-        type: String,
-        default: ''
-    },
-    desc: {
-        type: String,
-        default: ''
-    },
-    logo: {
-        type: String,
-        default: ''
-    }
-})
-// 香水电影列表
-var movieSchema = new db.Schema({
-    name: {
-        type: String,
-        default: ''
-    },
-    country: {
-        type: String,
-        default: ''
-    },
-    classify: {
-        type: String,
-        default: ''
-    },
-    desc: {
-        type: String,
-        default: ''
-    },
-    logo: {
-        type: String,
-        default: ''
-    }
-})
 // 香水热门话题
 var topicSchema = new db.Schema({
     title: {
@@ -323,27 +240,17 @@ var todaySchema = new db.Schema({
         type: String,
         default: ''
     },
-    detail: {
-        type: String,
-        default: ''
-    },
-    logo: {
-        type: String,
-        default: ''
+    date: {
+        type: Date,
+        default: Date.now()
     }
 })
 var User = db.model('User', userSchema);
 var Brand = db.model('Brand', brandSchema);
 var Product = db.model('Product', productSchema);
 var Knowledge = db.model('Knowledge', knowledgeSchema);
-
-var Material = db.model('Material', materialSchema)
-var Material2 = db.model('Material2', material2Schema)
-var Classify = db.model('Classify', classifySchema)
-var Book = db.model('Book', bookSchema)
-var Movie = db.model('Movie', movieSchema)
 var Topic = db.model('Topic', topicSchema)
 var Article = db.model('Article', articleSchema)
 var Today = db.model('Today', todaySchema)
 
-module.exports = { User, Brand, Product, Knowledge,Material, Material2, Classify, Book, Movie, Topic, Article, Today }
+module.exports = { User, Brand, Product, Knowledge, Topic, Article, Today }
