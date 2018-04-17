@@ -1,39 +1,39 @@
 <template>
-    <div class="fillcontain">
-        <div class="table_container">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
-                <el-breadcrumb-item>植物原料列表</el-breadcrumb-item>
-            </el-breadcrumb>
-            <div class="add">
-                <el-button size="mini" type="primary" @click="addMaterial()" icon="el-icon-plus">新增</el-button>
-            </div>
-            <el-table :data="tableData" style="width: 100%">
-                <el-table-column type="index" width="50">
-                </el-table-column>
-                <el-table-column prop="plant" label="植物原料" width="180">
-                </el-table-column>
-                <el-table-column prop="plantdesc" label="植物原料介绍">
-                </el-table-column>
-                <el-table-column label="操作" header-align="center" width="320">
-                    <template slot-scope="scope">
-                        <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
-                        <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
-                </el-pagination>
-            </div>
-            <!--对话框(新增/编辑)-->
-            <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
-                </projcetAddOrEdit>
-            </el-dialog>
-        </div>
+  <div class="fillcontain">
+    <div class="table_container">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
+        <el-breadcrumb-item>植物原料列表</el-breadcrumb-item>
+      </el-breadcrumb>
+      <div class="add">
+        <el-button size="mini" type="primary" @click="addMaterial()" icon="el-icon-plus">新增</el-button>
+      </div>
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column type="index" width="50">
+        </el-table-column>
+        <el-table-column prop="plant" label="植物原料" width="180">
+        </el-table-column>
+        <el-table-column prop="plantdesc" label="植物原料介绍">
+        </el-table-column>
+        <el-table-column label="操作" header-align="center" width="320">
+          <template slot-scope="scope">
+            <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
+            <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="Pagination" style="text-align: left;margin-top: 10px;">
+        <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+        </el-pagination>
+      </div>
+      <!--对话框(新增/编辑)-->
+      <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
+        <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+        </projcetAddOrEdit>
+      </el-dialog>
     </div>
+  </div>
 </template>
 
 <script>
@@ -67,7 +67,10 @@ export default {
         this.pageCount = res.pageCount; //总页数
         this.total = res.length; //总数
         if (res.code == "success") {
-          this.tableData = res.data;
+          var data = res.data
+          this.tableData = data.filter(function(item) {
+            return item.plant !== ''
+          })
         }
       });
     },

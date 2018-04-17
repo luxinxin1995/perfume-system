@@ -77,9 +77,17 @@
         <p class="info">由于法国人当时喜欢在皮革手套上加上香水，而要找这种手套最好就是前往格拉斯（Grasse），这个法国城市也因这种贸易而逐渐繁荣昌盛，并且它的香水业得到了很好的发展，法国很快就有了世界香水之都的称号。</p>
       </div>
     </div>
+    <div class="topic">
+      <div class="content" v-for="(item,index) in articles" :key="index">
+        <p>{{item.title}}</p>
+        <img :src="item.photo" alt="" width="500px;">
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import axios from "../../Api/api";
+
 export default {
   data() {
     return {
@@ -90,7 +98,25 @@ export default {
         { src: require("../../assets/c4.png") },
         { src: require("../../assets/c5.jpg") },
         { src: require("../../assets/c4.jpg") }
-      ]
+      ],
+      articles: '',
+      pageIndex: 1,
+      pageSize: 100
+    }
+  },
+  created() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      axios.getarticleAll(this.pageIndex, this.pageSize, res => {
+        if (res.code == 'success') {
+          var data = res.data
+          this.articles = data.filter(function(item) {
+            return item.title !== ''
+          })
+        }
+      })
     }
   }
 }

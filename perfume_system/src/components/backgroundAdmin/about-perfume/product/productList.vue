@@ -3,20 +3,29 @@
         <div class="table_container">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
-                <el-breadcrumb-item>动物原料列表</el-breadcrumb-item>
+                <el-breadcrumb-item>香水产品管理</el-breadcrumb-item>
+                <el-breadcrumb-item>香水产品列表</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="add">
-                <el-button size="mini" type="primary" @click="addMaterial()" icon="el-icon-plus">新增</el-button>
+                <el-button size="mini" type="primary" @click="addProduct()" icon="el-icon-plus">新增</el-button>
             </div>
-            <el-table :data="tableData" style="width: 100%">
+            <el-table :data="tableData" style="width: 100%;">
                 <el-table-column type="index" width="50">
                 </el-table-column>
-                <el-table-column prop="animal" label="动物原料" width="180">
+                <el-table-column prop="productName" label="名称">
                 </el-table-column>
-                <el-table-column prop="animaldesc" label="动物原料介绍">
+                <el-table-column prop="brand" label="品牌">
                 </el-table-column>
-                <el-table-column label="操作" header-align="center" width="320">
+                <el-table-column prop="fragrance" label="香调">
+                </el-table-column>
+                <el-table-column prop="photo" label="香水图片" width="120">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.photo" class="img"  width="120"/>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="desc" label="品牌介绍">
+                </el-table-column>
+                <el-table-column label="操作" header-align="center" width="200">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
                         <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
@@ -29,7 +38,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -38,7 +47,7 @@
 
 <script>
 import axios from '../../../../Api/api'
-import projcetAddOrEdit from './addMaterial'
+import projcetAddOrEdit from './addProduct'
 export default {
     components: {
         projcetAddOrEdit
@@ -46,6 +55,7 @@ export default {
     data() {
         return {
             tableData: [],
+            urlaction: '',
             pageCount: '',
             pageIndex: 1,
             pageSize: 5,
@@ -53,35 +63,33 @@ export default {
             titleText: '',
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
-            formObj: null
+            formObj: null,
         }
     },
     created() {
         this.getData()
     },
     methods: {
-        // 获取所有原料
+        // 获取所有品牌
         getData() {
-            axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
+            axios.getproductAll(this.pageIndex, this.pageSize, res => {
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
-                    var data = res.data
-                    this.tableData = data.filter(function (item) {
-                        return item.animal !== ''
-                    })
+                    this.tableData = res.data
                 }
             })
         },
         // 新增品牌
-        addMaterial() {
+        addProduct() {
             var obj = {}
             this.formObj = obj
             this.projcetAddOrEditShow = true
-            this.titleText = '新增香水原料'
+            this.titleText = '新增产品'
         },
-        // 编辑原料
+        // 编辑品牌
         handleEdit(index, row) {
+            this.urlaction = `http://localhost:3000/product/editor/${row._id}`
             var obj = {}
             for (var key in row) {
                 if (row.hasOwnProperty(key)) {
@@ -90,17 +98,16 @@ export default {
             }
             this.formObj = obj
             this.projcetAddOrEditShow = true
-            this.titleText = '编辑香水原料'
+            this.titleText = '编辑产品'
         },
+        // 删除品牌
         handleDelete(index, row) {
-            console.log(row)
             var id = row._id
-            axios.postmaterialDelete(id, res => {
-                console.log(res)
+            axios.postproductDelete(id, res => {
                 if (res.code == 'success') {
                     this.$message.success('删除成功')
                     this.$router.push({
-                        name: 'MaterialList'
+                        name: 'ProductList'
                     })
                     this.getData();
                 } else {
@@ -116,28 +123,34 @@ export default {
         submitHandle(obj, flag) {
             this.projcetAddOrEditShow = false
             if (flag === '修改') {
-                axios.postmaterialEditor(obj._id, obj, res => {
+                axios.postproductEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('修改原料成功')
+                        this.$message.success('修改产品成功')
                         this.formObj = obj
                         this.getData();
                     }
                 })
             } else {
-                axios.postmaterialAdd(obj, res => {
+                axios.postproductAdd(obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('添加原料成功')
+                        this.$message.success('添加产品成功')
                         this.$router.push({
-                            name: 'MaterialList'
+                            name: 'productList'
                         })
                         this.getData();
                     }
                 })
             }
         },
+        // 分页
         pageChange(page) {
             this.pageIndex = page;
             this.getData();
+        }
+    },
+    watch: {
+        $route: function() {
+            this.getData()
         }
     }
 }
@@ -146,6 +159,10 @@ export default {
 <style scoped>
 .table_container {
     padding: 20px;
+}
+
+.img {
+    width: 100px;
 }
 
 .add {

@@ -6,16 +6,16 @@
             <span class="nav">
                 <router-link to="/index" active-class="active-nav">首页</router-link>
                 <router-link to="/centre" active-class="active-nav">品牌中心</router-link>
-                <router-link to="/top" active-class="active-nav">品牌Top10</router-link>
+                <router-link to="/top" active-class="active-nav">品牌排行榜</router-link>
                 <router-link to="/knowledge" active-class="active-nav">入门知识</router-link>
-                <router-link to="/advisory" active-class="active-nav">时尚资讯</router-link>
+                <router-link to="/advisory" active-class="active-nav">产品中心</router-link>
                 <router-link to="/message" active-class="active-nav">留言板</router-link>
             </span>
             <span class="user">
                 <el-dropdown trigger="click" @command="handleCommand" v-show="isLogin" style="color:white;">
                     <span class="el-dropdown-link" style="display:flex;align-items:center;justify-content:space-between;width:100px;">
                         <span>{{username}}</span>
-                        <img :src="avatar" alt="" style="width:50px;height:50px;border-radius:50%">
+                        <img :src="avatar" alt="" onerror="javascript:this.src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg';" style="width:50px;height:50px;border-radius:50%">
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <template slot-scope="scope">
@@ -123,7 +123,6 @@ export default {
         submitHandle(obj) {
             this.infoShow = false;
             axios.postEditorInfo(obj._id, obj, res => {
-                this.urlaction = `http://localhost:3000/users/editorInfo/${obj._id}`
                 if (res.code == "success") {
                     this.$message({
                         type: "success",
@@ -131,7 +130,11 @@ export default {
                     });
                     this.formObj = obj;
                     this.username = this.formObj.username;
-                    this.avatar = this.formObj.avatar;
+                    if (this.formObj.avatar == '') {
+                        this.avatar = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg'
+                    } else {
+                        this.avatar = this.formObj.avatar;
+                    }
                 }
             });
         },
@@ -159,37 +162,39 @@ export default {
                         message: "留言成功"
                     });
                     this.formObj = obj;
-                    console.log(this.formObj)
                     this.$router.push({
                         name: "MessageBoard"
                     });
+                    this.getData()
                 }
             });
         },
         getData() {
-            var self = this;
             // 获取个人用户信息
             axios.getId(sessionStorage.getItem("username"), res => {
                 if (res.code == "success") {
-                    //获取表中id
-                    self.id = res.id;
-                    self.urlaction = `http://localhost:3000/users/editorInfo/${self.id}`
+                    this.urlaction = `http://localhost:3000/users/editorInfo/${res.id}`
                     sessionStorage.setItem("id", res.id);
                     axios.getInfo(res.id, data => {
                         //获取个人信息
                         var result = data.data;
-                        self.formObj = result;
-                        if (self.formObj.username == "admin") {
+                        this.formObj = result;
+                        if (this.formObj.username == "admin") {
                             this.show = true;
                         }
+                        if (this.formObj.avatar == '') {
+                            this.avatar = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg'
+                        } else {
+                            this.avatar = this.formObj.avatar;
+                        }
                         sessionStorage.setItem("userInfo", JSON.stringify(result));
-                        self.username = result.username;
-                        self.avatar = result.avatar;
-                        self.loginOut = false;
-                        self.isLogin = true;
-                        if (self.username == "admin") {
+                        this.username = this.formObj.username;
+
+                        this.loginOut = false;
+                        this.isLogin = true;
+                        if (this.username == "admin") {
                             this.admin = true;
-                            his.adminNo = false
+                            this.adminNo = false
                         } else {
                             this.admin = false;
                             this.adminNo = true

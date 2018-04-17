@@ -11,7 +11,7 @@
                     <el-dropdown trigger="click" @command="handleCommand" style="float:right;padding-right:40px;padding-top:25px;color:white;">
                         <span class="el-dropdown-link">
                             <span>{{username}}</span>
-                            <img src="../assets/logo.jpg" alt="">
+                            <img :src="avatar" onerror="javascript:this.src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg';" alt="">
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="loginOut">退出登录</el-dropdown-item>
@@ -43,62 +43,74 @@
                             <el-menu-item index="/editBrand">香水品牌列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="5">
+                    <el-submenu index="4">
                         <template slot="title">
-                            <i class="fa fa-pagelines ft-size"></i>
-                            <span>香水原料管理</span>
+                            <i class="fa fa-yelp ft-size"></i>
+                            <span>香水产品管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/editMaterial">动物原料列表</el-menu-item>
-                            <el-menu-item index="/editMaterial2">植物原料列表</el-menu-item>
+                            <el-menu-item index="/editProduct">香水产品列表</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="5">
+                        <template slot="title">
+                            <i class="fa fa-book ft-size"></i>
+                            <span>香水知识管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-submenu index="5-1">
+                                <template slot="title">
+                                    <i class="fa fa-pagelines ft-size"></i>
+                                    <span>香水原料管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="/editMaterial">动物原料列表</el-menu-item>
+                                    <el-menu-item index="/editMaterial2">植物原料列表</el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
+                        </el-menu-item-group>
+                        <el-menu-item-group>
+                            <el-submenu index="5-2">
+                                <template slot="title">
+                                    <i class="fa fa-pie-chart ft-size"></i>
+                                    <span>香水分类管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="/editClassify">香水分类列表</el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
+                        </el-menu-item-group>
+                        <el-menu-item-group>
+                            <el-submenu index="5-3">
+                                <template slot="title">
+                                    <i class="fa fa-snowflake-o ft-size"></i>
+                                    <span>香水香调管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="/editFragrance">香水香调列表</el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="6">
-                        <template slot="title">
-                            <i class="fa fa-pie-chart ft-size"></i>
-                            <span>香水分类管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/editClassify">香水分类列表</el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-                    <el-submenu index="7">
-                        <template slot="title">
-                            <i class="fa fa-book ft-size"></i>
-                            <span>香水书籍管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/editBook">香水书籍列表</el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-                    <el-submenu index="8">
-                        <template slot="title">
-                            <i class="fa fa-youtube-play ft-size"></i>
-                            <span>香水电影管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/editMovie">香水电影列表</el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-                    <el-submenu index="9">
                         <template slot="title">
                             <i class="fa fa-ge ft-size"></i>
                             <span>系统管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-submenu index="9-1">
+                            <el-submenu index="6-1">
                                 <template slot="title">热门话题管理</template>
                                 <el-menu-item index="/editTopic">热门话题列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
-                            <el-submenu index="9-2">
+                            <el-submenu index="6-2">
                                 <template slot="title">精彩文章管理</template>
                                 <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
-                            <el-submenu index="9-3">
+                            <el-submenu index="6-3">
                                 <template slot="title">今日之香管理</template>
                                 <el-menu-item index="/editToday">今日之香列表</el-menu-item>
                             </el-submenu>
@@ -122,7 +134,8 @@ export default {
             isCollapse: true,
             password: '',
             username: '',
-            isLogo: true
+            isLogo: true,
+            avatar: '',
         }
     },
 
@@ -147,16 +160,16 @@ export default {
             }
         },
         getData() {
-            var self = this;
             axios.getId(sessionStorage.getItem('username'), res => {
                 //获取表中id
-                self.id = res.id;
+                this.id = res.id;
                 sessionStorage.setItem('id', res.id);
                 axios.getInfo(res.id, data => {
                     //获取个人信息
                     var result = data.data;
+                    console.log(result)
                     sessionStorage.setItem("userInfo", JSON.stringify(result));
-                    self.username = result.username;
+                    this.username = result.username;
                 });
             });
         }
@@ -181,7 +194,9 @@ export default {
     width: 100%;
     height: 100%;
 }
-
+.el-main{
+    overflow-x: scroll;
+}
 .el-dropdown {
     height: 50px !important;
 }

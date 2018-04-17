@@ -15,6 +15,7 @@ var brand = require('./routes/brand');//品牌
 var material = require('./routes/material');//原料
 var material2 = require('./routes/material2');//原料
 var classify = require('./routes/classify');//分类
+var product = require('./routes/product');//产品
 var book = require('./routes/book');//书籍
 var movie = require('./routes/movie');//电影
 var topic = require('./routes/topic');//热门话题
@@ -53,6 +54,7 @@ app.use('/users', users);//用户
 app.use('/login', login);//登录
 app.use('/register', register);//注册
 app.use('/brand', brand)//品牌
+app.use('/product', product)//产品
 app.use('/material', material)//原料
 app.use('/material2', material2)//原料
 app.use('/classify', classify)//分类

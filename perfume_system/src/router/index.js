@@ -7,8 +7,8 @@ import Home from '@/components/Home'
 // 用户
 import AdminList from '@/components/backgroundAdmin/system-management/adminList'
 // 品牌
-// import AddBrand from '@/components/backgroundAdmin/about-perfume/brand/addBrand'
 import BrandList from '@/components/backgroundAdmin/about-perfume/brand/brandList'
+import ProductList from '@/components/backgroundAdmin/about-perfume/product/productList'
 // 原料
 import MaterialList from '@/components/backgroundAdmin/about-perfume/material/materialList'
 import MaterialList2 from '@/components/backgroundAdmin/about-perfume/material/materialList2'
@@ -235,6 +235,11 @@ export default new Router({
           path: '/editBrand',
           name: 'BrandList',
           component: BrandList
+        },
+        {
+          path: '/editProduct',
+          name: 'ProductList',
+          component: ProductList
         },
         {
           path: '/editMaterial',

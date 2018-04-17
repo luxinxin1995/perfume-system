@@ -2,16 +2,12 @@
     <div class="knowledge">
         <div class="info" v-for="(item,index) in message" :key="index">
             <div class="user">
-                <img :src="item.avatar" alt="">
-                <p>用户名:
-                    <span>{{item.username}}</span>
-                </p>
+                <img :src="item.avatar" onerror="javascript:this.src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg';" alt="">
+                <p>{{item.username}}</p>
             </div>
             <div class="content">
-                <p>留言内容:
-                    <span>{{item.message}}</span>
-                </p>
-                <p>{{item.MessageDate}}</p>
+                <p>{{item.message}}</p>
+                <p class="date">{{item.MessageDate}}</p>
             </div>
         </div>
     </div>
@@ -48,7 +44,7 @@ export default {
                         var m = date.getMinutes()
                         var s = date.getSeconds()
                         var date1 = [year, month, day].join('/')
-                        var time = [ h, m, s].join(':')
+                        var time = [h, m, s].join(':')
                         element = date1 + ' ' + time
                         this.message[i].MessageDate = element
                     }
@@ -74,6 +70,7 @@ export default {
     padding: 20px;
     border-radius: 20px;
     margin-top: 40px;
+    position: relative;
 }
 
 .user img {
@@ -85,9 +82,11 @@ export default {
 .user:nth-child(2n) {
     float: left;
 }
-.content{
+
+.content {
     text-align: left;
 }
+
 .content:nth-child(2n) {
     float: right;
 }
@@ -98,6 +97,12 @@ export default {
 
 .content:nth-child(2n) {
     float: left;
+}
+.date{
+    position: absolute;
+    bottom: 30px;
+    color: gray;
+    font-size: 12px;
 }
 </style>
 

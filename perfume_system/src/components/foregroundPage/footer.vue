@@ -25,6 +25,7 @@
   background: -moz-linear-gradient(white, lightblue);
   background: -mos-linear-gradient(white, lightblue);
   background: linear-gradient(white, lightblue);
+  margin-top: 50px;
 }
 
 .container div {

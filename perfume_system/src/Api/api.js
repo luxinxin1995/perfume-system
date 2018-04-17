@@ -239,6 +239,46 @@ export default {
       console.log(err)
     })
   },
+  // 添加产品
+  postproductAdd (data, callback) {
+    axios.post(`${global.ApiUrl}/product/add`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取所有产品
+  getproductAll (pageIndex, pageSize, callback) {
+    axios.get(`${global.ApiUrl}/product/allProduct/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取id对应产品
+  getproductById (id, callback) {
+    axios.get(`${global.ApiUrl}/product/ProductOne/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 修改id对应产品
+  postproductEditor (id, data, callback) {
+    axios.post(`${global.ApiUrl}/product/editor/${id}`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 删除id对应产品
+  postproductDelete (id, callback) {
+    axios.post(`${global.ApiUrl}/product/delete/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
   // 添加书籍
   postbookAdd (data, callback) {
     axios.post(`${global.ApiUrl}/book/add`, data).then((res) => {
