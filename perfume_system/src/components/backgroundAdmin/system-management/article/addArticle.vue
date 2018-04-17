@@ -7,6 +7,12 @@
             <el-form-item label="文章内容" prop="detail">
                 <el-input type="textarea" v-model="formObj.detail" placeholder="请输入文章内容"></el-input>
             </el-form-item>
+            <el-form-item label="文章相关图片" prop="photo">
+                <el-upload class="avatar-uploader" v-model="formObj.photo" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <img v-if="formObj.photo" :src="formObj.photo" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
                 <el-button @click="resetForm('formObj')">重置</el-button>
@@ -24,7 +30,8 @@ export default {
             default: () => {
                 return {}
             }
-        }
+        },
+        url: ''
     },
     data() {
         return {
@@ -47,6 +54,21 @@ export default {
         }
     },
     methods: {
+        handleAvatarSuccess(res, file) {
+            this.formObj.photo = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+                this.$message.error('上传图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {

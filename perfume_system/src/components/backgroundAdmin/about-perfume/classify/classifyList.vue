@@ -12,15 +12,23 @@
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column type="index" width="50">
                 </el-table-column>
-                <el-table-column prop="odortype" label="香型" width="180">
+                <el-table-column prop="odortype" label="香型">
                 </el-table-column>
-                <el-table-column prop="flavour" label="味道" width="220">
+                 <el-table-column prop="odortypeDesc" label="香型介绍">
                 </el-table-column>
-                <el-table-column prop="concentration" label="浓度" width="180">
+                <el-table-column prop="flavour" label="味道">
                 </el-table-column>
-                <el-table-column prop="rank" label="等级" width="220">
+                 <el-table-column prop="flavourDesc" label="味道介绍">
                 </el-table-column>
-                <el-table-column label="操作" header-align="center">
+                <el-table-column prop="concentration" label="浓度">
+                </el-table-column>
+                 <el-table-column prop="concentrationDesc" label="浓度介绍">
+                </el-table-column>
+                <el-table-column prop="rank" label="等级">
+                </el-table-column>
+                 <el-table-column prop="rankDesc" label="等级介绍">
+                </el-table-column>
+                <el-table-column label="操作" header-align="center" width="200px;">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
                         <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
@@ -71,7 +79,10 @@ export default {
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
-                    this.tableData = res.data
+                    var data = res.data
+                    this.tableData = data.filter(function(item) {
+                        return item.flavour !== '' || item.odortype !== '' || item.concentration !== '' || item.rank !== ''
+                    })
                 }
             })
         },

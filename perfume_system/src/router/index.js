@@ -7,8 +7,8 @@ import Home from '@/components/Home'
 // 用户
 import AdminList from '@/components/backgroundAdmin/system-management/adminList'
 // 品牌
-// import AddBrand from '@/components/backgroundAdmin/about-perfume/brand/addBrand'
 import BrandList from '@/components/backgroundAdmin/about-perfume/brand/brandList'
+import ProductList from '@/components/backgroundAdmin/about-perfume/product/productList'
 // 原料
 import MaterialList from '@/components/backgroundAdmin/about-perfume/material/materialList'
 import MaterialList2 from '@/components/backgroundAdmin/about-perfume/material/materialList2'
@@ -26,6 +26,13 @@ import ArticleList from '@/components/backgroundAdmin/system-management/article/
 import TodayList from '@/components/backgroundAdmin/system-management/today/todayList'
 // 前台
 import foreIndex from '@/components/foregroundPage/index'
+import Main from '@/components/foregroundPage/main'
+import Centre from '@/components/foregroundPage/centre'
+import Top from '@/components/foregroundPage/top'
+import Knowledge from '@/components/foregroundPage/knowledge'
+import Advisory from '@/components/foregroundPage/advisory'
+import MessageBoard from '@/components/foregroundPage/MessageBoard'
+
 Vue.use(Router)
 
 export default new Router({
@@ -33,7 +40,172 @@ export default new Router({
     {
       path: '/',
       name: 'foreIndex',
-      component: foreIndex
+      component: foreIndex,
+      redirect: '/index',
+      children: [
+        {
+          path: '/index',
+          name: 'Main',
+          component: Main
+        },
+        {
+          path: '/centre',
+          name: 'Centre',
+          component: Centre,
+          children: [
+            {
+              path: '/A',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/B',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/C',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/D',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/E',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/F',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/G',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/H',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/I',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/J',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/K',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/L',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/M',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/N',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/O',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/P',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Q',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/R',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/S',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/T',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/U',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/V',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/W',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/X',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Y',
+              name: 'Centre',
+              component: Centre
+            },
+            {
+              path: '/Z',
+              name: 'Centre',
+              component: Centre
+            }
+          ]
+        },
+        {
+          path: '/top',
+          name: 'Top',
+          component: Top
+        },
+        {
+          path: '/knowledge',
+          name: 'Knowledge',
+          component: Knowledge
+        },
+        {
+          path: '/advisory',
+          name: 'Advisory',
+          component: Advisory
+        },
+        {
+          path: '/message',
+          name: 'MessageBoard',
+          component: MessageBoard
+        }
+      ]
     },
     {
       path: '/background',
@@ -63,6 +235,11 @@ export default new Router({
           path: '/editBrand',
           name: 'BrandList',
           component: BrandList
+        },
+        {
+          path: '/editProduct',
+          name: 'ProductList',
+          component: ProductList
         },
         {
           path: '/editMaterial',

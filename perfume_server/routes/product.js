@@ -1,20 +1,20 @@
 var exp = require('express');
 var router = exp.Router();
 var db = require('../db');
-// 添加植物原料
+// 添加产品
 router.post('/add', function (req, res) {
     console.log(req.body)
-    new db.Knowledge(req.body).save().then(function () {
+    new db.Product(req.body).save().then(function () {
         res.send({
             code: 'success',
             msg: "添加成功"
         })
     })
 });
-// 修改植物原料
+// 修改产品
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findByIdAndUpdate(id, req.body, function (err) {
+    db.Product.findByIdAndUpdate(id, req.body, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -23,10 +23,10 @@ router.post('/editor/:id', function (req, res) {
         }
     })
 });
-// 删除植物原料
+// 删除产品
 router.post('/delete/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findByIdAndRemove(id, function (err) {
+    db.Product.findByIdAndRemove(id, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -35,11 +35,11 @@ router.post('/delete/:id', function (req, res) {
         }
     })
 });
-// 获取所有植物原料(分页)
-router.get('/allMaterial2/:pageIndex/:pageSize', function (req, res) {
+// 获取所有产品(分页)
+router.get('/allProduct/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
-    db.Knowledge.find().then(function (data) {
+    db.Product.find().then(function (data) {
         var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
         var pageCount = Math.ceil(data.length / pageSize);
         res.send({
@@ -52,8 +52,8 @@ router.get('/allMaterial2/:pageIndex/:pageSize', function (req, res) {
         console.log(err)
     })
 })
-router.get('/allMaterial2', function (req, res) {
-    db.Knowledge.find().then(function (data) {
+router.get('/allProduct', function (req, res) {
+    db.Product.find().then(function (data) {
         res.send({
             code: 'success',
             data: data
@@ -62,10 +62,10 @@ router.get('/allMaterial2', function (req, res) {
         console.log(err)
     })
 })
-// 编辑获取植物原料
-router.get('/Material2One/:id', function (req, res) {
+// 编辑获取产品
+router.get('/ProductOne/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findById(id, function (err, data) {
+    db.Product.findById(id, function (err, data) {
         if (!err) {
             console.log(data)
             res.send({

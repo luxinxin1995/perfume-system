@@ -13,9 +13,14 @@
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column type="index" width="50">
                 </el-table-column>
-                <el-table-column prop="title" label="文章标题" width="180">
+                <el-table-column prop="title" label="文章标题" width="250">
                 </el-table-column>
-                <el-table-column prop="detail" label="文章内容" width="180">
+                <el-table-column prop="detail" label="文章内容" width="600">
+                </el-table-column>
+                <el-table-column prop="photo" label="文章相关图片" width="120">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.photo" class="img"  width="120"/>
+                    </template>
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
@@ -30,7 +35,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -48,6 +53,7 @@ export default {
         return {
             tableData: [],
             pageCount: '',
+            urlaction: '',
             pageIndex: 1,
             pageSize: 5,
             total: 0,
@@ -80,6 +86,7 @@ export default {
         },
         // 编辑文章
         handleEdit(index, row) {
+            this.urlaction = `http://localhost:3000/brand/editor/${row._id}`
             var obj = {}
             for (var key in row) {
                 if (row.hasOwnProperty(key)) {
@@ -90,7 +97,7 @@ export default {
             this.projcetAddOrEditShow = true
             this.titleText = '编辑文章'
         },
-        handleDelete(index,row) {
+        handleDelete(index, row) {
             console.log(row)
             var id = row._id
             axios.postarticleDelete(id, res => {
@@ -100,7 +107,7 @@ export default {
                         name: 'ArticleList'
                     })
                     this.getData();
-                }else{
+                } else {
                     this.$message.error('删除失败')
                 }
             })

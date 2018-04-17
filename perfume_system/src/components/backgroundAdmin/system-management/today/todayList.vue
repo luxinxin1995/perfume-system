@@ -4,8 +4,8 @@
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item>系统管理</el-breadcrumb-item>
-                <el-breadcrumb-item>今日之香管理</el-breadcrumb-item>
-                <el-breadcrumb-item>今日之香列表</el-breadcrumb-item>
+                <el-breadcrumb-item>公告管理</el-breadcrumb-item>
+                <el-breadcrumb-item>公告列表</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="add">
                 <el-button size="mini" type="primary" @click="addToday()" icon="el-icon-plus">新增</el-button>
@@ -15,12 +15,7 @@
                 </el-table-column>
                 <el-table-column prop="title" label="标题" width="180">
                 </el-table-column>
-                <el-table-column prop="logo" label="图片">
-                    <template slot-scope="scope">
-                        <img :src="scope.row.logo" />
-                    </template>
-                </el-table-column>
-                <el-table-column prop="detail" label="详情">
+                <el-table-column prop="date" label="日期">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
@@ -66,25 +61,30 @@ export default {
         this.getData()
     },
     methods: {
-        // 获取所有系列
+        // 获取所有公告
         getData() {
             axios.gettodayAll(this.pageIndex, this.pageSize, res => {
-                console.log(res)
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var element = this.tableData[i].date;
+                        element = new Date(element)
+                        console.log(element.toLocaleDateString())
+                        this.tableData[i].date = element.toLocaleDateString();
+                    }
                 }
             })
         },
-        // 新增今日之香
+        // 新增公告
         addToday() {
             var obj = {}
             this.formObj = obj
             this.projcetAddOrEditShow = true
-            this.titleText = '新增今日之香'
+            this.titleText = '新增公告'
         },
-        // 编辑系列
+        // 编辑公告
         handleEdit(index, row) {
             var obj = {}
             for (var key in row) {
@@ -94,13 +94,11 @@ export default {
             }
             this.formObj = obj
             this.projcetAddOrEditShow = true
-            this.titleText = '编辑今日之香'
+            this.titleText = '编辑公告'
         },
         handleDelete(index, row) {
-            console.log(row)
             var id = row._id
             axios.posttodayDelete(id, res => {
-                console.log(res)
                 if (res.code == 'success') {
                     this.$message.success('删除成功')
                     this.$router.push({
@@ -122,7 +120,7 @@ export default {
             if (flag === '修改') {
                 axios.posttodayEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('修改今日之香成功')
+                        this.$message.success('修改公告成功')
                         this.formObj = obj
                         this.getData();
                     }
@@ -130,7 +128,7 @@ export default {
             } else {
                 axios.posttodayAdd(obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('添加今日之香成功')
+                        this.$message.success('添加公告成功')
                         this.$router.push({
                             name: 'TodayList'
                         })

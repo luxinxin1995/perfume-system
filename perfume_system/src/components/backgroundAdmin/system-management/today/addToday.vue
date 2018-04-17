@@ -4,12 +4,6 @@
             <el-form-item label="标题" prop="title">
                 <el-input v-model="formObj.title" placeholder="请输入标题"></el-input>
             </el-form-item>
-            <el-form-item label="图片" prop="logo">
-                <el-input v-model="formObj.logo" placeholder="请输入图片URL地址"></el-input>
-            </el-form-item>
-            <el-form-item label="详情" prop="detail">
-                <el-input type="textarea" v-model="formObj.detail" placeholder="请输入详情介绍"></el-input>
-            </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
                 <el-button @click="resetForm('formObj')">重置</el-button>

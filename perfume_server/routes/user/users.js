@@ -36,7 +36,7 @@ router.get('/findAll/:pageIndex/:pageSize', function (req, res) {
                 pageCount: pageCount,
                 length: data.length
             })
-        }else{
+        } else {
             console.log(err)
         }
     })
@@ -84,14 +84,14 @@ router.post('/changePassword/:id', function (req, res) {
 });
 // 删除用户
 router.post('/delete/:id', function (req, res) {
-  var _id = req.params.id;
-  db.User.findByIdAndRemove(_id, function (err) {
-    if (!err) {
-      res.send({
-        code: 'success',
-        msg: '删除成功'
-      });
-    }
-  })
+    var _id = req.params.id;
+    db.User.findByIdAndRemove(_id, function (err) {
+        if (!err) {
+            res.send({
+                code: 'success',
+                msg: '删除成功'
+            });
+        }
+    })
 });
 module.exports = router;

@@ -10,20 +10,20 @@
                 <el-button size="mini" type="primary" @click="addBrand()" icon="el-icon-plus">新增</el-button>
             </div>
             <el-table :data="tableData" style="width: 100%;">
-                <el-table-column type="index">
+                <el-table-column type="index" width="50">
                 </el-table-column>
-                <el-table-column prop="ChineseName" label="品牌中文名称">
+                <el-table-column prop="ChineseName" label="品牌中文名称" width="120">
                 </el-table-column>
-                <el-table-column prop="EnglishName" label="品牌英文名称">
+                <el-table-column prop="EnglishName" label="品牌英文名称" width="120">
                 </el-table-column>
-                <el-table-column prop="logo" label="品牌logo">
+                <el-table-column prop="logo" label="品牌logo" width="120">
                     <template slot-scope="scope">
-                        <img :src="scope.row.logo" width="80" />
+                        <img :src="scope.row.logo" class="img" />
                     </template>
                 </el-table-column>
                 <el-table-column prop="desc" label="品牌介绍">
                 </el-table-column>
-                <el-table-column label="操作" header-align="center">
+                <el-table-column label="操作" header-align="center" width="200">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
                         <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
@@ -36,7 +36,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -53,6 +53,7 @@ export default {
     data() {
         return {
             tableData: [],
+            urlaction: '',
             pageCount: '',
             pageIndex: 1,
             pageSize: 5,
@@ -86,6 +87,7 @@ export default {
         },
         // 编辑品牌
         handleEdit(index, row) {
+            this.urlaction = `http://localhost:3000/brand/editor/${row._id}`
             var obj = {}
             for (var key in row) {
                 if (row.hasOwnProperty(key)) {
@@ -155,6 +157,10 @@ export default {
 <style scoped>
 .table_container {
     padding: 20px;
+}
+
+.img {
+    width: 100px;
 }
 
 .add {

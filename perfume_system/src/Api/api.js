@@ -47,6 +47,7 @@ export default {
       console.log(err)
     })
   },
+  // 修改密码
   postChangePassword (_id, data, callback) {
     axios.post(`${global.ApiUrl}/users/changePassword/${_id}`, data).then((res) => {
       callback(res.data)
@@ -233,6 +234,46 @@ export default {
   // 删除id对应分类
   postclassifyDelete (id, callback) {
     axios.post(`${global.ApiUrl}/classify/delete/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 添加产品
+  postproductAdd (data, callback) {
+    axios.post(`${global.ApiUrl}/product/add`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取所有产品
+  getproductAll (pageIndex, pageSize, callback) {
+    axios.get(`${global.ApiUrl}/product/allProduct/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取id对应产品
+  getproductById (id, callback) {
+    axios.get(`${global.ApiUrl}/product/ProductOne/${id}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 修改id对应产品
+  postproductEditor (id, data, callback) {
+    axios.post(`${global.ApiUrl}/product/editor/${id}`, data).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 删除id对应产品
+  postproductDelete (id, callback) {
+    axios.post(`${global.ApiUrl}/product/delete/${id}`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
