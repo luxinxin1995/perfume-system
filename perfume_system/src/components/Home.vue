@@ -99,20 +99,20 @@
                         </template>
                         <el-menu-item-group>
                             <el-submenu index="6-1">
-                                <template slot="title">热门话题管理</template>
-                                <el-menu-item index="/editTopic">热门话题列表</el-menu-item>
-                            </el-submenu>
-                        </el-menu-item-group>
-                        <el-menu-item-group>
-                            <el-submenu index="6-2">
-                                <template slot="title">精彩文章管理</template>
+                                <template slot="title">
+                                    <i class="fa fa-pagelines ft-size"></i>
+                                    <span>精彩文章管理</span>
+                                </template>
                                 <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
-                            <el-submenu index="6-3">
-                                <template slot="title">今日之香管理</template>
-                                <el-menu-item index="/editToday">今日之香列表</el-menu-item>
+                            <el-submenu index="6-2">
+                                <template slot="title">
+                                    <i class="fa fa-pagelines ft-size"></i>
+                                    <span>公告管理</span>
+                                </template>
+                                <el-menu-item index="/editToday">公告列表</el-menu-item>
                             </el-submenu>
                         </el-menu-item-group>
                     </el-submenu>

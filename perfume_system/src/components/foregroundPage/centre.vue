@@ -11,7 +11,7 @@
         <div class="brand">
             <div class="info" v-for="(item,index) in brand" :key="index">
                 <div class="img">
-                    <img :src="item.logo" alt="">
+                    <a :href="item.link" target="_blank"><img :src="item.logo" :title="item.desc"></a>
                 </div>
                 <div class="name">
                     <p>{{item.ChineseName}}</p>
@@ -62,7 +62,7 @@ export default {
 </script>
 <style scoped>
 .centre {
-    padding: 0 200px;
+    padding: 20px 200px;
 }
 
 .head {

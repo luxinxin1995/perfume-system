@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="header">
         <div class="head">
             <span class="logo">
-                <span style="font-size:60px;">P</span>ERFUME</span>
+                <router-link to="/"><img src="../../assets/logo.jpg" alt="" width="100px;"></router-link>
+            </span>
             <span class="nav">
                 <router-link to="/index" active-class="active-nav">首页</router-link>
                 <router-link to="/centre" active-class="active-nav">品牌中心</router-link>
@@ -207,12 +208,25 @@ export default {
 }
 </script>
 <style scoped>
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    background-color: #fff;
+    margin-bottom: 100px;
+    z-index: 1000;
+    height: 100px;
+    width: 99%;
+    /*border-bottom: 2px solid #eee;*/
+    box-shadow: 0px 2px 2px #eee;
+}
 .head {
     height: 100px !important;
     line-height: 100px;
     color: #333;
     text-align: center;
     padding: 0 20px;
+    
 }
 
 .head .nav {
@@ -241,7 +255,9 @@ export default {
     color: pink;
     font-size: 36px;
 }
-
+.head .logo img{
+    margin-left: 50px;
+}
 .head .user {
     float: right;
     word-spacing: 20px;

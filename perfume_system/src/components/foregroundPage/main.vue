@@ -17,15 +17,32 @@
     </div>
     <div class="div">
       <div class="news">
-        <p class="title">公告</p>
+        <p class="title">公告
+          <span class="gray">Notice</span>
+        </p>
         <p class="detail" v-for="(item,index) in news" :key="index">{{item.title}}
           <span class="date">{{item.date}}</span>
         </p>
       </div>
       <div class="about">
-        <p class="title">关于我们</p>
-        <p class="weibo">微博</p>
-        <p class="weixin">微信公众号</p>
+        <p class="title">关于我们
+          <span class="gray">About Us</span>
+        </p>
+        <div style="float:left;">
+          <p class="methods weibo gray">
+            <i class="fa fa-weibo"></i>
+            <a href="http://weibo.com/u/5327611403">官方微博</a>
+          </p>
+          <p class="methods weixin gray">
+            <i class="fa fa-weixin"></i>微信公众号：大咖来说
+            <span class="gray">punching-say</span>
+          </p>
+          <p class="methods QQ gray">
+            <i class="fa fa-qq"></i>QQ号码：617916928</p>
+          <p class="methods email gray">
+            <i class="fa fa-envelope"></i>邮箱：617916928@qq.com</p>
+        </div>
+        <img src="../../assets/code.png" alt="" width="150px" style="float:right;">
       </div>
     </div>
   </div>
@@ -84,6 +101,20 @@ export default {
 <style scoped>
 .el-carousel {
   overflow: unset;
+}
+
+.gray {
+  color: gray;
+  font-size: 14px;
+}
+
+.gray i {
+  margin: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: gray
 }
 
 .el-carousel__item img {
@@ -145,23 +176,30 @@ export default {
   margin-top: 20px;
 }
 
-.news,
-.about .title {
+.news .title {
   display: block;
   margin-bottom: 10px;
   color: #204f7a;
   font-size: 18px;
 }
-.news .detail{
+.about .title{
+  display: block;
+  margin-bottom: 10px;
+  color: #204f7a;
+  font-size: 18px;  
+}
+.news .detail {
   display: block;
   padding: 10px 0;
   font-size: 12px;
   border-bottom: 1px dotted #eee;
   color: gray;
 }
-.news .date{
+
+.news .date {
   float: right;
 }
+
 .news {
   width: 32%;
 }

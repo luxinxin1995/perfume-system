@@ -54,7 +54,7 @@ export default {
 </script>
 <style scoped>
 .product {
-  padding: 30px 100px;
+  padding: 0 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;

@@ -18,11 +18,9 @@ import ClassifyList from '@/components/backgroundAdmin/about-perfume/classify/cl
 import BookList from '@/components/backgroundAdmin/about-perfume/book/bookList'
 // 电影
 import MovieList from '@/components/backgroundAdmin/about-perfume/movie/movieList'
-// 热门话题
-import TopicList from '@/components/backgroundAdmin/system-management/topic/topicList'
 // 精彩文章
 import ArticleList from '@/components/backgroundAdmin/system-management/article/articleList'
-// 今日之香
+// 公告
 import TodayList from '@/components/backgroundAdmin/system-management/today/todayList'
 // 前台
 import foreIndex from '@/components/foregroundPage/index'
@@ -270,11 +268,6 @@ export default new Router({
           path: '/AdminList',
           name: 'AdminList',
           component: AdminList
-        },
-        {
-          path: '/editTopic',
-          name: 'TopicList',
-          component: TopicList
         },
         {
           path: '/editArticle',

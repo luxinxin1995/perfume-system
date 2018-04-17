@@ -208,17 +208,6 @@ var knowledgeSchema = new db.Schema({
         default: ''
     }
 })
-// 香水热门话题
-var topicSchema = new db.Schema({
-    title: {
-        type: String,
-        default: ''
-    },
-    detail: {
-        type: String,
-        default: ''
-    }
-})
 // 香水热门文章
 var articleSchema = new db.Schema({
     title: {
@@ -234,7 +223,7 @@ var articleSchema = new db.Schema({
         default: ''
     }
 })
-// 今日之香
+// 公告
 var todaySchema = new db.Schema({
     title: {
         type: String,
@@ -249,8 +238,7 @@ var User = db.model('User', userSchema);
 var Brand = db.model('Brand', brandSchema);
 var Product = db.model('Product', productSchema);
 var Knowledge = db.model('Knowledge', knowledgeSchema);
-var Topic = db.model('Topic', topicSchema)
 var Article = db.model('Article', articleSchema)
 var Today = db.model('Today', todaySchema)
 
-module.exports = { User, Brand, Product, Knowledge, Topic, Article, Today }
+module.exports = { User, Brand, Product, Knowledge, Article, Today }

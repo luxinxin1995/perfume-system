@@ -70,7 +70,7 @@ export default {
         this.getData()
     },
     methods: {
-        // 获取所有品牌
+        // 获取所有产品
         getData() {
             axios.getproductAll(this.pageIndex, this.pageSize, res => {
                 this.pageCount = res.pageCount //总页数
@@ -80,14 +80,14 @@ export default {
                 }
             })
         },
-        // 新增品牌
+        // 新增产品
         addProduct() {
             var obj = {}
             this.formObj = obj
             this.projcetAddOrEditShow = true
             this.titleText = '新增产品'
         },
-        // 编辑品牌
+        // 编辑产品
         handleEdit(index, row) {
             this.urlaction = `http://localhost:3000/product/editor/${row._id}`
             var obj = {}
@@ -100,7 +100,7 @@ export default {
             this.projcetAddOrEditShow = true
             this.titleText = '编辑产品'
         },
-        // 删除品牌
+        // 删除产品
         handleDelete(index, row) {
             var id = row._id
             axios.postproductDelete(id, res => {

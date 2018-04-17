@@ -93,12 +93,12 @@
           <p class="detail">中调是香水中最重要的部分，它在前调消失之后开始散发出来，一般可持续数小时或者更久一些。中调是一款香水的精华所在，也就是说洒上香水的你就是带着这种味道示人，以这种味儿来表达自己其时的心境、情感等等信息。中味的调配是香水师最重要的责任，他除了要选择适当的香精组合来突出香水的特色以外，还要想法来使香水的味道能适当持久。通常这部分由含有某种特殊花香、木香、及微量辛辣刺激香制成，其气味无论清新或浓郁，都必须和前调完美衔接。</p>
         </div>
         <div class="noteBG">
-          <img src="../../assets/2.jpg" alt="">
+          <img src="../../assets/11.jpg" alt="">
         </div>
       </div>
       <div class="top">
         <div class="noteBG">
-          <img src="../../assets/3.jpg" alt="">
+          <img src="../../assets/111.jpg" alt="">
         </div>
         <div class="desc">
           <p class="name">尾调(基调)</p>
@@ -256,6 +256,7 @@ export default {
 
 .noteBG img {
   width: 600px;
+  height: 250px;
   box-shadow: 10px 10px 10px #eee;
 }
 
@@ -283,20 +284,17 @@ export default {
   display: block;
   background: black;
   color: white;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 30%;
+  padding: 5px 30%;
   margin: 20px 0;
-  font-size: 30px;
-  font-family: "楷体"
 }
 .odorType{
-  width: 40%;
+  width: 45%;
 }
 .classify{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 0 12%;
 }
 
 .content {
@@ -304,8 +302,7 @@ export default {
   margin: 0 auto;
   padding: 0 20px;
   text-align: left;
-  border-radius: 20px;
-  border: 1px solid #eee;
+
 }
 
 .content p {
@@ -319,25 +316,18 @@ export default {
 }
 
 .intro {
-  font-size: 14px;
+  font-size: 12px;
   color: gray;
 }
 .Mcontent{
-  display: flex;
-  justify-content: space-around;
+  padding: 0 12%;
 }
 .Mcontent .name {
   display: block;
-  background: url('../../assets/bg.jpg');
-  height: 30px;
-  line-height: 30px;
-  font-size: 18px;
+  background: black;
   color: white;
   width: 100%;
-}
-
-.Mcontent .material {
-  width: 40%;
+  padding: 5px 0;  
 }
 
 .Mcontent .animal,

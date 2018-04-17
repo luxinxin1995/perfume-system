@@ -1,13 +1,5 @@
 <template>
     <div class="centre">
-        <div class="title">
-            <el-carousel :interval="4000" arrow="always" height="200px">
-                <el-carousel-item v-for="(item,index) in imgURL" :key="index">
-                    <h1 class="Number">NO.{{index+1}}</h1>
-                    <img :src="item.src" alt="">
-                </el-carousel-item>
-            </el-carousel>
-        </div>
         <div class="info">
             <div class="NO" v-for="(item,index) in brand" :key="index">
                 <div class="blank">
@@ -117,32 +109,6 @@ export default {
 }
 </script>
 <style scoped>
-.el-carousel {
-    overflow: unset;
-}
-
-.Number {
-    position: absolute;
-    top: 90px;
-    left: 300px;
-    color: lightgray;
-    font-size: 30px;
-}
-
-.el-carousel__item img {
-    width: 100%;
-    height: 100%;
-}
-
-.carousel {
-    width: 100%;
-}
-
-.carousel img {
-    width: 100%;
-    height: 100%;
-}
-
 .NO {
     margin-top: 40px;
     margin-top: 30px;
