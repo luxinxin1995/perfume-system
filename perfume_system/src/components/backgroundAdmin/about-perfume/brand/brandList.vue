@@ -60,7 +60,7 @@ export default {
     data() {
         return {
             tableData: [],
-            urlaction: '',
+            urlaction: 'http://localhost:3000/brand/add',
             pageCount: '',
             pageIndex: 1,
             pageSize: 5,

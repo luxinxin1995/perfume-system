@@ -8,8 +8,8 @@
                 <el-input v-model="formObj.EnglishName" placeholder="请输入品牌英文名称"></el-input>
             </el-form-item>
             <el-form-item label="品牌图片" prop="logo">
-                <el-upload class="avatar-uploader" v-model="formObj.logo" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                    <img v-if="formObj.logo" :src="formObj.logo" class="avatar">
+                <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <img  v-if="img" :src="img" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
@@ -49,7 +49,8 @@ export default {
                 ChineseName: [
                     { required: true, message: '请输入品牌中文名称', trigger: 'blur' }
                 ]
-            }
+            },
+            img: ''
         };
     },
     mounted() {
@@ -61,7 +62,8 @@ export default {
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            this.formObj.logo = URL.createObjectURL(file.raw);
+            this.img = URL.createObjectURL(file.raw);
+            this.formObj.logo = this.img
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';

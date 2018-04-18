@@ -65,7 +65,7 @@ export default {
             isCollapse: true,
             infoShow: false,
             show: false,
-            urlaction: '',
+            urlaction: 'http://localhost:3000/users/add',
             passShow: false,
             messageShow: false,
             dialogTableVisible: false,

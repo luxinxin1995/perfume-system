@@ -14,18 +14,6 @@ router.post('/add', function (req, res) {
 // 修改热门文章
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
-    // db.Article.find().then(function (data) {
-    //     console.log(data)
-    //     // 先查找数据库中是否有名称相同
-    //     data.forEach(item => {
-    //         if (item.title == req.body.title) {
-    //             res.send({
-    //                 code: 'error',
-    //                 msg: '修改失败,修改的标题不能与其他标题相同'
-    //             })
-    //         }
-    //     })
-    // })
     db.Article.findByIdAndUpdate(id, req.body, function (err) {
         console.log(req.body)
         if (!err) {

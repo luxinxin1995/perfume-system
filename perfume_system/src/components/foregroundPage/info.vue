@@ -12,8 +12,8 @@
         <el-input placeholder="请输入邮箱" name="email" v-model="formObj.email" prefix-icon="el-icon-message" size="medium" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="头像" prop="avatar">
-        <el-upload class="avatar-uploader" v-model="formObj.avatar" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-          <img v-if="formObj.avatar" :src="formObj.avatar" class="avatar">
+        <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <img v-if="img" :src="img" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -60,12 +60,14 @@ export default {
           { required: true, message: "请输入用户名", trigger: "blur" }
         ],
         phone: [{ required: true, trigger: "blur", validator: validPhone }]
-      }
+      },
+      img:''
     };
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.formObj.avatar = URL.createObjectURL(file.raw);
+      this.img = URL.createObjectURL(file.raw);
+      this.formObj.avatar = this.img
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';

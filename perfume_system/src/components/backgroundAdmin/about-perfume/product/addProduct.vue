@@ -26,8 +26,8 @@
                 <el-input v-model="formObj.flavorist" placeholder="请输入调香师"></el-input>
             </el-form-item>
             <el-form-item label="香水图片" prop="photo">
-                <el-upload class="avatar-uploader" v-model="formObj.photo" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                    <img v-if="formObj.photo" :src="formObj.photo" class="avatar">
+                <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <img v-if="img" :src="img" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
@@ -64,7 +64,8 @@ export default {
                 productName: [
                     { required: true, message: '请输入香水名称', trigger: 'blur' }
                 ]
-            }
+            },
+            img: ''
         };
     },
     mounted() {
@@ -76,7 +77,8 @@ export default {
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            this.formObj.photo = URL.createObjectURL(file.raw);
+            this.img = URL.createObjectURL(file.raw);
+            this.formObj.photo = this.img
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
