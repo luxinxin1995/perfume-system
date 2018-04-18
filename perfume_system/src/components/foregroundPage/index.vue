@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-      <Head></Head>
-      <router-view></router-view>
-      <Footer>
-      </Footer>
+    <Head></Head>
+    <router-view></router-view>
+    <Footer>
+    </Footer>
   </div>
 </template>
 
@@ -19,6 +19,9 @@ export default {
 };
 </script>
 <style scoped>
-
+.container {
+  overflow-x: hidden;
+  padding-top: 100px;
+}
 </style>
 

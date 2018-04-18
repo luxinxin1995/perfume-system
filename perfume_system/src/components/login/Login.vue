@@ -52,7 +52,7 @@ export default {
           var username = qs.stringify({ username: this.ruleForm.username })
           axios.postLogin(qs.stringify({ data: this.ruleForm }), res => {
             if (res.code == 'success') {
-              if (this.ruleForm.username == 'admin' && this.ruleForm.pass == 'luxinxin') {
+              if (this.ruleForm.username == 'admin') {
                 self.$message({
                   message: '欢迎登录香水管理系统！',
                   type: 'success'

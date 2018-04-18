@@ -9,7 +9,14 @@
       <div class="add">
         <el-button size="mini" type="primary" @click="addMaterial()" icon="el-icon-plus">新增</el-button>
       </div>
-      <el-table :data="tableData" style="width: 100%">
+      <el-col :span="10">
+        <el-form>
+          <el-form-item label="原料名称" label-width="200px">
+            <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <el-table :data="tableData1" style="width: 100%">
         <el-table-column type="index" width="50">
         </el-table-column>
         <el-table-column prop="plant" label="植物原料" width="180">
@@ -53,11 +60,28 @@ export default {
       titleText: "",
       dialogTableVisible: false,
       projcetAddOrEditShow: false,
-      formObj: null
+      formObj: null,
+      search: ''
     };
   },
   created() {
     this.getData();
+  },
+  computed: {
+    tableData1: function() {
+      var arr = this.tableData,
+        search = this.search;
+      if (!search) {
+        return arr;
+      }
+      search = search.trim().toLowerCase();
+      arr = arr.filter(function(item) {
+        if (item.plant.toLowerCase().indexOf(search) !== -1) {
+          return item;
+        }
+      })
+      return arr;
+    }
   },
   methods: {
     // 获取所有原料

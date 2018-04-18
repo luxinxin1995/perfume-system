@@ -145,8 +145,8 @@ var productSchema = new db.Schema({
         default: Date.now()
     }
 })
-// 香水知识表
-var knowledgeSchema = new db.Schema({
+// 香水原料
+var materialSchema = new db.Schema({
     // 动物原料
     animal: {
         type: String,
@@ -166,7 +166,10 @@ var knowledgeSchema = new db.Schema({
     plantdesc: {
         type: String,
         default: ''
-    },
+    }
+})
+// 香水知识表
+var classifySchema = new db.Schema({
     // 香型
     odortype: {
         type: String,
@@ -208,17 +211,6 @@ var knowledgeSchema = new db.Schema({
         default: ''
     }
 })
-// 香水热门话题
-var topicSchema = new db.Schema({
-    title: {
-        type: String,
-        default: ''
-    },
-    detail: {
-        type: String,
-        default: ''
-    }
-})
 // 香水热门文章
 var articleSchema = new db.Schema({
     title: {
@@ -234,7 +226,7 @@ var articleSchema = new db.Schema({
         default: ''
     }
 })
-// 今日之香
+// 公告
 var todaySchema = new db.Schema({
     title: {
         type: String,
@@ -248,9 +240,9 @@ var todaySchema = new db.Schema({
 var User = db.model('User', userSchema);
 var Brand = db.model('Brand', brandSchema);
 var Product = db.model('Product', productSchema);
-var Knowledge = db.model('Knowledge', knowledgeSchema);
-var Topic = db.model('Topic', topicSchema)
+var Material = db.model('Material', materialSchema);
+var Classify = db.model('Classify', classifySchema);
 var Article = db.model('Article', articleSchema)
 var Today = db.model('Today', todaySchema)
 
-module.exports = { User, Brand, Product, Knowledge, Topic, Article, Today }
+module.exports = { User, Brand, Product, Material,Classify, Article, Today }

@@ -41,7 +41,7 @@ export default {
             rules: {
                 title: [
                     { required: true, message: '请输入文章标题', trigger: 'blur' },
-                    { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+                    { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'blur' }
                 ]
             }
         };

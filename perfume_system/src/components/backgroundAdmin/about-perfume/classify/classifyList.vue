@@ -9,24 +9,31 @@
             <div class="add">
                 <el-button size="mini" type="primary" @click="addClassify()" icon="el-icon-plus">新增</el-button>
             </div>
-            <el-table :data="tableData" style="width: 100%">
+            <el-col :span="10">
+                <el-form>
+                    <el-form-item label="香型/味道/浓度/等级" label-width="200px">
+                        <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-table :data="tableData1" style="width: 100%">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="odortype" label="香型">
                 </el-table-column>
-                 <el-table-column prop="odortypeDesc" label="香型介绍">
+                <el-table-column prop="odortypeDesc" label="香型介绍">
                 </el-table-column>
                 <el-table-column prop="flavour" label="味道">
                 </el-table-column>
-                 <el-table-column prop="flavourDesc" label="味道介绍">
+                <el-table-column prop="flavourDesc" label="味道介绍">
                 </el-table-column>
                 <el-table-column prop="concentration" label="浓度">
                 </el-table-column>
-                 <el-table-column prop="concentrationDesc" label="浓度介绍">
+                <el-table-column prop="concentrationDesc" label="浓度介绍">
                 </el-table-column>
                 <el-table-column prop="rank" label="等级">
                 </el-table-column>
-                 <el-table-column prop="rankDesc" label="等级介绍">
+                <el-table-column prop="rankDesc" label="等级介绍">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center" width="200px;">
                     <template slot-scope="scope">
@@ -65,17 +72,33 @@ export default {
             titleText: '',
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
-            formObj: null
+            formObj: null,
+            search: ''
         }
     },
     created() {
         this.getData()
     },
+    computed: {
+        tableData1: function() {
+            var arr = this.tableData,
+                search = this.search;
+            if (!search) {
+                return arr;
+            }
+            search = search.trim().toLowerCase();
+            arr = arr.filter(function(item) {
+                if (item.odortype.toLowerCase().indexOf(search) !== -1 || item.flavour.toLowerCase().indexOf(search) !== -1 || item.concentration.toLowerCase().indexOf(search) !== -1 || item.rank.toLowerCase().indexOf(search) !== -1) {
+                    return item;
+                }
+            })
+            return arr;
+        }
+    },
     methods: {
         // 获取所有分类
         getData() {
             axios.getclassifyAll(this.pageIndex, this.pageSize, res => {
-                console.log(res)
                 this.pageCount = res.pageCount //总页数
                 this.total = res.length //总数
                 if (res.code == 'success') {
@@ -83,6 +106,7 @@ export default {
                     this.tableData = data.filter(function(item) {
                         return item.flavour !== '' || item.odortype !== '' || item.concentration !== '' || item.rank !== ''
                     })
+                    
                 }
             })
         },

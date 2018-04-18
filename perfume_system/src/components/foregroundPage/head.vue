@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="header">
         <div class="head">
             <span class="logo">
-                <span style="font-size:60px;">P</span>ERFUME</span>
+                <router-link to="/"><img src="../../assets/logo.jpg" alt="" width="100px;"></router-link>
+            </span>
             <span class="nav">
                 <router-link to="/index" active-class="active-nav">首页</router-link>
                 <router-link to="/centre" active-class="active-nav">品牌中心</router-link>
@@ -86,6 +87,40 @@ export default {
         }
     },
     methods: {
+        getData() {
+            // 获取个人用户信息
+            axios.getId(sessionStorage.getItem("username"), res => {
+                if (res.code == "success") {
+                    this.urlaction = `http://localhost:3000/users/editorInfo/${res.id}`
+                    sessionStorage.setItem("id", res.id);
+                    axios.getInfo(res.id, data => {
+                        //获取个人信息
+                        var result = data.data;
+                        this.formObj = result;
+                        if (this.formObj.username == "admin") {
+                            this.show = true;
+                        }
+                        if (this.formObj.avatar == '') {
+                            this.avatar = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg'
+                        } else {
+                            this.avatar = this.formObj.avatar;
+                        }
+                        sessionStorage.setItem("userInfo", JSON.stringify(result));
+                        this.username = this.formObj.username;
+
+                        this.loginOut = false;
+                        this.isLogin = true;
+                        if (this.username == "admin") {
+                            this.admin = true;
+                            this.adminNo = false
+                        } else {
+                            this.admin = false;
+                            this.adminNo = true
+                        }
+                    });
+                }
+            });
+        },
         handleCommand(command) {
             if (command == "out") {
                 this.$confirm("您确定要退出登录?", "提示", {
@@ -155,6 +190,7 @@ export default {
             });
         },
         submitmessageHandle(obj, date) {
+            this.messageShow = false;
             axios.postEditorInfo(obj._id, obj, res => {
                 if (res.code == "success") {
                     this.$message({
@@ -163,50 +199,29 @@ export default {
                     });
                     this.formObj = obj;
                     this.$router.push({
-                        name: "MessageBoard"
+                        path: "/message"
                     });
-                    this.getData()
                 }
             });
         },
-        getData() {
-            // 获取个人用户信息
-            axios.getId(sessionStorage.getItem("username"), res => {
-                if (res.code == "success") {
-                    this.urlaction = `http://localhost:3000/users/editorInfo/${res.id}`
-                    sessionStorage.setItem("id", res.id);
-                    axios.getInfo(res.id, data => {
-                        //获取个人信息
-                        var result = data.data;
-                        this.formObj = result;
-                        if (this.formObj.username == "admin") {
-                            this.show = true;
-                        }
-                        if (this.formObj.avatar == '') {
-                            this.avatar = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=373715905,1462484251&fm=27&gp=0.jpg'
-                        } else {
-                            this.avatar = this.formObj.avatar;
-                        }
-                        sessionStorage.setItem("userInfo", JSON.stringify(result));
-                        this.username = this.formObj.username;
 
-                        this.loginOut = false;
-                        this.isLogin = true;
-                        if (this.username == "admin") {
-                            this.admin = true;
-                            this.adminNo = false
-                        } else {
-                            this.admin = false;
-                            this.adminNo = true
-                        }
-                    });
-                }
-            });
-        }
     }
 }
 </script>
 <style scoped>
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    margin-bottom: 100px;
+    z-index: 1000;
+    height: 100px;
+    width: 99%;
+    /*border-bottom: 2px solid #eee;*/
+    box-shadow: 0px 2px 2px #eee;
+}
+
 .head {
     height: 100px !important;
     line-height: 100px;
@@ -240,6 +255,10 @@ export default {
     float: left;
     color: pink;
     font-size: 36px;
+}
+
+.head .logo img {
+    margin-left: 50px;
 }
 
 .head .user {

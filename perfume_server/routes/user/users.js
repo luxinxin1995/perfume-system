@@ -3,7 +3,6 @@ var router = express.Router();
 var db = require('../../db')
 
 router.get('/findId/:username', function (req, res) {
-    console.log(req.params.username)
     var username = req.params.username;
     db.User.find({
         username: username
@@ -28,8 +27,6 @@ router.get('/findAll/:pageIndex/:pageSize', function (req, res) {
         if (!err) {
             var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
             var pageCount = Math.ceil(data.length / pageSize);
-            console.log(result)
-            console.log(pageCount)
             res.send({
                 code: 'success',
                 data: result,
@@ -41,11 +38,22 @@ router.get('/findAll/:pageIndex/:pageSize', function (req, res) {
         }
     })
 });
+// 获取所有用户
+router.get('/All', function (req, res) {
+    db.User.find(function (err, data) {
+        if (!err) {
+            res.send({
+                code: 'success',
+                data: data
+            })
+        } else {
+            console.log(err)
+        }
+    })
+});
 // 提交个人信息
 router.post('/editorInfo/:id', function (req, res) {
     var _id = req.params.id;
-    console.log(_id)
-    console.log(req.body)
     db.User.findByIdAndUpdate({
         _id: _id
     }, req.body, function (err) {
@@ -59,7 +67,6 @@ router.post('/editorInfo/:id', function (req, res) {
 });
 router.get('/getInfo/:id', function (req, res) {
     var _id = req.params.id;
-    console.log(_id)
     db.User.findById(_id, function (err, data) {
         if (!err) {
             res.send({

@@ -19,17 +19,15 @@
 .container {
   color: #333;
   text-align: center;
-  height: 300px !important;
+  height: 150px !important;
   background: -webkit-linear-gradient(white, lightblue);
   background: -o-linear-gradient(white, lightblue);
   background: -moz-linear-gradient(white, lightblue);
   background: -mos-linear-gradient(white, lightblue);
   background: linear-gradient(white, lightblue);
-  margin-top: 50px;
 }
 
 .container div {
-  margin-top: 150px;
   font-size: 16px;
   color: gray !important;
 }

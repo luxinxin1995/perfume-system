@@ -39,6 +39,14 @@ export default {
       console.log(err)
     })
   },
+    // 获取所有用户
+  getAllUser (callback) {
+    axios.get(`${global.ApiUrl}/users/All`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
   // 删除用户
   postUserDelete (_id, callback) {
     axios.post(`${global.ApiUrl}/users/delete/${_id}`).then((res) => {
@@ -274,126 +282,6 @@ export default {
   // 删除id对应产品
   postproductDelete (id, callback) {
     axios.post(`${global.ApiUrl}/product/delete/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 添加书籍
-  postbookAdd (data, callback) {
-    axios.post(`${global.ApiUrl}/book/add`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取所有书籍
-  getbookAll (pageIndex, pageSize, callback) {
-    axios.get(`${global.ApiUrl}/book/allBook/${pageIndex}/${pageSize}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取id对应书籍
-  getbookById (id, callback) {
-    axios.get(`${global.ApiUrl}/book/BookOne/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 修改id对应书籍
-  postbookEditor (id, data, callback) {
-    axios.post(`${global.ApiUrl}/book/editor/${id}`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 删除id对应书籍
-  postbookDelete (id, callback) {
-    axios.post(`${global.ApiUrl}/book/delete/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 添加电影
-  postmovieAdd (data, callback) {
-    axios.post(`${global.ApiUrl}/movie/add`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取所有电影
-  getmovieAll (pageIndex, pageSize, callback) {
-    axios.get(`${global.ApiUrl}/movie/allMovie/${pageIndex}/${pageSize}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取id对应电影
-  getmovieById (id, callback) {
-    axios.get(`${global.ApiUrl}/movie/MovieOne/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 修改id对应电影
-  postmovieEditor (id, data, callback) {
-    axios.post(`${global.ApiUrl}/movie/editor/${id}`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 删除id对应电影
-  postmovieDelete (id, callback) {
-    axios.post(`${global.ApiUrl}/movie/delete/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 添加热门话题
-  posttopicAdd (data, callback) {
-    axios.post(`${global.ApiUrl}/topic/add`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取所有热门话题
-  gettopicAll (pageIndex, pageSize, callback) {
-    axios.get(`${global.ApiUrl}/topic/allTopic/${pageIndex}/${pageSize}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 获取id对应热门话题
-  gettopicById (id, callback) {
-    axios.get(`${global.ApiUrl}/topic/TopicOne/${id}`).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 修改id对应热门话题
-  posttopicEditor (id, data, callback) {
-    axios.post(`${global.ApiUrl}/topic/editor/${id}`, data).then((res) => {
-      callback(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  },
-  // 删除id对应热门话题
-  posttopicDelete (id, callback) {
-    axios.post(`${global.ApiUrl}/topic/delete/${id}`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
