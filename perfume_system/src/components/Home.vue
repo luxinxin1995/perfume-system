@@ -80,17 +80,6 @@
                                 </el-menu-item-group>
                             </el-submenu>
                         </el-menu-item-group>
-                        <el-menu-item-group>
-                            <el-submenu index="5-3">
-                                <template slot="title">
-                                    <i class="fa fa-snowflake-o ft-size"></i>
-                                    <span>香水香调管理</span>
-                                </template>
-                                <el-menu-item-group>
-                                    <el-menu-item index="/editFragrance">香水香调列表</el-menu-item>
-                                </el-menu-item-group>
-                            </el-submenu>
-                        </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">

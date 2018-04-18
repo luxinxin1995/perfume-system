@@ -11,7 +11,7 @@
         <div class="brand">
             <div class="info" v-for="(item,index) in brand" :key="index">
                 <div class="img">
-                    <a :href="item.link" target="_blank"><img :src="item.logo" :title="item.desc"></a>
+                    <a :href="item.link" target="_blank"><img :src="item.logo"></a>
                 </div>
                 <div class="name">
                     <p>{{item.ChineseName}}</p>

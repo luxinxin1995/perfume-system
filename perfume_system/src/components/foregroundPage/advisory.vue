@@ -25,13 +25,13 @@
 </template>
 <script>
 import axios from "../../Api/api";
-
 export default {
   data() {
     return {
       pageIndex: 1,
       pageSize: 100,
       product: '',
+      formObj: ''
     }
   },
   created() {
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     getData() {
-      // 获取所有分类
+      // 获取所有产品
       axios.getproductAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
           var data = res.data
@@ -48,7 +48,7 @@ export default {
           })
         }
       })
-    }
+    },
   }
 }
 </script>
@@ -58,6 +58,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
   text-align: left;
 }
 
@@ -79,6 +80,20 @@ export default {
   color: #362c4f;
   margin-top: 30px;
 }
+
+.intro {
+  border: 1px dotted #eee;
+  height: 350px;
+  padding: 20px;
+}
+
+.comment {
+  width: 86.5%;
+  border: 1px dotted #eee;
+  padding: 20px;
+  margin-top: 20px;
+}
+
 .intro img {
   float: left;
   margin-top: 20px;
@@ -95,7 +110,7 @@ export default {
   padding: 20px;
   line-height: 20px;
   text-align: justify;
-  height: fit-content;
+  height: 350px;
   font-size: 20px;
 }
 

@@ -14,10 +14,6 @@ import MaterialList from '@/components/backgroundAdmin/about-perfume/material/ma
 import MaterialList2 from '@/components/backgroundAdmin/about-perfume/material/materialList2'
 // 分类
 import ClassifyList from '@/components/backgroundAdmin/about-perfume/classify/classifyList'
-// 书籍
-import BookList from '@/components/backgroundAdmin/about-perfume/book/bookList'
-// 电影
-import MovieList from '@/components/backgroundAdmin/about-perfume/movie/movieList'
 // 精彩文章
 import ArticleList from '@/components/backgroundAdmin/system-management/article/articleList'
 // 公告
@@ -253,16 +249,6 @@ export default new Router({
           path: '/editClassify',
           name: 'ClassifyList',
           component: ClassifyList
-        },
-        {
-          path: '/editBook',
-          name: 'BookList',
-          component: BookList
-        },
-        {
-          path: '/editMovie',
-          name: 'MovieList',
-          component: MovieList
         },
         {
           path: '/AdminList',

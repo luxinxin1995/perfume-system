@@ -9,14 +9,21 @@
             <div class="add">
                 <el-button size="mini" type="primary" @click="addProduct()" icon="el-icon-plus">新增</el-button>
             </div>
-            <el-table :data="tableData" style="width: 100%;">
+            <el-col :span="10">
+                <el-form>
+                    <el-form-item label="名称/品牌/属性" label-width="200px">
+                        <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-table :data="tableData1" style="width: 100%;">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="productName" label="名称">
                 </el-table-column>
                 <el-table-column prop="brand" label="品牌">
                 </el-table-column>
-                <el-table-column prop="fragrance" label="香调">
+                <el-table-column prop="property" label="属性">
                 </el-table-column>
                 <el-table-column prop="photo" label="香水图片" width="120">
                     <template slot-scope="scope">
@@ -64,6 +71,23 @@ export default {
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
             formObj: null,
+            search: ''
+        }
+    },
+    computed: {
+        tableData1: function() {
+            var arr = this.tableData,
+                search = this.search;
+            if (!search) {
+                return arr;
+            }
+            search = search.trim().toLowerCase();
+            arr = arr.filter(function(item) {
+                if (item.productName.toLowerCase().indexOf(search) !== -1 || item.brand.toLowerCase().indexOf(search) !== -1 || item.property.toLowerCase().indexOf(search) !== -1) {
+                    return item;
+                }
+            })
+            return arr;
         }
     },
     created() {

@@ -51,11 +51,6 @@ export default {
                 }
             });
         },
-    },
-    watch: {
-        $route: function() {
-            this.getData();
-        }
     }
 };
 </script>

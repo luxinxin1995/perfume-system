@@ -4,7 +4,7 @@ var db = require('../db');
 // 添加香水分类
 router.post('/add', function (req, res) {
     console.log(req.body)
-    new db.Knowledge(req.body).save().then(function () {
+    new db.Classify(req.body).save().then(function () {
         res.send({
             code: 'success',
             msg: "添加成功"
@@ -14,7 +14,7 @@ router.post('/add', function (req, res) {
 // 修改香水分类
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findByIdAndUpdate(id, req.body, function (err) {
+    db.Classify.findByIdAndUpdate(id, req.body, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -26,7 +26,7 @@ router.post('/editor/:id', function (req, res) {
 // 删除香水分类
 router.post('/delete/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findByIdAndRemove(id, function (err) {
+    db.Classify.findByIdAndRemove(id, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -39,8 +39,9 @@ router.post('/delete/:id', function (req, res) {
 router.get('/allClassify/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
-    db.Knowledge.find().then(function (data) {
+    db.Classify.find().then(function (data) {
         var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
+        console.log(result)
         var pageCount = Math.ceil(data.length / pageSize);
         res.send({
             code: 'success',
@@ -53,7 +54,7 @@ router.get('/allClassify/:pageIndex/:pageSize', function (req, res) {
     })
 })
 router.get('/allClassify', function (req, res) {
-    db.Knowledge.find().then(function (data) {
+    db.Classify.find().then(function (data) {
         res.send({
             code: 'success',
             data: data
@@ -65,7 +66,7 @@ router.get('/allClassify', function (req, res) {
 // 编辑获取香水分类
 router.get('/ClassifyOne/:id', function (req, res) {
     var id = req.params.id;
-    db.Knowledge.findById(id, function (err, data) {
+    db.Classify.findById(id, function (err, data) {
         if (!err) {
             console.log(data)
             res.send({

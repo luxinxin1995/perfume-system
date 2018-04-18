@@ -39,6 +39,14 @@ export default {
       console.log(err)
     })
   },
+    // 获取所有用户
+  getAllUser (callback) {
+    axios.get(`${global.ApiUrl}/users/All`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
   // 删除用户
   postUserDelete (_id, callback) {
     axios.post(`${global.ApiUrl}/users/delete/${_id}`).then((res) => {

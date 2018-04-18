@@ -9,7 +9,14 @@
             <div class="add">
                 <el-button size="mini" type="primary" @click="addBrand()" icon="el-icon-plus">新增</el-button>
             </div>
-            <el-table :data="tableData" style="width: 100%;">
+            <el-col :span="10">
+                <el-form>
+                    <el-form-item label="品牌名称" label-width="200px">
+                        <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-table :data="tableData1" style="width: 100%;">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="ChineseName" label="品牌中文名称" width="120">
@@ -62,10 +69,27 @@ export default {
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
             formObj: null,
+            search: ''//搜索框的初始值
         }
     },
     created() {
         this.getData()
+    },
+    computed: {
+        tableData1: function() {
+            var arr = this.tableData,
+                search = this.search;
+            if (!search) {
+                return arr;
+            }
+            search = search.trim().toLowerCase();
+            arr = arr.filter(function(item) {
+                if (item.EnglishName.toLowerCase().indexOf(search) !== -1 || item.ChineseName.indexOf(search) !== -1) {
+                    return item;
+                }
+            })
+            return arr;
+        }
     },
     methods: {
         // 获取所有品牌
