@@ -83,26 +83,20 @@
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
-                            <i class="fa fa-ge ft-size"></i>
+                            <i class="fa fa-pagelines ft-size"></i>
+                            <span>文章管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="7">
+                        <template slot="title">
+                            <i class="fa fa-pagelines ft-size"></i>
                             <span>系统管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-submenu index="6-1">
-                                <template slot="title">
-                                    <i class="fa fa-pagelines ft-size"></i>
-                                    <span>精彩文章管理</span>
-                                </template>
-                                <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
-                            </el-submenu>
-                        </el-menu-item-group>
-                        <el-menu-item-group>
-                            <el-submenu index="6-2">
-                                <template slot="title">
-                                    <i class="fa fa-pagelines ft-size"></i>
-                                    <span>公告管理</span>
-                                </template>
-                                <el-menu-item index="/editToday">公告列表</el-menu-item>
-                            </el-submenu>
+                            <el-menu-item index="/editToday">公告列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>

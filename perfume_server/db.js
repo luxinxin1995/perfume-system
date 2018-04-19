@@ -133,16 +133,6 @@ var productSchema = new db.Schema({
     flavorist: {
         type: String,
         default: ''
-    },
-    // 评价
-    comment: {
-        type: String,
-        default: ''
-    },
-    // 评价时间
-    commentDate: {
-        type: Date,
-        default: Date.now()
     }
 })
 // 香水原料

@@ -26,7 +26,7 @@
                 <el-input v-model="formObj.flavorist" placeholder="请输入调香师"></el-input>
             </el-form-item>
             <el-form-item label="香水图片" prop="photo">
-                <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-change="changeFile" :before-upload="beforeAvatarUpload">
                     <img v-if="img" :src="img" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
@@ -76,9 +76,16 @@ export default {
         }
     },
     methods: {
-        handleAvatarSuccess(res, file) {
-            this.img = URL.createObjectURL(file.raw);
-            this.formObj.photo = this.img
+        changeFile(file, fileList) {
+            var This = this;
+            var reader = new FileReader();
+            reader.readAsDataURL(file.raw);
+            reader.onload = function(e) {
+                console.log(this.result)
+                this.result // 这个就是base64编码了
+                This.img = this.result;
+                This.formObj.photo = This.img
+            }
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';

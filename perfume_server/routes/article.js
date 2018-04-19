@@ -3,7 +3,6 @@ var router = exp.Router();
 var db = require('../db');
 // 添加热门文章
 router.post('/add', function (req, res) {
-    console.log(req.body)
     new db.Article(req.body).save().then(function () {
         res.send({
             code: 'success',
@@ -15,7 +14,6 @@ router.post('/add', function (req, res) {
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
     db.Article.findByIdAndUpdate(id, req.body, function (err) {
-        console.log(req.body)
         if (!err) {
             res.send({
                 code: "success",
@@ -58,7 +56,6 @@ router.get('/ArticleOne/:id', function (req, res) {
     var id = req.params.id;
     db.Article.findById(id, function (err, data) {
         if (!err) {
-            console.log(data)
             res.send({
                 code: 'success',
                 data: data
