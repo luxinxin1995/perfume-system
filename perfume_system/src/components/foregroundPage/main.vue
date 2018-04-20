@@ -5,20 +5,12 @@
         <img :src="item.src" alt="">
       </el-carousel-item>
     </el-carousel>
-    <div class="topic">
-      <div class="content" v-for="(item,index) in articles" :key="index">
-        <p class="title">{{item.title}}</p>
-        <img src="../../assets/blank.png" alt="" style="margin:20px;">
-        <div class="detail">
-          <img :src="item.photo" alt="" width="300px;">
-          <div>{{item.detail}}</div>
-        </div>
-      </div>
-    </div>
+    <knowledge></knowledge>
+    
     <div class="div">
       <div class="news">
         <p class="title">公告
-          <span class="gray">Notice</span>
+          <i class="fa fa-bullhorn"></i>
         </p>
         <p class="detail" v-for="(item,index) in news" :key="index">{{item.title}}
           <span class="date">{{item.date}}</span>
@@ -26,7 +18,7 @@
       </div>
       <div class="about">
         <p class="title">关于我们
-          <span class="gray">About Us</span>
+          <i class="fa fa-user"></i>
         </p>
         <div style="float:left;">
           <p class="methods weibo gray">
@@ -49,8 +41,11 @@
 </template>
 <script>
 import axios from "../../Api/api";
-
+import knowledge from './knowledge'
 export default {
+  components: {
+    knowledge
+  },
   data() {
     return {
       imgURL: [
@@ -72,14 +67,6 @@ export default {
   },
   methods: {
     getData() {
-      axios.getarticleAll(this.pageIndex, this.pageSize, res => {
-        if (res.code == 'success') {
-          var data = res.data
-          this.articles = data.filter(function(item) {
-            return item.title !== ''
-          })
-        }
-      })
       axios.gettodayAll(this.pageIndex, this.pageSize, res => {
         if (res.code == 'success') {
           var data = res.data
@@ -131,37 +118,7 @@ a {
   height: 100%;
 }
 
-.content {
-  padding: 30px 0;
-}
 
-.topic .title {
-  color: #2c2049;
-  font-size: 22px;
-}
-
-.detail {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.content:nth-child(2n) .detail {
-  flex-direction: row-reverse;
-}
-
-.detail div {
-  width: 50%;
-  text-align: justify;
-  color: gray;
-  font-size: 14px;
-  text-indent: 2em;
-  line-height: 30px;
-}
-
-.detail img {
-  box-shadow: 5px 5px 5px #eee;
-}
 
 .div {
   display: flex;

@@ -42,7 +42,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :img="img" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -68,6 +68,7 @@ export default {
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
             formObj: null,
+            img: '',
             search: ''
         }
     },
@@ -110,6 +111,7 @@ export default {
         },
         // 编辑文章
         handleEdit(index, row) {
+            this.img = row.photo
             this.urlaction = `http://localhost:3000/article/editor/${row._id}`
             var obj = {}
             for (var key in row) {
@@ -122,6 +124,7 @@ export default {
             this.titleText = '编辑文章'
         },
         handleDelete(index, row) {
+            this.img = row.photo
             var id = row._id
             axios.postarticleDelete(id, res => {
                 if (res.code == 'success') {
@@ -140,7 +143,7 @@ export default {
             this.projcetAddOrEditShow = false
         },
         // 提交(新增/修改)
-        submitHandle(obj,flag) {
+        submitHandle(obj, flag) {
             this.projcetAddOrEditShow = false
             if (flag === '修改') {
                 axios.postarticleEditor(obj._id, obj, res => {

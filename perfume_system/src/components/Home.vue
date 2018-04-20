@@ -28,7 +28,7 @@
                     <el-submenu index="2">
                         <template slot="title">
                             <i class="fa fa-user-circle ft-size"></i>
-                            <span>系统管理员</span>
+                            <span>用户管理</span>
                         </template>
                         <el-menu-item-group>
                             <el-menu-item index="/AdminList">用户列表</el-menu-item>
@@ -36,7 +36,7 @@
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title">
-                            <i class="fa fa-yelp ft-size"></i>
+                            <i class="fa fa-gittip ft-size"></i>
                             <span>香水品牌管理</span>
                         </template>
                         <el-menu-item-group>
@@ -83,7 +83,7 @@
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
-                            <i class="fa fa-pagelines ft-size"></i>
+                            <i class="fa fa-list-alt ft-size"></i>
                             <span>文章管理</span>
                         </template>
                         <el-menu-item-group>
@@ -92,7 +92,7 @@
                     </el-submenu>
                     <el-submenu index="7">
                         <template slot="title">
-                            <i class="fa fa-pagelines ft-size"></i>
+                            <i class="fa fa-cogs ft-size"></i>
                             <span>系统管理</span>
                         </template>
                         <el-menu-item-group>
@@ -170,7 +170,6 @@ export default {
         this.username = decodeURI(sessionStorage.getItem('username'));
     }
 }
-
 </script>
 <style scoped>
 .container {

@@ -7,19 +7,16 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var db = require('./db')
 
-var index = require('./routes/index');
 var login = require('./routes/user/login');//登录
 var register = require('./routes/user/register');//注册
 var users = require('./routes/user/users');//用户信息
 var brand = require('./routes/brand');//品牌
-var material = require('./routes/material');//原料
-var material2 = require('./routes/material2');//原料
-var classify = require('./routes/classify');//分类
+var material = require('./routes/knowledge/material');//原料
+var material2 = require('./routes/knowledge/material2');//原料
+var classify = require('./routes/knowledge/classify');//分类
 var product = require('./routes/product');//产品
-var book = require('./routes/book');//书籍
-var movie = require('./routes/movie');//电影
 var article = require('./routes/article');//精彩文章
-var today = require('./routes/today');//公告
+var notice = require('./routes/notice');//公告
 
 var app = express();
 
@@ -47,7 +44,6 @@ app.all('*', (req, res, next) => {
 })
 
 // 使用路由
-app.use('/', index);
 app.use('/users', users);//用户
 app.use('/login', login);//登录
 app.use('/register', register);//注册
@@ -56,10 +52,8 @@ app.use('/product', product)//产品
 app.use('/material', material)//原料
 app.use('/material2', material2)//原料
 app.use('/classify', classify)//分类
-app.use('/book', book)//书籍
-app.use('/movie', movie)//电影
 app.use('/article', article)//精彩文章
-app.use('/today', today)//公告
+app.use('/today', notice)//公告
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

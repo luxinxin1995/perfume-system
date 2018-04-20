@@ -6,10 +6,10 @@
             </span>
             <span class="nav">
                 <router-link to="/index" active-class="active-nav">首页</router-link>
-                <router-link to="/centre" active-class="active-nav">品牌中心</router-link>
+                <router-link to="/centre" active-class="active-nav">香水品牌</router-link>
                 <router-link to="/top" active-class="active-nav">品牌排行榜</router-link>
-                <router-link to="/knowledge" active-class="active-nav">入门知识</router-link>
-                <router-link to="/advisory" active-class="active-nav">产品中心</router-link>
+                <router-link to="/advisory" active-class="active-nav">香水中心</router-link>
+                <router-link to="/articles" active-class="active-nav">精选文章</router-link>
                 <router-link to="/message" active-class="active-nav">留言板</router-link>
             </span>
             <span class="user">

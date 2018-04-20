@@ -9,7 +9,7 @@
       <el-col :span="10">
         <el-form>
           <el-form-item label="用户名/手机号/邮箱账号/性别" label-width="200px">
-            <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
+            <el-input size="large" placeholder="请输入要查询的用户" v-model="search" suffix-icon="el-icon-search"></el-input>
           </el-form-item>
         </el-form>
       </el-col>

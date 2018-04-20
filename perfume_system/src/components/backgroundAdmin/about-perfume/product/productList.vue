@@ -45,7 +45,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :img="img" :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -71,7 +71,8 @@ export default {
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
             formObj: null,
-            search: ''
+            search: '',
+            img: ''
         }
     },
     computed: {
@@ -113,6 +114,7 @@ export default {
         },
         // 编辑产品
         handleEdit(index, row) {
+            this.img = row.photo
             this.urlaction = `http://localhost:3000/product/editor/${row._id}`
             var obj = {}
             for (var key in row) {

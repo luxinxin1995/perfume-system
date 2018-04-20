@@ -1,6 +1,6 @@
 <template>
   <div class="knowledge">
-    <div class="bg"></div>
+    
     <div class="title">
       <p class="ChineseName">起源介绍</p>
       <p class="EnglishName">————————————The Origin Of Perfume————————————</p>
@@ -167,7 +167,6 @@
       </div>
     </div>
 
-  </div>
   </div>
 </template>
 <script>

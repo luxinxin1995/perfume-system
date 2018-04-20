@@ -43,7 +43,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :img="img" :form='formObj' :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -69,6 +69,7 @@ export default {
             dialogTableVisible: false,
             projcetAddOrEditShow: false,
             formObj: null,
+            img: '',
             search: ''//搜索框的初始值
         }
     },
@@ -111,6 +112,7 @@ export default {
         },
         // 编辑品牌
         handleEdit(index, row) {
+            this.img = row.logo
             this.urlaction = `http://localhost:3000/brand/editor/${row._id}`
             var obj = {}
             for (var key in row) {

@@ -9,7 +9,6 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
-                <el-button @click="resetForm('formObj')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -17,16 +16,6 @@
 
 <script>
 import axios from '../../Api/api'
-import { isvalidPhone } from '../../utils/validate'
-var validPhone = (rule, value, callback) => {
-    if (!value) {
-        callback(new Error('请输入电话号码'))
-    } else if (!isvalidPhone(value)) {
-        callback(new Error('请输入正确的11位手机号码'))
-    } else {
-        callback()
-    }
-}
 export default {
     props: {
         form: {
@@ -59,7 +48,6 @@ export default {
         return {
             dialogVisible: false,
             formObj: this.form,
-            // 1表示新增,2表示修改
             rules: {
                 pass: [
                     { required: true, validator: validatePass, trigger: 'blur' },
@@ -82,9 +70,6 @@ export default {
                     return false;
                 }
             });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
         }
     }
 }
