@@ -60,7 +60,7 @@ export default {
         return {
             tableData: [],
             pageCount: '',
-            urlaction: '',
+            urlaction: 'http://localhost:3000/article/add',
             pageIndex: 1,
             pageSize: 5,
             total: 0,
@@ -110,7 +110,7 @@ export default {
         },
         // 编辑文章
         handleEdit(index, row) {
-            this.urlaction = `http://localhost:3000/brand/editor/${row._id}`
+            this.urlaction = `http://localhost:3000/article/editor/${row._id}`
             var obj = {}
             for (var key in row) {
                 if (row.hasOwnProperty(key)) {
@@ -122,7 +122,6 @@ export default {
             this.titleText = '编辑文章'
         },
         handleDelete(index, row) {
-            console.log(row)
             var id = row._id
             axios.postarticleDelete(id, res => {
                 if (res.code == 'success') {
@@ -141,11 +140,10 @@ export default {
             this.projcetAddOrEditShow = false
         },
         // 提交(新增/修改)
-        submitHandle(obj, flag) {
+        submitHandle(obj,flag) {
             this.projcetAddOrEditShow = false
             if (flag === '修改') {
                 axios.postarticleEditor(obj._id, obj, res => {
-                    console.log(res)
                     if (res.code == 'success') {
                         this.$message.success('修改文章成功')
                         this.formObj = obj

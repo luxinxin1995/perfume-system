@@ -30,8 +30,8 @@ app.set('view engine', 'html');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.text()); //把请求发送的数据解析成文本
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,7 +42,7 @@ app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type")
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-  res.header("Content-Type", "application/json;charset=utf-8");
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
   next()
 })
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form :model="formObj" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
+        <el-form :model="formObj" enctype="multipart/form-data" :rules="rules" ref="formObj" label-width="120px" class="demo-formObj">
             <el-form-item label="文章标题" prop="title">
                 <el-input v-model="formObj.title" placeholder="请输入文章标题"></el-input>
             </el-form-item>
@@ -8,8 +8,8 @@
                 <el-input type="textarea" v-model="formObj.detail" placeholder="请输入文章内容"></el-input>
             </el-form-item>
             <el-form-item label="文章相关图片" prop="photo">
-                <el-upload class="avatar-uploader" v-model="formObj.photo" :action="url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                    <img v-if="formObj.photo" :src="formObj.photo" class="avatar">
+                <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-change="changeFile" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                    <img v-if="img" :src="img" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
@@ -43,7 +43,9 @@ export default {
                     { required: true, message: '请输入文章标题', trigger: 'blur' },
                     { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'blur' }
                 ]
-            }
+            },
+            img: '',
+            imgUrl: ''
         };
     },
     mounted() {
@@ -54,8 +56,20 @@ export default {
         }
     },
     methods: {
+        changeFile(file, fileList) {
+            var This = this;
+            //this.imageUrl = URL.createObjectURL(file.raw);
+            var reader = new FileReader();
+            reader.readAsDataURL(file.raw);
+            reader.onload = function(e) {
+                this.result // 这个就是base64编码了
+                This.img = this.result;
+                This.formObj.photo = This.img
+            }
+        },
         handleAvatarSuccess(res, file) {
-            this.formObj.photo = URL.createObjectURL(file.raw);
+            // this.img = URL.createObjectURL(file.raw);
+            // this.formObj.photo = this.img
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
