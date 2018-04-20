@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="admin-form">
-      <h2 class="title">
-        <p>欢迎注册</p>
-      </h2>
+      <h2 class="title">欢迎注册</h2>
       <div class="form-container">
         <el-form id="user" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">
@@ -144,13 +142,10 @@ export default {
 </script>
 <style scoped>
 .title {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 30px;
   padding: 10px;
-  display: flex;
   color: white;
-  justify-content: space-around;
-  letter-spacing: 8px;
+  border-bottom: 3px solid lightskyblue;
 }
 
 .title p {
