@@ -2,9 +2,8 @@
     <div class="fillcontain">
         <div class="table_container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
-                <el-breadcrumb-item>公告管理</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
+                <el-breadcrumb-item>系统公告管理</el-breadcrumb-item>
                 <el-breadcrumb-item>公告列表</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="add">
@@ -17,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table :data="tableData1" style="width: 100%">
+            <el-table border :data="tableData1" style="width: 100%;max-height:470px;">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="title" label="标题" width="180">

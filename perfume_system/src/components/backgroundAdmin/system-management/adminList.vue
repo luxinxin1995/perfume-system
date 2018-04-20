@@ -2,8 +2,8 @@
   <div class="fillcontain">
     <div class="table_container">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>系统管理员</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
+        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
         <el-breadcrumb-item>用户列表</el-breadcrumb-item>
       </el-breadcrumb>
       <el-col :span="10">
@@ -13,7 +13,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-table :data="tableData1" style="width: 100%">
+      <el-table border :data="tableData1" style="width: 100%;max-height:470px;">
         <el-table-column type="index" width="50">
         </el-table-column>
         <el-table-column prop="username" label="用户名" width="180">

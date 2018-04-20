@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
         <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
         <el-breadcrumb-item>植物原料列表</el-breadcrumb-item>
       </el-breadcrumb>
@@ -16,7 +16,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-table :data="tableData1" style="width: 100%">
+      <el-table border :data="tableData1" style="width: 100%;" height="470px">
         <el-table-column type="index" width="50">
         </el-table-column>
         <el-table-column prop="plant" label="植物原料" width="180">

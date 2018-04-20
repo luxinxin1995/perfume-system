@@ -7,7 +7,7 @@
                     </el-switch>
                 </el-col>
                 <el-col :span="22" style="text-align:left;">
-                    <span style="font-size:24px;">欢迎登录香水知识管理系统</span>
+                    <span style="font-size:24px;">品牌香水管理系统</span>
                     <el-dropdown trigger="click" @command="handleCommand" style="float:right;padding-right:40px;padding-top:25px;color:white;">
                         <span class="el-dropdown-link">
                             <span>{{username}}</span>
@@ -23,9 +23,13 @@
                 <el-menu default-active="1" background-color="#2f4050" text-color="#fff" active-text-color="#ffd04b" style="height:100%;text-align:left" :router="true" :collapse="!isCollapse">
                     <el-menu-item index="/">
                         <i class="fa fa-home ft-size"></i>
-                        <span slot="title">首页</span>
+                        <span slot="title">网站首页</span>
                     </el-menu-item>
-                    <el-submenu index="2">
+                    <el-menu-item index="/home">
+                        <i class="fa fa-bar-chart ft-size"></i>
+                        <span slot="title">系统信息统计</span>
+                    </el-menu-item>
+                    <el-submenu index="3">
                         <template slot="title">
                             <i class="fa fa-user-circle ft-size"></i>
                             <span>用户管理</span>
@@ -34,7 +38,7 @@
                             <el-menu-item index="/AdminList">用户列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="3">
+                    <el-submenu index="4">
                         <template slot="title">
                             <i class="fa fa-gittip ft-size"></i>
                             <span>香水品牌管理</span>
@@ -43,7 +47,7 @@
                             <el-menu-item index="/editBrand">香水品牌列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="4">
+                    <el-submenu index="5">
                         <template slot="title">
                             <i class="fa fa-yelp ft-size"></i>
                             <span>香水产品管理</span>
@@ -52,13 +56,13 @@
                             <el-menu-item index="/editProduct">香水产品列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="5">
+                    <el-submenu index="6">
                         <template slot="title">
                             <i class="fa fa-book ft-size"></i>
                             <span>香水知识管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-submenu index="5-1">
+                            <el-submenu index="6-1">
                                 <template slot="title">
                                     <i class="fa fa-pagelines ft-size"></i>
                                     <span>香水原料管理</span>
@@ -70,7 +74,7 @@
                             </el-submenu>
                         </el-menu-item-group>
                         <el-menu-item-group>
-                            <el-submenu index="5-2">
+                            <el-submenu index="6-2">
                                 <template slot="title">
                                     <i class="fa fa-pie-chart ft-size"></i>
                                     <span>香水分类管理</span>
@@ -81,7 +85,7 @@
                             </el-submenu>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="6">
+                    <el-submenu index="7">
                         <template slot="title">
                             <i class="fa fa-list-alt ft-size"></i>
                             <span>文章管理</span>
@@ -90,10 +94,10 @@
                             <el-menu-item index="/editArticle">精彩文章列表</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="7">
+                    <el-submenu index="8">
                         <template slot="title">
                             <i class="fa fa-cogs ft-size"></i>
-                            <span>系统管理</span>
+                            <span>系统公告管理</span>
                         </template>
                         <el-menu-item-group>
                             <el-menu-item index="/editToday">公告列表</el-menu-item>
@@ -176,9 +180,11 @@ export default {
     width: 100%;
     height: 100%;
 }
-.el-main{
-    overflow-x: scroll;
+
+.el-main {
+    /*overflow-x: scroll;*/
 }
+
 .el-dropdown {
     height: 50px !important;
 }

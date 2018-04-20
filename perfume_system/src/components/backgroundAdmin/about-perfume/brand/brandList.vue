@@ -2,7 +2,7 @@
     <div class="fillcontain">
         <div class="table_container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
                 <el-breadcrumb-item>香水品牌管理</el-breadcrumb-item>
                 <el-breadcrumb-item>香水品牌列表</el-breadcrumb-item>
             </el-breadcrumb>
@@ -16,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table :data="tableData1" style="width: 100%;">
+            <el-table border :data="tableData1" style="width: 100%;" height="470px">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="ChineseName" label="品牌中文名称" width="120">
@@ -25,10 +25,10 @@
                 </el-table-column>
                 <el-table-column prop="logo" label="品牌logo" width="120">
                     <template slot-scope="scope">
-                        <img :src="scope.row.logo" class="img" />
+                        <img :src="scope.row.logo" class="img"/>
                     </template>
                 </el-table-column>
-                <el-table-column prop="desc" label="品牌介绍">
+                <el-table-column prop="desc" label="品牌介绍" height="50px">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center" width="200">
                     <template slot-scope="scope">
@@ -186,7 +186,7 @@ export default {
 }
 
 .img {
-    width: 100px;
+    width: 80px;
 }
 
 .add {

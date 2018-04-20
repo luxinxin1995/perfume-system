@@ -42,6 +42,14 @@ table {
   border-spacing: 0;
 }
 
+.el-table th {
+  background: #f4f4f4 !important;
+}
+
+.el-table__body tr {
+  background: white !important;
+}
+
 fieldset,
 img {
   border: 0;
@@ -109,6 +117,8 @@ body {
 
 
 
+
+
 /*登录表单label*/
 
 
@@ -155,4 +165,7 @@ body {
 .el-breadcrumb {
   margin-bottom: 20px;
 }
+/*.el-table__body, .el-table__footer, .el-table__header{
+  table-layout:unset;
+}*/
 </style>
