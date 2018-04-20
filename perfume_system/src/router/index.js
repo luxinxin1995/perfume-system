@@ -21,10 +21,10 @@ import TodayList from '@/components/backgroundAdmin/system-management/today/toda
 // 前台
 import foreIndex from '@/components/foregroundPage/index'
 import Main from '@/components/foregroundPage/main'
-import Centre from '@/components/foregroundPage/centre'
+import Brand from '@/components/foregroundPage/brand'
 import Top from '@/components/foregroundPage/top'
-import Knowledge from '@/components/foregroundPage/knowledge'
-import Advisory from '@/components/foregroundPage/advisory'
+import Articles from '@/components/foregroundPage/articles'
+import Product from '@/components/foregroundPage/product'
 import MessageBoard from '@/components/foregroundPage/MessageBoard'
 
 Vue.use(Router)
@@ -44,138 +44,138 @@ export default new Router({
         },
         {
           path: '/centre',
-          name: 'Centre',
-          component: Centre,
+          name: 'Brand',
+          component: Brand,
           children: [
             {
               path: '/A',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/B',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/C',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/D',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/E',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/F',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/G',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/H',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/I',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/J',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/K',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/L',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/M',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/N',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/O',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/P',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/Q',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/R',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/S',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/T',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/U',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/V',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/W',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/X',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/Y',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             },
             {
               path: '/Z',
-              name: 'Centre',
-              component: Centre
+              name: 'Brand',
+              component: Brand
             }
           ]
         },
@@ -185,14 +185,14 @@ export default new Router({
           component: Top
         },
         {
-          path: '/knowledge',
-          name: 'Knowledge',
-          component: Knowledge
+          path: '/articles',
+          name: 'Articles',
+          component: Articles
         },
         {
-          path: '/advisory',
-          name: 'Advisory',
-          component: Advisory
+          path: '/product',
+          name: 'Product',
+          component: Product
         },
         {
           path: '/message',

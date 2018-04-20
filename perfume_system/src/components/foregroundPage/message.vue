@@ -6,7 +6,6 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
-                <el-button @click="resetForm('formObj')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -43,9 +42,6 @@ export default {
                     return false;
                 }
             });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
         }
     }
 }

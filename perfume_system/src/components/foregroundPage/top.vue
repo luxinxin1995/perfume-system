@@ -1,7 +1,14 @@
 <template>
     <div class="centre">
+        <el-col :span="24" style="margin:30px 0 0 0;">
+            <el-form>
+                <el-form-item style="padding:0 600px;">
+                    <el-input size="large" placeholder="请输入要搜索品牌名称" v-model="search" suffix-icon="el-icon-search" width="200px"></el-input>
+                </el-form-item>
+            </el-form>
+        </el-col>
         <div class="info">
-            <div class="NO" v-for="(item,index) in brand" :key="index">
+            <div class="NO" v-for="(item,index) in brand1" :key="index">
                 <div class="blank">
                     <img src="../../assets/blank.png" alt="">
                 </div>
@@ -40,11 +47,28 @@ export default {
                 { src: require("../../assets/c3.jpg") },
                 { src: require("../../assets/c4.png") },
                 { src: require("../../assets/c5.jpg") }
-            ]
+            ],
+            search: ''
         }
     },
     created() {
         this.getData();
+    },
+    computed: {
+        brand1: function() {
+            var arr = this.brand,
+                search = this.search;
+            if (!search) {
+                return arr;
+            }
+            search = search.trim().toLowerCase();
+            arr = arr.filter(function(item) {
+                if (item.ChineseName.toLowerCase().indexOf(search) !== -1 || item.EnglishName.toLowerCase().indexOf(search) !== -1) {
+                    return item;
+                }
+            })
+            return arr;
+        }
     },
     methods: {
         getData() {
@@ -125,22 +149,26 @@ export default {
 .blank {
     text-align: center;
 }
-.blank img{
+
+.blank img {
     margin: 20px 0;
 }
+
 .img {
     width: 800px;
     line-height: 30px;
 }
+
 .ChineseName {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .EnglishName {
-  font-size: 14px;
-  color: lightgray;
-  letter-spacing: 5px;
+    font-size: 14px;
+    color: lightgray;
+    letter-spacing: 5px;
 }
+
 .img img {
     width: 400px;
     float: left;

@@ -1,20 +1,20 @@
 var exp = require('express');
 var router = exp.Router();
 var db = require('../db');
-// 添加植物原料
+// 添加公告
 router.post('/add', function (req, res) {
     console.log(req.body)
-    new db.Material(req.body).save().then(function () {
+    new db.Today(req.body).save().then(function () {
         res.send({
             code: 'success',
             msg: "添加成功"
         })
     })
 });
-// 修改植物原料
+// 修改公告
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
-    db.Material.findByIdAndUpdate(id, req.body, function (err) {
+    db.Today.findByIdAndUpdate(id, req.body, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -23,10 +23,10 @@ router.post('/editor/:id', function (req, res) {
         }
     })
 });
-// 删除植物原料
+// 删除公告
 router.post('/delete/:id', function (req, res) {
     var id = req.params.id;
-    db.Material.findByIdAndRemove(id, function (err) {
+    db.Today.findByIdAndRemove(id, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -35,11 +35,11 @@ router.post('/delete/:id', function (req, res) {
         }
     })
 });
-// 获取所有植物原料(分页)
-router.get('/allMaterial2/:pageIndex/:pageSize', function (req, res) {
+// 获取所有公告(分页)
+router.get('/allToday/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
-    db.Material.find().then(function (data) {
+    db.Today.find().then(function (data) {
         var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
         var pageCount = Math.ceil(data.length / pageSize);
         res.send({
@@ -52,20 +52,10 @@ router.get('/allMaterial2/:pageIndex/:pageSize', function (req, res) {
         console.log(err)
     })
 })
-router.get('/allMaterial2', function (req, res) {
-    db.Material.find().then(function (data) {
-        res.send({
-            code: 'success',
-            data: data
-        })
-    }).catch(function (err) {
-        console.log(err)
-    })
-})
-// 编辑获取植物原料
-router.get('/Material2One/:id', function (req, res) {
+// 编辑获取公告
+router.get('/TodayOne/:id', function (req, res) {
     var id = req.params.id;
-    db.Material.findById(id, function (err, data) {
+    db.Today.findById(id, function (err, data) {
         if (!err) {
             console.log(data)
             res.send({

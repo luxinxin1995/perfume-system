@@ -1,7 +1,7 @@
 var exp = require('express');
 var router = exp.Router();
-var db = require('../db');
-// 添加动物原料
+var db = require('../../db');
+// 添加植物原料
 router.post('/add', function (req, res) {
     console.log(req.body)
     new db.Material(req.body).save().then(function () {
@@ -11,7 +11,7 @@ router.post('/add', function (req, res) {
         })
     })
 });
-// 修改动物原料
+// 修改植物原料
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
     db.Material.findByIdAndUpdate(id, req.body, function (err) {
@@ -23,7 +23,7 @@ router.post('/editor/:id', function (req, res) {
         }
     })
 });
-// 删除动物原料
+// 删除植物原料
 router.post('/delete/:id', function (req, res) {
     var id = req.params.id;
     db.Material.findByIdAndRemove(id, function (err) {
@@ -35,8 +35,8 @@ router.post('/delete/:id', function (req, res) {
         }
     })
 });
-// 获取所有动物原料(分页)
-router.get('/allMaterial/:pageIndex/:pageSize', function (req, res) {
+// 获取所有植物原料(分页)
+router.get('/allMaterial2/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
     db.Material.find().then(function (data) {
@@ -52,7 +52,7 @@ router.get('/allMaterial/:pageIndex/:pageSize', function (req, res) {
         console.log(err)
     })
 })
-router.get('/allMaterial', function (req, res) {
+router.get('/allMaterial2', function (req, res) {
     db.Material.find().then(function (data) {
         res.send({
             code: 'success',
@@ -62,8 +62,8 @@ router.get('/allMaterial', function (req, res) {
         console.log(err)
     })
 })
-// 编辑获取动物原料
-router.get('/MaterialOne/:id', function (req, res) {
+// 编辑获取植物原料
+router.get('/Material2One/:id', function (req, res) {
     var id = req.params.id;
     db.Material.findById(id, function (err, data) {
         if (!err) {

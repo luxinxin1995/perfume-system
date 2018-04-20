@@ -15,7 +15,6 @@
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
-                <el-button @click="resetForm('formObj')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -31,7 +30,8 @@ export default {
                 return {}
             }
         },
-        url: ''
+        url: '',
+        img: ''
     },
     data() {
         return {
@@ -44,8 +44,7 @@ export default {
                     { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'blur' }
                 ]
             },
-            img: '',
-            imgUrl: ''
+            img: ''
         };
     },
     mounted() {
@@ -92,10 +91,7 @@ export default {
                     return false;
                 }
             });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
+        }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 var exp = require('express');
 var router = exp.Router();
-var db = require('../db');
+var db = require('../../db');
 // 添加香水分类
 router.post('/add', function (req, res) {
     console.log(req.body)

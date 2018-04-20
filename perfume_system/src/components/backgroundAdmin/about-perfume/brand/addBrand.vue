@@ -9,7 +9,7 @@
             </el-form-item>
             <el-form-item label="品牌图片" prop="logo">
                 <el-upload class="avatar-uploader" :action="url" :show-file-list="false" :on-change="changeFile" :before-upload="beforeAvatarUpload">
-                    <img  v-if="img" :src="img" class="avatar">
+                    <img v-if="img" :src="img" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
@@ -22,7 +22,6 @@
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
-                <el-button @click="resetForm('formObj')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -38,7 +37,8 @@ export default {
                 return {}
             }
         },
-        url: ''
+        url: '',
+        img: ''
     },
     data() {
         return {
@@ -92,16 +92,6 @@ export default {
                     return false;
                 }
             });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
         }
     }
 }

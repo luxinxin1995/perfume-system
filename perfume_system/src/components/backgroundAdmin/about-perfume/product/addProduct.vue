@@ -37,7 +37,6 @@
             </el-form-item>
             <el-form-item style="display:flex;">
                 <el-button type="primary" @click="submitForm('formObj')">确认</el-button>
-                <el-button @click="resetForm('formObj')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -53,7 +52,8 @@ export default {
                 return {}
             }
         },
-        url: ''
+        url: '',
+        img: ''
     },
     data() {
         return {
@@ -108,16 +108,6 @@ export default {
                     return false;
                 }
             });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
         }
     }
 }
