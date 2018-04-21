@@ -17,9 +17,9 @@
                 </el-form>
             </el-col>
             <el-table border :data="tableData1" style="width: 100%;">
-                <el-table-column type="index" width="50">
+                <el-table-column type="index">
                 </el-table-column>
-                <el-table-column prop="title" label="标题" width="180">
+                <el-table-column prop="title" label="标题">
                 </el-table-column>
                 <el-table-column prop="date" label="日期">
                 </el-table-column>

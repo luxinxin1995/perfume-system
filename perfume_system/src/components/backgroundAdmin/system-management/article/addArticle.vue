@@ -4,6 +4,12 @@
             <el-form-item label="文章标题" prop="title">
                 <el-input v-model="formObj.title" placeholder="请输入文章标题"></el-input>
             </el-form-item>
+            <el-form-item label="作者" prop="author">
+                <el-input v-model="formObj.author" placeholder="请输入作者名称"></el-input>
+            </el-form-item>
+            <el-form-item label="时间" prop="author">
+                <el-input v-model="formObj.date" placeholder="请输入时间"></el-input>
+            </el-form-item>
             <el-form-item label="文章内容" prop="detail">
                 <el-input type="textarea" v-model="formObj.detail" placeholder="请输入文章内容"></el-input>
             </el-form-item>

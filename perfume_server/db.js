@@ -203,6 +203,14 @@ var articleSchema = new db.Schema({
         type: String,
         default: ''
     },
+    author: {
+        type: String,
+        default: ''
+    },
+    date: {
+        type: String,
+        default: ''
+    },
     detail: {
         type: String,
         default: ''
