@@ -17,6 +17,27 @@
                 </el-form>
             </el-col>
             <el-table border :data="tableData1" style="width:100%" height="470px">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="香味：">
+                                <span>{{ props.row.fragrance }}</span>
+                            </el-form-item>
+                            <el-form-item label="前调：">
+                                <span>{{ props.row.topNotes }}</span>
+                            </el-form-item>
+                            <el-form-item label="中调：">
+                                <span>{{ props.row.middleNotes }}</span>
+                            </el-form-item>
+                            <el-form-item label="尾调：">
+                                <span>{{ props.row.lowNote }}</span>
+                            </el-form-item>
+                            <el-form-item label="简介：">
+                                <span>{{ props.row.desc }}</span>
+                            </el-form-item>
+                        </el-form>
+                    </template>
+                </el-table-column>
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="productName" label="名称">
@@ -193,5 +214,20 @@ export default {
 
 .add {
     float: left;
+}
+.demo-table-expand {
+  font-size: 0;
+  text-align: left
+}
+
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
 }
 </style>
