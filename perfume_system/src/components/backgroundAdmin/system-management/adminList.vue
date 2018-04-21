@@ -14,28 +14,54 @@
         </el-form>
       </el-col>
       <el-table border :data="tableData1" style="width: 100%;max-height:470px;">
-        <el-table-column type="index" width="50">
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            <el-form label-position="left" inline class="demo-table-expand">
+              <el-form-item label="用户名：">
+                <span>{{ props.row.username }}</span>
+              </el-form-item>
+              <el-form-item label="性别：">
+                <span>{{ props.row.gender }}</span>
+              </el-form-item>
+              <el-form-item label="邮箱账号：">
+                <span>{{ props.row.email }}</span>
+              </el-form-item>
+              <el-form-item label="手机号码：">
+                <span>{{ props.row.phone }}</span>
+              </el-form-item>
+              <el-form-item label="留言：">
+                <span>{{ props.row.message }}</span>
+              </el-form-item>
+              <el-form-item label="留言时间：">
+                <span>{{ props.row.MessageDate }}</span>
+              </el-form-item>
+              <el-form-item label="注册时间：">
+                <span>{{ props.row.registDate }}</span>
+              </el-form-item>
+              <el-form-item label="权限：">
+                <span>{{ props.row.jurisdiction }}</span>
+              </el-form-item>
+            </el-form>
+          </template>
         </el-table-column>
-        <el-table-column prop="username" label="用户名" width="180">
+        <el-table-column type="index">
         </el-table-column>
-        <el-table-column prop="jurisdiction" label="权限" width="220">
+        <el-table-column prop="username" label="用户名">
         </el-table-column>
-        <el-table-column prop="registDate" label="注册时间" width="180">
+        <el-table-column prop="jurisdiction" label="权限">
         </el-table-column>
-        <el-table-column prop="gender" label="性别" width="100">
+        <el-table-column prop="registDate" label="注册时间">
         </el-table-column>
-        <el-table-column prop="phone" label="手机号码" width="180">
+        <el-table-column prop="phone" label="手机号码">
         </el-table-column>
-        <el-table-column prop="email" label="邮箱" width="180">
-        </el-table-column>
-        <el-table-column label="操作" header-align="center" width="200">
+        <el-table-column label="操作" header-align="center">
           <template slot-scope="scope">
             <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="Pagination" style="text-align: left;margin-top: 10px;">
-        <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+        <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
         </el-pagination>
       </div>
     </div>
@@ -95,6 +121,20 @@ export default {
             element = new Date(element)
             this.tableData[i].registDate = element.toLocaleDateString();
           }
+          for (var i = 0; i < this.tableData.length; i++) {
+            var element = this.tableData[i].MessageDate;
+            var date = new Date(element)
+            var year = date.getFullYear() + '年';
+            var month = date.getMonth() + 1 + '月';
+            var day = date.getDate() + '日';
+            var h = date.getHours()
+            var m = date.getMinutes()
+            var s = date.getSeconds()
+            var date1 = [year, month, day].join('/')
+            var time = [h, m, s].join(':')
+            element = date1 + ' ' + time
+            this.tableData[i].MessageDate = element
+          }
         }
       });
     },
@@ -143,6 +183,22 @@ export default {
 
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
+}
+
+.demo-table-expand {
+  font-size: 0;
+  text-align: left
+}
+
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
 }
 </style>
 

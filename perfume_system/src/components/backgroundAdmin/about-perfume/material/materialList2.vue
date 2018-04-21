@@ -31,7 +31,7 @@
         </el-table-column>
       </el-table>
       <div class="Pagination" style="text-align: left;margin-top: 10px;">
-        <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+        <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
         </el-pagination>
       </div>
       <!--对话框(新增/编辑)-->

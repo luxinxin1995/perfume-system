@@ -16,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table border :data="tableData1" style="width: 100%" height="470px">
+            <el-table border :data="tableData1" style="width:100%" height="470px">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="productName" label="名称">
@@ -40,7 +40,7 @@
                 </el-table-column>
             </el-table>
             <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+                <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
                 </el-pagination>
             </div>
             <!--对话框(新增/编辑)-->
