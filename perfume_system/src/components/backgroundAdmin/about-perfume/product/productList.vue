@@ -2,7 +2,7 @@
     <div class="fillcontain">
         <div class="table_container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
                 <el-breadcrumb-item>香水产品管理</el-breadcrumb-item>
                 <el-breadcrumb-item>香水产品列表</el-breadcrumb-item>
             </el-breadcrumb>
@@ -16,7 +16,28 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table :data="tableData1" style="width: 100%;">
+            <el-table border :data="tableData1" style="width:100%" height="470px">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="香味：">
+                                <span>{{ props.row.fragrance }}</span>
+                            </el-form-item>
+                            <el-form-item label="前调：">
+                                <span>{{ props.row.topNotes }}</span>
+                            </el-form-item>
+                            <el-form-item label="中调：">
+                                <span>{{ props.row.middleNotes }}</span>
+                            </el-form-item>
+                            <el-form-item label="尾调：">
+                                <span>{{ props.row.lowNote }}</span>
+                            </el-form-item>
+                            <el-form-item label="简介：">
+                                <span>{{ props.row.desc }}</span>
+                            </el-form-item>
+                        </el-form>
+                    </template>
+                </el-table-column>
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="productName" label="名称">
@@ -27,7 +48,7 @@
                 </el-table-column>
                 <el-table-column prop="photo" label="香水图片" width="120">
                     <template slot-scope="scope">
-                        <img :src="scope.row.photo" class="img"  width="120"/>
+                        <img :src="scope.row.photo" class="img" width="120" />
                     </template>
                 </el-table-column>
                 <el-table-column prop="flavorist" label="调香师">
@@ -40,7 +61,7 @@
                 </el-table-column>
             </el-table>
             <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+                <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
                 </el-pagination>
             </div>
             <!--对话框(新增/编辑)-->
@@ -193,5 +214,20 @@ export default {
 
 .add {
     float: left;
+}
+.demo-table-expand {
+  font-size: 0;
+  text-align: left
+}
+
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
 }
 </style>

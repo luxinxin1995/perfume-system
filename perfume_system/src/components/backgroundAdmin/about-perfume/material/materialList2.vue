@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
         <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
         <el-breadcrumb-item>植物原料列表</el-breadcrumb-item>
       </el-breadcrumb>
@@ -16,7 +16,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-table :data="tableData1" style="width: 100%">
+      <el-table border :data="tableData1" style="width: 100%;" height="470px">
         <el-table-column type="index" width="50">
         </el-table-column>
         <el-table-column prop="plant" label="植物原料" width="180">
@@ -31,7 +31,7 @@
         </el-table-column>
       </el-table>
       <div class="Pagination" style="text-align: left;margin-top: 10px;">
-        <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+        <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
         </el-pagination>
       </div>
       <!--对话框(新增/编辑)-->
@@ -86,7 +86,7 @@ export default {
   methods: {
     // 获取所有原料
     getData() {
-      axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
+      axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
         console.log(res);
         this.pageCount = res.pageCount; //总页数
         this.total = res.length; //总数
@@ -120,7 +120,7 @@ export default {
     handleDelete(index, row) {
       console.log(row);
       var id = row._id;
-      axios.postmaterial2Delete(id, res => {
+      axios.postmaterialDelete(id, res => {
         console.log(res);
         if (res.code == "success") {
           this.$message.success("删除成功");
@@ -141,7 +141,7 @@ export default {
     submitHandle(obj, flag) {
       this.projcetAddOrEditShow = false;
       if (flag === "修改") {
-        axios.postmaterial2Editor(obj._id, obj, res => {
+        axios.postmaterialEditor(obj._id, obj, res => {
           if (res.code == "success") {
             this.$message.success("修改原料成功");
             this.formObj = obj;
@@ -149,7 +149,7 @@ export default {
           }
         });
       } else {
-        axios.postmaterial2Add(obj, res => {
+        axios.postmaterialAdd(obj, res => {
           if (res.code == "success") {
             this.$message.success("添加原料成功");
             this.$router.push({

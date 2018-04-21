@@ -91,8 +91,7 @@ export default {
 </script>
 <style scoped>
 .title {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 30px;
   padding: 10px;
   color: white;
   border-bottom: 3px solid lightskyblue;

@@ -2,7 +2,7 @@
     <div class="fillcontain">
         <div class="table_container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/infoStatic' }">系统首页</el-breadcrumb-item>
                 <el-breadcrumb-item>香水原料管理</el-breadcrumb-item>
                 <el-breadcrumb-item>动物原料列表</el-breadcrumb-item>
             </el-breadcrumb>
@@ -16,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table :data="tableData1" style="width: 100%">
+            <el-table border  :data="tableData1" style="width: 100%;" height="470px">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="animal" label="动物原料" width="180">
@@ -31,7 +31,7 @@
                 </el-table-column>
             </el-table>
             <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
+                <el-pagination background layout="prev, pager, next,jumper" :current-page="pageIndex" :page-count="pageCount||1" @current-change="pageChange">
                 </el-pagination>
             </div>
             <!--对话框(新增/编辑)-->
@@ -91,7 +91,7 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     var data = res.data
-                    this.tableData = data.filter(function (item) {
+                    this.tableData = data.filter(function(item) {
                         return item.animal !== ''
                     })
                 }

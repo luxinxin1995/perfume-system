@@ -11,7 +11,7 @@
             <i class="fa fa-weibo ft-weibo"></i>&#x3000;
             <i class="fa fa-weixin ft-weixin"></i>
         </p>
-        <p>©2018 ▪ 最美香水 ▪ ALL RIGHTS RESERVED ▪ 福建省宁德师范学院 ▪ 14级 ▪ 计算机科学与技术师范班 ▪ 陆欣欣</p>
+        <p>©2018 ▪ 品牌香水管理系统 ▪ ALL RIGHTS RESERVED ▪ 福建省宁德师范学院 ▪ 14级 ▪ 计算机科学与技术（师范） ▪ Lxx</p>
        </div>
   </div>
 </template>

@@ -6,6 +6,8 @@ import Register from '@/components/login/Register'
 import Home from '@/components/Home'
 // 用户
 import AdminList from '@/components/backgroundAdmin/system-management/adminList'
+// 用户
+import infoStatic from '@/components/backgroundAdmin/system-management/infoStatic'
 // 品牌
 import BrandList from '@/components/backgroundAdmin/about-perfume/brand/brandList'
 import ProductList from '@/components/backgroundAdmin/about-perfume/product/productList'
@@ -223,8 +225,13 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
-      redirect: '/AdminList',
+      redirect: '/infoStatic',
       children: [
+        {
+          path: '/infoStatic',
+          name: 'infoStatic',
+          component: infoStatic
+        },
         {
           path: '/editBrand',
           name: 'BrandList',

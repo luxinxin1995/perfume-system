@@ -3,8 +3,7 @@ var router = exp.Router();
 var db = require('../db');
 // 添加公告
 router.post('/add', function (req, res) {
-    console.log(req.body)
-    new db.Today(req.body).save().then(function () {
+    new db.Notice(req.body).save().then(function () {
         res.send({
             code: 'success',
             msg: "添加成功"
@@ -14,7 +13,7 @@ router.post('/add', function (req, res) {
 // 修改公告
 router.post('/editor/:id', function (req, res) {
     var id = req.params.id;
-    db.Today.findByIdAndUpdate(id, req.body, function (err) {
+    db.Notice.findByIdAndUpdate(id, req.body, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -26,7 +25,7 @@ router.post('/editor/:id', function (req, res) {
 // 删除公告
 router.post('/delete/:id', function (req, res) {
     var id = req.params.id;
-    db.Today.findByIdAndRemove(id, function (err) {
+    db.Notice.findByIdAndRemove(id, function (err) {
         if (!err) {
             res.send({
                 code: "success",
@@ -39,7 +38,7 @@ router.post('/delete/:id', function (req, res) {
 router.get('/allToday/:pageIndex/:pageSize', function (req, res) {
     var pageIndex = req.params.pageIndex;
     var pageSize = req.params.pageSize;
-    db.Today.find().then(function (data) {
+    db.Notice.find().then(function (data) {
         var result = data.slice(parseInt((pageIndex - 1) * pageSize), Number(parseInt((pageIndex - 1) * pageSize) + parseInt(pageSize)))
         var pageCount = Math.ceil(data.length / pageSize);
         res.send({
@@ -55,9 +54,8 @@ router.get('/allToday/:pageIndex/:pageSize', function (req, res) {
 // 编辑获取公告
 router.get('/TodayOne/:id', function (req, res) {
     var id = req.params.id;
-    db.Today.findById(id, function (err, data) {
+    db.Notice.findById(id, function (err, data) {
         if (!err) {
-            console.log(data)
             res.send({
                 code: 'success',
                 data: data

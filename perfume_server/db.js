@@ -80,10 +80,6 @@ var brandSchema = new db.Schema({
     logo: {
         type: String,
         default: ''
-    },
-    classify: {
-        type: String,
-        default: ''
     }
 })
 // 香水产品表
@@ -217,7 +213,7 @@ var articleSchema = new db.Schema({
     }
 })
 // 公告
-var todaySchema = new db.Schema({
+var NoticeSchema = new db.Schema({
     title: {
         type: String,
         default: ''
@@ -233,6 +229,6 @@ var Product = db.model('Product', productSchema);
 var Material = db.model('Material', materialSchema);
 var Classify = db.model('Classify', classifySchema);
 var Article = db.model('Article', articleSchema)
-var Today = db.model('Today', todaySchema)
+var Notice = db.model('Notice', NoticeSchema)
 
-module.exports = { User, Brand, Product, Material,Classify, Article, Today }
+module.exports = { User, Brand, Product, Material,Classify, Article, Notice }
