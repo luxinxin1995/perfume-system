@@ -3,12 +3,15 @@
     <el-col :span="24" style="margin:50px 0 30px 0;">
       <el-form>
         <el-form-item style="padding:0 600px;">
-          <el-input size="large" placeholder="请输入要搜索的文章标题" v-model="search" suffix-icon="el-icon-search" width="200px"></el-input>
+          <el-input size="large" placeholder="请输入要搜索的文章标题或作者" v-model="search" suffix-icon="el-icon-search" width="200px"></el-input>
         </el-form-item>
       </el-form>
     </el-col>
     <div class="content" v-for="(item,index) in articles1" :key="index">
       <p class="title">{{item.title}}</p>
+      <p style="display:block;margin-top:10px;">{{item.author}}
+        <span style="color:gray;font-size:12px;">{{item.date}}</span>
+      </p>
       <img src="../../assets/blank.png" alt="" style="margin:20px;">
       <div class="detail">
         <img :src="item.photo" alt="" width="300px;">
@@ -41,7 +44,7 @@ export default {
       }
       search = search.trim().toLowerCase();
       arr = arr.filter(function(item) {
-        if (item.title.toLowerCase().indexOf(search) !== -1) {
+        if (item.title.toLowerCase().indexOf(search) !== -1 || item.author.toLowerCase().indexOf(search) !== -1) {
           return item;
         }
       })
@@ -56,6 +59,12 @@ export default {
           this.articles = data.filter(function(item) {
             return item.title !== ''
           })
+          for (var i = 0; i < this.articles.length; i++) {
+            if (this.articles[i].date !== '') {
+              var element = new Date(this.articles[i].date);
+              this.articles[i].date = element.toLocaleDateString()
+            }
+          }
         }
       })
     }

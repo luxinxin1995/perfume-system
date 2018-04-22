@@ -18,13 +18,13 @@
     display: block;
     width: 100px;
     height: 100px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 10px auto;
     background-image: url('../../assets/logo.jpg');
     background-size: 100% 100%;
     border-radius: 50%;
   }
   .footer{
-    position: absolute;
+    position: fixed;
     left: 500px;
     bottom: 20px;
     font-size: 12px;

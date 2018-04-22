@@ -6,7 +6,6 @@
       </el-carousel-item>
     </el-carousel>
     <knowledge></knowledge>
-    
     <div class="div">
       <div class="news">
         <p class="title">公告
@@ -117,20 +116,20 @@ a {
   width: 100%;
   height: 100%;
 }
-
-
-
 .div {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
 .news,
 .about {
   border: 1px solid #eeeeee;
   text-align: left;
-  padding: 20px;
+  padding: 10px;
   margin-top: 20px;
+  height: 200px;
+  width: 48.1%
 }
 
 .news .title {
@@ -155,14 +154,6 @@ a {
 
 .news .date {
   float: right;
-}
-
-.news {
-  width: 32%;
-}
-
-.about {
-  width: 32%;
 }
 </style>
 

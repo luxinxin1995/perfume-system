@@ -3,7 +3,7 @@
     <el-col :span="24" style="margin:30px 0;">
       <el-form>
         <el-form-item style="padding:0 600px;">
-          <el-input size="large" placeholder="请输入要搜索内容（香水 品牌 属性...）" v-model="search" suffix-icon="el-icon-search" width="200px"></el-input>
+          <el-input size="large" placeholder="请输入要搜索内容（产品名称 品牌 属性）" v-model="search" suffix-icon="el-icon-search" width="200px"></el-input>
         </el-form-item>
       </el-form>
     </el-col>

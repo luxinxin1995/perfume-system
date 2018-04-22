@@ -66,7 +66,7 @@
             </div>
             <!--对话框(新增/编辑)-->
             <el-dialog :title="titleText" modal center :visible.sync="projcetAddOrEditShow">
-                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :img="img" :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
+                <projcetAddOrEdit v-if="projcetAddOrEditShow" :form='formObj' :brandTypes="brandTypes" :img="img" :url="urlaction" @cancleHandle='cancleHandle' @submitHandle='submitHandle'>
                 </projcetAddOrEdit>
             </el-dialog>
         </div>
@@ -93,7 +93,8 @@ export default {
             projcetAddOrEditShow: false,
             formObj: null,
             search: '',
-            img: ''
+            img: '',
+            brandTypes: []
         }
     },
     computed: {
@@ -109,6 +110,7 @@ export default {
                     return item;
                 }
             })
+            this.pageCount = Math.ceil(arr.length / 5)
             return arr;
         }
     },
@@ -125,10 +127,17 @@ export default {
                     this.tableData = res.data
                 }
             })
+            // 获取所有品牌
+            axios.getAllbrand(res => {
+                if (res.code == 'success') {
+                    this.brandTypes = res.data
+                }
+            })
         },
         // 新增产品
         addProduct() {
             var obj = {}
+            obj.brandTypes = this.brandTypes
             this.formObj = obj
             this.projcetAddOrEditShow = true
             this.titleText = '新增产品'
@@ -143,6 +152,7 @@ export default {
                     obj[key] = row[key];
                 }
             }
+            obj.brandTypes = this.brandTypes
             this.formObj = obj
             this.projcetAddOrEditShow = true
             this.titleText = '编辑产品'
@@ -215,19 +225,20 @@ export default {
 .add {
     float: left;
 }
+
 .demo-table-expand {
-  font-size: 0;
-  text-align: left
+    font-size: 0;
+    text-align: left
 }
 
 .demo-table-expand label {
-  width: 90px;
-  color: #99a9bf;
+    width: 90px;
+    color: #99a9bf;
 }
 
 .demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
 }
 </style>

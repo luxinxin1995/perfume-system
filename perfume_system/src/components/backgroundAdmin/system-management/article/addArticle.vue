@@ -4,6 +4,13 @@
             <el-form-item label="文章标题" prop="title">
                 <el-input v-model="formObj.title" placeholder="请输入文章标题"></el-input>
             </el-form-item>
+            <el-form-item label="作者" prop="author">
+                <el-input v-model="formObj.author" placeholder="请输入作者名称"></el-input>
+            </el-form-item>
+            <el-form-item label="发表日期" prop="date">
+                <el-date-picker v-model="formObj.date" type="date" placeholder="选择日期">
+                </el-date-picker>
+            </el-form-item>
             <el-form-item label="文章内容" prop="detail">
                 <el-input type="textarea" v-model="formObj.detail" placeholder="请输入文章内容"></el-input>
             </el-form-item>
@@ -42,6 +49,9 @@ export default {
                 title: [
                     { required: true, message: '请输入文章标题', trigger: 'blur' },
                     { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'blur' }
+                ],
+                detail: [
+                    { required: true, message: '请输入文章内容', trigger: 'blur' }
                 ]
             },
             img: ''

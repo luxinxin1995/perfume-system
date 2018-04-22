@@ -5,7 +5,10 @@
                 <el-input v-model="formObj.productName" placeholder="请输入香水名称"></el-input>
             </el-form-item>
             <el-form-item label="香水品牌" prop="brand">
-                <el-input v-model="formObj.brand" placeholder="请输入香水品牌"></el-input>
+                <el-select v-model="formObj.brand" placeholder="请选择品牌">
+                    <el-option v-for="item in formObj.brandTypes" :key="item.ChineseName" :label="item.ChineseName" :value="item.ChineseName">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="香调" prop="fragrance">
                 <el-input v-model="formObj.fragrance" placeholder="请输入香水香调"></el-input>
@@ -81,7 +84,6 @@ export default {
             var reader = new FileReader();
             reader.readAsDataURL(file.raw);
             reader.onload = function(e) {
-                console.log(this.result)
                 this.result // 这个就是base64编码了
                 This.img = this.result;
                 This.formObj.photo = This.img

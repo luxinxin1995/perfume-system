@@ -11,7 +11,7 @@
             </div>
             <el-col :span="10">
                 <el-form>
-                    <el-form-item label="标题" label-width="200px">
+                    <el-form-item label="标题/作者" label-width="200px">
                         <el-input size="large" placeholder="请输入要查询内容" v-model="search" suffix-icon="el-icon-search"></el-input>
                     </el-form-item>
                 </el-form>
@@ -19,11 +19,15 @@
             <el-table border :data="tableData1" style="width: 100%;" height="470px">
                 <el-table-column type="index" width="50">
                 </el-table-column>
-                <el-table-column prop="title" label="文章标题" width="250">
+                <el-table-column prop="title" label="文章标题">
                 </el-table-column>
-                <el-table-column prop="detail" label="文章内容" width="600">
+                <el-table-column prop="author" label="作者">
                 </el-table-column>
-                <el-table-column prop="photo" label="文章相关图片" width="120">
+                <el-table-column prop="date" label="发表日期">
+                </el-table-column>
+                <el-table-column prop="detail" label="文章内容">
+                </el-table-column>
+                <el-table-column prop="photo" label="文章相关图片">
                     <template slot-scope="scope">
                         <img :src="scope.row.photo" class="img" width="120" />
                     </template>
@@ -83,10 +87,11 @@ export default {
             }
             search = search.trim().toLowerCase();
             arr = arr.filter(function(item) {
-                if (item.title.toLowerCase().indexOf(search) !== -1) {
+                if (item.title.toLowerCase().indexOf(search) !== -1 || item.author.toLowerCase().indexOf(search) !== -1) {
                     return item;
                 }
             })
+            this.pageCount = arr.length
             return arr;
         }
     },
@@ -98,6 +103,10 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var element = new Date(this.tableData[i].date);
+                        this.tableData[i].date = element.toLocaleDateString()
+                    }
                 }
             })
         },
