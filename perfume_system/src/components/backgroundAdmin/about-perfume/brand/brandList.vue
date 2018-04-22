@@ -25,7 +25,7 @@
                 </el-table-column>
                 <el-table-column prop="logo" label="品牌logo" width="120">
                     <template slot-scope="scope">
-                        <img :src="scope.row.logo" class="img"/>
+                        <img :src="scope.row.logo" class="img" />
                     </template>
                 </el-table-column>
                 <el-table-column prop="desc" label="品牌介绍" height="50px">
@@ -89,6 +89,7 @@ export default {
                     return item;
                 }
             })
+            this.pageCount =  Math.ceil(arr.length / 5)
             return arr;
         }
     },

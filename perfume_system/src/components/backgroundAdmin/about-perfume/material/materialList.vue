@@ -16,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table border  :data="tableData1" style="width: 100%;">
+            <el-table border :data="tableData1" style="width: 100%;">
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="animal" label="动物原料" width="180">
@@ -80,6 +80,7 @@ export default {
                     return item;
                 }
             })
+            this.pageCount = Math.ceil(arr.length / 5)
             return arr;
         }
     },

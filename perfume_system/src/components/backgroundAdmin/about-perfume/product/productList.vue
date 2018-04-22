@@ -110,6 +110,7 @@ export default {
                     return item;
                 }
             })
+            this.pageCount = Math.ceil(arr.length / 5)
             return arr;
         }
     },
@@ -126,7 +127,7 @@ export default {
                     this.tableData = res.data
                 }
             })
-             // 获取所有品牌
+            // 获取所有品牌
             axios.getAllbrand(res => {
                 if (res.code == 'success') {
                     this.brandTypes = res.data

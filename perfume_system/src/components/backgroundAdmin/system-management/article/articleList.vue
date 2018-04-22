@@ -91,6 +91,7 @@ export default {
                     return item;
                 }
             })
+            this.pageCount = arr.length
             return arr;
         }
     },

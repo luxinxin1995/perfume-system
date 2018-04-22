@@ -80,6 +80,7 @@ export default {
           return item;
         }
       })
+      this.pageCount = Math.ceil(arr.length / 5)
       return arr;
     }
   },
