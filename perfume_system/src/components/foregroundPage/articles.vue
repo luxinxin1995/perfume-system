@@ -9,7 +9,9 @@
     </el-col>
     <div class="content" v-for="(item,index) in articles1" :key="index">
       <p class="title">{{item.title}}</p>
-      <p style="display:block;margin-top:10px;">{{item.author}} <span style="color:gray;font-size:12px;">{{item.date}}</span></p>
+      <p style="display:block;margin-top:10px;">{{item.author}}
+        <span style="color:gray;font-size:12px;">{{item.date}}</span>
+      </p>
       <img src="../../assets/blank.png" alt="" style="margin:20px;">
       <div class="detail">
         <img :src="item.photo" alt="" width="300px;">
@@ -57,6 +59,12 @@ export default {
           this.articles = data.filter(function(item) {
             return item.title !== ''
           })
+          for (var i = 0; i < this.articles.length; i++) {
+            if (this.articles[i].date !== '') {
+              var element = new Date(this.articles[i].date);
+              this.articles[i].date = element.toLocaleDateString()
+            }
+          }
         }
       })
     }

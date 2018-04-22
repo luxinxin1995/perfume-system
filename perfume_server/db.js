@@ -207,6 +207,10 @@ var articleSchema = new db.Schema({
         type: String,
         default: ''
     },
+    type: {
+        type: String,
+        default: ''
+    },
     date: {
         type: String,
         default: ''

@@ -102,6 +102,10 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var element = new Date(this.tableData[i].date);
+                        this.tableData[i].date = element.toLocaleDateString()
+                    }
                 }
             })
         },
