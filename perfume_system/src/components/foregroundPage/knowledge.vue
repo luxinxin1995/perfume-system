@@ -90,19 +90,19 @@
         <div class="top">
           <div class="desc">
             <p class="name">前调</p>
-            <p class="detail">前调是香水最先透露的信息，也就是当你接触到香水的那么几十秒到几分钟之间所嗅到的，直达鼻内的昧道。</p>
+            <p class="detail">前调是香水最先透露的信息，也就是当你接触到香水的那么几十秒到几分钟之间所嗅到的，直达鼻内的昧道。前调通常是由挥发性的香精油所散发，味道一般较清新，大多为花香或柑橘类成分的香味。但前味并不是一瓶香水的真正味道，因为它只能维持几分钟而已。</p>
           </div>
         </div>
         <div class="top">
           <div class="desc">
             <p class="name">中调</p>
-            <p class="detail">中调是香水中最重要的部分，它在前调消失之后开始散发出来，一般可持续数小时或者更久一些。中调是一款香水的精华所在，也就是说洒上香水的你就是带着这种味道示人，以这种味儿来表达自己其时的心境、情感等等信息。</p>
+            <p class="detail">“前调”之后那就是“中调”了，是香水中最重要的部分，也是“香核”。也就是说洒上香水的你就是带着这种味道示人的。中味是一款香水的精华所在，这部分通常由含有某种特殊花香、木香、及微量辛辣刺激香制成，其气味无论清新还是浓郁，都必须是和前味完美衔接的。中味的香味一般可持续数小时或者更久一些。</p>
           </div>
         </div>
         <div class="top">
           <div class="desc">
             <p class="name">尾调(基调)</p>
-            <p class="detail">基调和尾调是同一个意思，也就是我们常所说的"余"香。通常用微量的动物性香精和雪松、檀香等芳香树脂所组成，它不仅只是散发香味，更兼具整合香味的功能。</p>
+            <p class="detail">也就是我们平常所说的“余”香。通常是用微量的动物性香精和雪松、檀香等芳香树脂所组成，这个阶段的香味是兼具整合香味的功能的。后味的作用是给予香水一种绕梁三日不绝的深度，它持续的时间最长久，可达整日或者数日之久，抹过香水隔天后还可以隐隐感到的香味就是香水的后味，这也就是香水制作的极致了，连绵不断，回味无尽。</p>
           </div>
         </div>
       </div>
@@ -174,8 +174,6 @@ import axios from "../../Api/api";
 export default {
   data() {
     return {
-      pageIndex: 1,
-      pageSize: 100,
       classify: '',
       material1: '',
       material2: ''
@@ -187,7 +185,7 @@ export default {
   methods: {
     getData() {
       // 获取所有分类
-      axios.getclassifyAll(this.pageIndex, this.pageSize, res => {
+      axios.getAllclassify(res => {
         if (res.code == 'success') {
           var data = res.data
           this.classify = data.filter(function(item) {
@@ -196,7 +194,7 @@ export default {
         }
       })
       // 获取所有原料1
-      axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
+      axios.getAllmaterial(res => {
         if (res.code == 'success') {
           var data = res.data
           this.material1 = data.filter(function(item) {
@@ -205,7 +203,7 @@ export default {
         }
       })
       // 获取所有原料2
-      axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
+      axios.getAllmaterial2(res => {
         if (res.code == "success") {
           var data = res.data
           this.material2 = data.filter(function(item) {
@@ -277,6 +275,7 @@ export default {
   color: gray;
   font-size: 12px;
   line-height: 20px;
+  text-align: justify;
   text-indent: 2em;
 }
 

@@ -39,8 +39,6 @@ import axios from "../../Api/api";
 export default {
   data() {
     return {
-      pageIndex: 1,
-      pageSize: 100,
       product: '',
       formObj: '',
       search: ''
@@ -68,7 +66,7 @@ export default {
   methods: {
     getData() {
       // 获取所有产品
-      axios.getproductAll(this.pageIndex, this.pageSize, res => {
+      axios.getAllproduct(res => {
         if (res.code == 'success') {
           var data = res.data
           this.product = data.filter(function(item) {

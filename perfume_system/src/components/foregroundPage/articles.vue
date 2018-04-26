@@ -26,8 +26,6 @@ import axios from "../../Api/api";
 export default {
   data() {
     return {
-      pageIndex: 1,
-      pageSize: 100,
       articles: '',
       search: ''
     }
@@ -53,7 +51,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.getarticleAll(this.pageIndex, this.pageSize, res => {
+      axios.getAllarticle(res => {
         if (res.code == 'success') {
           var data = res.data
           this.articles = data.filter(function(item) {

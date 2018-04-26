@@ -87,7 +87,7 @@ export default {
   methods: {
     // 获取所有原料
     getData() {
-      axios.getmaterialAll(this.pageIndex, this.pageSize, res => {
+      axios.getmaterial2All(this.pageIndex, this.pageSize, res => {
         console.log(res);
         this.pageCount = res.pageCount; //总页数
         this.total = res.length; //总数
@@ -121,7 +121,7 @@ export default {
     handleDelete(index, row) {
       console.log(row);
       var id = row._id;
-      axios.postmaterialDelete(id, res => {
+      axios.postmaterial2Delete(id, res => {
         console.log(res);
         if (res.code == "success") {
           this.$message.success("删除成功");
@@ -142,7 +142,7 @@ export default {
     submitHandle(obj, flag) {
       this.projcetAddOrEditShow = false;
       if (flag === "修改") {
-        axios.postmaterialEditor(obj._id, obj, res => {
+        axios.postmaterial2Editor(obj._id, obj, res => {
           if (res.code == "success") {
             this.$message.success("修改原料成功");
             this.formObj = obj;
@@ -150,7 +150,7 @@ export default {
           }
         });
       } else {
-        axios.postmaterialAdd(obj, res => {
+        axios.postmaterial2Add(obj, res => {
           if (res.code == "success") {
             this.$message.success("添加原料成功");
             this.$router.push({

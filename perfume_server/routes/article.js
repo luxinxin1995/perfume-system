@@ -51,6 +51,17 @@ router.get('/allArticle/:pageIndex/:pageSize', function (req, res) {
         console.log(err)
     })
 })
+// 获取所有热门文章
+router.get('/allArticle', function (req, res) {
+    db.Article.find().then(function (data) {
+        res.send({
+            code: 'success',
+            data: data
+        })
+    }).catch(function (err) {
+        console.log(err)
+    })
+})
 // 编辑获取热门文章
 router.get('/ArticleOne/:id', function (req, res) {
     var id = req.params.id;

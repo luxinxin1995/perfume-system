@@ -135,9 +135,17 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有原料
+  // 获取所有原料(分页)
   getmaterialAll (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/material/allMaterial/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+    // 获取所有原料
+  getAllmaterial (callback) {
+    axios.get(`${global.ApiUrl}/material/allMaterial`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
@@ -175,9 +183,17 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有原料
+  // 获取所有原料(分页)
   getmaterial2All (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/material2/allMaterial2/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+    // 获取所有原料
+  getAllmaterial2 (callback) {
+    axios.get(`${global.ApiUrl}/material2/allMaterial2`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
@@ -215,9 +231,17 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有分类
+  // 获取所有分类(分页)
   getclassifyAll (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/classify/allClassify/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+    // 获取所有分类
+  getAllclassify(callback) {
+    axios.get(`${global.ApiUrl}/classify/allClassify`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
@@ -255,9 +279,17 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有产品
+  // 获取所有产品(分页)
   getproductAll (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/product/allProduct/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+    // 获取所有产品
+  getAllproduct (callback) {
+    axios.get(`${global.ApiUrl}/product/allProduct`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
@@ -295,9 +327,17 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有精彩文章
+  // 获取所有精彩文章(分页)
   getarticleAll (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/article/allArticle/${pageIndex}/${pageSize}`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+    // 获取所有精彩文章
+  getAllarticle (callback) {
+    axios.get(`${global.ApiUrl}/article/allArticle`).then((res) => {
       callback(res.data)
     }).catch((err) => {
       console.log(err)
@@ -327,7 +367,7 @@ export default {
       console.log(err)
     })
   },
-  // 添加今日之香
+  // 添加公告
   posttodayAdd (data, callback) {
     axios.post(`${global.ApiUrl}/today/add`, data).then((res) => {
       callback(res.data)
@@ -335,7 +375,7 @@ export default {
       console.log(err)
     })
   },
-  // 获取所有今日之香
+  // 获取所有公告(分页)
   gettodayAll (pageIndex, pageSize, callback) {
     axios.get(`${global.ApiUrl}/today/allToday/${pageIndex}/${pageSize}`).then((res) => {
       callback(res.data)
@@ -343,7 +383,15 @@ export default {
       console.log(err)
     })
   },
-  // 获取id对应今日之香
+    // 获取所有公告
+  getAlltoday (callback) {
+    axios.get(`${global.ApiUrl}/today/allToday`).then((res) => {
+      callback(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  },
+  // 获取id对应公告
   gettodayById (id, callback) {
     axios.get(`${global.ApiUrl}/today/TodayOne/${id}`).then((res) => {
       callback(res.data)
@@ -351,7 +399,7 @@ export default {
       console.log(err)
     })
   },
-  // 修改id对应今日之香
+  // 修改id对应公告
   posttodayEditor (id, data, callback) {
     axios.post(`${global.ApiUrl}/today/editor/${id}`, data).then((res) => {
       callback(res.data)
@@ -359,7 +407,7 @@ export default {
       console.log(err)
     })
   },
-  // 删除id对应今日之香
+  // 删除id对应公告
   posttodayDelete (id, callback) {
     axios.post(`${global.ApiUrl}/today/delete/${id}`).then((res) => {
       callback(res.data)

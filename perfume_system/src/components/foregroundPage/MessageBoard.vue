@@ -17,8 +17,6 @@ import axios from "../../Api/api";
 export default {
     data() {
         return {
-            pageIndex: 1,
-            pageSize: 100,
             message: '',
         };
     },
@@ -28,7 +26,7 @@ export default {
     methods: {
         getData() {
             // 获取所有用户信息
-            axios.getAll(this.pageIndex, this.pageSize, res => {
+            axios.getAllUser(res => {
                 if (res.code == "success") {
                     var data = res.data
                     this.message = data.filter(function(item) {
@@ -57,6 +55,7 @@ export default {
 <style scoped>
 .knowledge {
     padding: 0 400px;
+    height: 100%;
 }
 
 .info {

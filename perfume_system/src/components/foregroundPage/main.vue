@@ -58,7 +58,7 @@ export default {
       articles: '',
       news: '',
       pageIndex: 1,
-      pageSize: 100
+      pageSize: 5
     }
   },
   created() {
