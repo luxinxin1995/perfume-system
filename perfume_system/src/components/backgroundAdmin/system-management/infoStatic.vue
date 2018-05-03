@@ -37,12 +37,12 @@
                 <span class="name">用户留言数量统计</span>
                 <span class="num">{{message.length}}</span>
             </p>
-            <div class="div" v-for="(item,index) in message" :key="index">
+            <!--<div class="div" v-for="(item,index) in message" :key="index">
                 <p>用户名：{{item.username}}</p>
                 <p>留言内容：{{item.message}}
                     <span style="float:right">{{item.MessageDate}}</span>
                 </p>
-            </div>
+            </div>-->
         </div>
     </div>
 </template>
@@ -78,20 +78,6 @@ export default {
                     this.message = data.filter(function(item) {
                         return item.message !== ''
                     })
-                    for (var i = 0; i < this.message.length; i++) {
-                        var element = this.message[i].MessageDate;
-                        var date = new Date(element)
-                        var year = date.getFullYear() + '年';
-                        var month = date.getMonth() + 1 + '月';
-                        var day = date.getDate() + '日';
-                        var h = date.getHours()
-                        var m = date.getMinutes()
-                        var s = date.getSeconds()
-                        var date1 = [year, month, day].join('/')
-                        var time = [h, m, s].join(':')
-                        element = date1 + ' ' + time
-                        this.message[i].MessageDate = element
-                    }
                 }
             });
             axios.getmaterialAll(this.pageIndex, this.pageSize, res => {

@@ -153,6 +153,7 @@ export default {
   text-align: justify;
   height: 350px;
   font-size: 20px;
+  overflow: hidden;
 }
 
 .desc span {

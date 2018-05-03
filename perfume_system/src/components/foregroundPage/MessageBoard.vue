@@ -45,7 +45,7 @@ export default {
                         var time = [h, m, s].join(':')
                         element = date1 + ' ' + time
                         this.message[i].MessageDate = element
-                    }
+                    }                  
                 }
             });
         },

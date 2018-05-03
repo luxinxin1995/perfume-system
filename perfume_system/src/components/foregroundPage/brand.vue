@@ -63,6 +63,7 @@ export default {
 <style scoped>
 .centre {
     padding: 20px 200px;
+    min-height: 440px
 }
 
 .head {
