@@ -27,10 +27,13 @@ export default {
   data() {
     return {
       articles: '',
-      search: ''
+      search: '',
+      Nodata: false,
+      Havedata: true
     }
   },
   created() {
+
     this.getData()
   },
   computed: {
@@ -41,6 +44,7 @@ export default {
         return arr;
       }
       search = search.trim().toLowerCase();
+      var that = this
       arr = arr.filter(function(item) {
         if (item.title.toLowerCase().indexOf(search) !== -1 || item.author.toLowerCase().indexOf(search) !== -1) {
           return item;

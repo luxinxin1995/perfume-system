@@ -16,7 +16,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-table border :data="tableData1" style="width: 100%;" height="470px">
+      <el-table border :data="tableData1" style="width: 100%;">
         <el-table-column type="index" width="50">
         </el-table-column>
         <el-table-column prop="plant" label="植物原料" width="180">

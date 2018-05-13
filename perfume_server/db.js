@@ -133,16 +133,6 @@ var productSchema = new db.Schema({
 })
 // 香水原料
 var materialSchema = new db.Schema({
-    // 动物原料
-    animal: {
-        type: String,
-        default: ''
-    },
-    // 动物原料介绍
-    animaldesc: {
-        type: String,
-        default: ''
-    },
     // 植物原料
     plant: {
         type: String,
@@ -150,6 +140,19 @@ var materialSchema = new db.Schema({
     },
     // 植物原料介绍    
     plantdesc: {
+        type: String,
+        default: ''
+    }
+})
+// 香水原料
+var material2Schema = new db.Schema({
+    // 动物原料
+    animal: {
+        type: String,
+        default: ''
+    },
+    // 动物原料介绍
+    animaldesc: {
         type: String,
         default: ''
     }
@@ -238,9 +241,12 @@ var NoticeSchema = new db.Schema({
 var User = db.model('User', userSchema);
 var Brand = db.model('Brand', brandSchema);
 var Product = db.model('Product', productSchema);
+// 植物
 var Material = db.model('Material', materialSchema);
+// 动物
+var Material2 = db.model('Material2', material2Schema);
 var Classify = db.model('Classify', classifySchema);
 var Article = db.model('Article', articleSchema)
 var Notice = db.model('Notice', NoticeSchema)
 
-module.exports = { User, Brand, Product, Material,Classify, Article, Notice }
+module.exports = { User, Brand, Product, Material,Material2,Classify, Article, Notice }

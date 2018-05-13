@@ -151,9 +151,9 @@ export default {
   padding: 20px;
   line-height: 20px;
   text-align: justify;
-  height: 350px;
+  min-height: 350px;
   font-size: 20px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .desc span {

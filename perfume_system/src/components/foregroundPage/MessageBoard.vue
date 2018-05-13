@@ -35,16 +35,8 @@ export default {
                     for (var i = 0; i < this.message.length; i++) {
                         var element = this.message[i].MessageDate;
                         var date = new Date(element)
-                        var year = date.getFullYear() + '年';
-                        var month = date.getMonth() + 1 + '月';
-                        var day = date.getDate() + '日';
-                        var h = date.getHours()
-                        var m = date.getMinutes()
-                        var s = date.getSeconds()
-                        var date1 = [year, month, day].join('/')
-                        var time = [h, m, s].join(':')
-                        element = date1 + ' ' + time
-                        this.message[i].MessageDate = element
+                        date = date.toLocaleString()
+                        this.message[i].MessageDate = date
                     }                  
                 }
             });

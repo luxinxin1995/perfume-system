@@ -16,24 +16,34 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table border :data="tableData1" style="width: 100%;" height="470px">
+            <el-table border :data="tableData1" style="width: 100%;">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="香型介绍:">
+                                <span>{{ props.row.odortypeDesc }}</span>
+                            </el-form-item>
+                            <el-form-item label="味道介绍:">
+                                <span>{{ props.row.flavourDesc }}</span>
+                            </el-form-item>
+                            <el-form-item label="浓度介绍:">
+                                <span>{{ props.row.concentrationDesc }}</span>
+                            </el-form-item>
+                            <el-form-item label="等级介绍:">
+                                <span>{{ props.row.rankDesc }}</span>
+                            </el-form-item>
+                        </el-form>
+                    </template>
+                </el-table-column>
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="odortype" label="香型">
                 </el-table-column>
-                <el-table-column prop="odortypeDesc" label="香型介绍">
-                </el-table-column>
                 <el-table-column prop="flavour" label="味道">
-                </el-table-column>
-                <el-table-column prop="flavourDesc" label="味道介绍">
                 </el-table-column>
                 <el-table-column prop="concentration" label="浓度">
                 </el-table-column>
-                <el-table-column prop="concentrationDesc" label="浓度介绍">
-                </el-table-column>
                 <el-table-column prop="rank" label="等级">
-                </el-table-column>
-                <el-table-column prop="rankDesc" label="等级介绍">
                 </el-table-column>
                 <el-table-column label="操作" header-align="center" width="200px;">
                     <template slot-scope="scope">
@@ -189,4 +199,15 @@ export default {
 .add {
     float: left;
 }
+.demo-table-expand {
+  font-size: 0;
+  text-align: left
+}
+
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+
+
 </style>

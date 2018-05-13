@@ -16,21 +16,28 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-table border :data="tableData1" style="width: 100%;" height="470px">
-                <el-table-column type="index" width="50">
+            <el-table border :data="tableData1" style="width: 100%;">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="品牌介绍">
+                                <span>{{ props.row.desc }}</span>
+                            </el-form-item>
+                        </el-form>
+                    </template>
                 </el-table-column>
-                <el-table-column prop="ChineseName" label="品牌中文名称" width="120">
+                <el-table-column type="index" width="150">
                 </el-table-column>
-                <el-table-column prop="EnglishName" label="品牌英文名称" width="120">
+                <el-table-column prop="ChineseName" label="品牌中文名称" width="220">
                 </el-table-column>
-                <el-table-column prop="logo" label="品牌logo" width="120">
+                <el-table-column prop="EnglishName" label="品牌英文名称" width="220">
+                </el-table-column>
+                <el-table-column prop="logo" label="品牌logo" width="220">
                     <template slot-scope="scope">
                         <img :src="scope.row.logo" class="img" />
                     </template>
                 </el-table-column>
-                <el-table-column prop="desc" label="品牌介绍" height="50px">
-                </el-table-column>
-                <el-table-column label="操作" header-align="center" width="200">
+                <el-table-column label="操作" header-align="center">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" class="fa fa-edit ft-btn" @click="handleEdit(scope.$index, scope.row)">&#x3000;编辑</el-button>
                         <el-button size="mini" type="danger" class="fa fa-trash ft-btn" @click="handleDelete(scope.$index, scope.row)">&#x3000;删除</el-button>

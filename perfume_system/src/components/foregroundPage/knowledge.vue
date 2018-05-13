@@ -125,7 +125,7 @@
         </div>
         <div class="material M">
           <p class="name">植物原料</p>
-          <div class="plant" v-for="(item,index) in material2" :key="index">
+          <div class="plant" v-for="(item,index) in material2" :key="index" v-if="index<4">
             <div class="Minfo">
               <p class="nameField">{{item.plant}}<span class="intro">{{item.plantdesc}}</span></p>
             </div>

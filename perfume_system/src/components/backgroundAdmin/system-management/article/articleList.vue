@@ -17,6 +17,15 @@
                 </el-form>
             </el-col>
             <el-table border :data="tableData1" style="width: 100%;" height="470px">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="文章内容">
+                                <span>{{ props.row.detail }}</span>
+                            </el-form-item>
+                        </el-form>
+                    </template>
+                </el-table-column>
                 <el-table-column type="index" width="50">
                 </el-table-column>
                 <el-table-column prop="title" label="文章标题">
@@ -24,8 +33,6 @@
                 <el-table-column prop="author" label="作者">
                 </el-table-column>
                 <el-table-column prop="date" label="发表日期">
-                </el-table-column>
-                <el-table-column prop="detail" label="文章内容">
                 </el-table-column>
                 <el-table-column prop="photo" label="文章相关图片">
                     <template slot-scope="scope">

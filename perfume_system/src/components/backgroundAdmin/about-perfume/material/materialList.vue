@@ -92,9 +92,8 @@ export default {
                 this.total = res.length //总数
                 if (res.code == 'success') {
                     var data = res.data
-                    this.tableData = data.filter(function(item) {
-                        return item.animal !== ''
-                    })
+                    this.tableData = data
+                    console.log(this.tableData)                    
                 }
             })
         },
@@ -143,7 +142,7 @@ export default {
             if (flag === '修改') {
                 axios.postmaterialEditor(obj._id, obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('修改原料成功')
+                        this.$message.success('修改动物原料成功')
                         this.formObj = obj
                         this.getData();
                     }
@@ -151,7 +150,7 @@ export default {
             } else {
                 axios.postmaterialAdd(obj, res => {
                     if (res.code == 'success') {
-                        this.$message.success('添加原料成功')
+                        this.$message.success('添加动物原料成功')
                         this.$router.push({
                             name: 'MaterialList'
                         })
